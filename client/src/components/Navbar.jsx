@@ -9,8 +9,8 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <i className="fas fa-graduation-cap"></i>
-          LearnHub
+          <i className="fas fa-rocket"></i>
+          Space
         </Link>
         
         <div className="menu-icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>

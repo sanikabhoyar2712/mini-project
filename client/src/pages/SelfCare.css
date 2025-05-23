@@ -2,26 +2,28 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, var(--white) 0%, var(--light-pink) 100%);
 }
 
 .selfcare-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease-in;
 }
 
 .selfcare-header h1 {
   font-size: 2.5rem;
   color: var(--primary);
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  margin-bottom: 0.5rem;
+  background: linear-gradient(45deg, var(--primary), var(--plum));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .selfcare-header p {
   color: var(--text);
-  opacity: 0.8;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .selfcare-tabs {
@@ -32,104 +34,496 @@
   flex-wrap: wrap;
 }
 
-.tab-btn {
+.tab-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  background: var(--white);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 2rem;
-  border: 2px solid var(--primary-light);
-  border-radius: 25px;
-  background: transparent;
-  color: var(--text);
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.tab-btn i {
-  font-size: 1.2rem;
-  color: var(--primary);
+.tab-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background: var(--light-pink);
 }
 
-.tab-btn:hover, .tab-btn.active {
+.tab-button.active {
   background: var(--primary);
   color: var(--white);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
 }
 
-.tab-btn:hover i, .tab-btn.active i {
-  color: var(--white);
+.tab-button i {
+  font-size: 1.1rem;
 }
 
 /* Diary Section */
 .diary-section {
   background: var(--white);
-  border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.5s ease-out;
+}
+
+.diary-prompt {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.diary-prompt h3 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
 }
 
 .diary-textarea {
   width: 100%;
   min-height: 200px;
   padding: 1rem;
-  border: 2px solid var(--primary-light);
-  border-radius: 15px;
+  border: 2px solid var(--light-pink);
+  border-radius: 10px;
   margin-bottom: 1rem;
-  font-family: inherit;
+  font-size: 1rem;
   resize: vertical;
+  transition: border-color 0.3s ease;
 }
 
-.diary-prompts {
-  margin-top: 2rem;
-  padding: 1rem;
-  background: var(--background);
-  border-radius: 15px;
+.diary-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
 }
 
-.diary-prompts ul {
-  list-style: none;
-  padding: 0;
+.save-button {
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 auto;
 }
 
-.diary-prompts li {
-  padding: 0.5rem 0;
-  color: var(--text);
-  opacity: 0.8;
+.save-button:hover {
+  background: var(--plum);
+  transform: translateY(-2px);
 }
 
 /* Workout Section */
+.workout-section {
+  animation: slideUp 0.5s ease-out;
+}
+
+.workout-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 .workout-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  margin-top: 2rem;
 }
 
 .workout-card {
   background: var(--white);
-  border-radius: 20px;
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  border: 2px solid var(--primary-light);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .workout-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(255, 105, 180, 0.2);
+}
+
+.workout-video {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background: var(--light-pink);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.workout-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.workout-card h3 {
+  padding: 1rem;
+  color: var(--primary);
+  margin: 0;
+}
+
+.workout-card p {
+  padding: 0 1rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.start-button {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.start-button:hover {
+  background: var(--plum);
+}
+
+/* Skincare Section */
+.skincare-section {
+  animation: slideUp 0.5s ease-out;
+}
+
+.skincare-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.skincare-header h2 {
+  color: var(--primary);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(45deg, var(--primary), var(--plum));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.skincare-header p {
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+/* Remove old benefits and motivation styles */
+.skincare-benefits,
+.skincare-motivation,
+.benefits-grid,
+.benefit-card,
+.motivation-card {
+  display: none;
+}
+
+/* Add new personal motivation styles */
+.personal-motivation {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.personal-motivation h3 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.motivation-input textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  border: 2px solid var(--light-pink);
+  border-radius: 10px;
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.motivation-input textarea:focus {
+  outline: none;
   border-color: var(--primary);
 }
 
-.workout-card i {
-  font-size: 2.5rem;
+/* Add skincare goals styles */
+.skincare-goals {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.skincare-goals h3 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.add-goal-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.add-goal-form input {
+  flex: 1;
+  padding: 0.8rem;
+  border: 2px solid var(--light-pink);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.add-goal-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.add-goal-form button {
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-goal-form button:hover {
+  background: var(--plum);
+  transform: translateY(-2px);
+}
+
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.goal-item {
+  background: var(--light-pink);
+  padding: 1rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.goal-item:hover {
+  transform: translateX(5px);
+}
+
+.goal-content {
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.goal-date {
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+/* Restore routine section styles */
+.skin-type-selector {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.skin-type-selector h4 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.skin-type-options {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.skin-type-button {
+  padding: 0.8rem 1.5rem;
+  border: 2px solid var(--light-pink);
+  border-radius: 25px;
+  background: var(--white);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.skin-type-button:hover {
+  background: var(--light-pink);
+  transform: translateY(-2px);
+}
+
+.skin-type-button.selected {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.skin-type-description {
+  text-align: center;
+  color: var(--text);
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.routine-category {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.routine-category h4 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.routine-category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.routine-category li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--light-pink);
+}
+
+.routine-category li:last-child {
+  border-bottom: none;
+}
+
+.routine-category li i {
+  color: var(--primary);
+}
+
+.skincare-streak {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.streak-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 2rem;
+  color: var(--primary);
+  margin: 1rem 0;
+}
+
+.streak-counter i {
+  color: #FF6B6B;
+  animation: flame 1.5s infinite;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.tip-card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.tip-card:hover {
+  transform: translateY(-5px);
+}
+
+.tip-card i {
+  font-size: 2rem;
   color: var(--primary);
   margin-bottom: 1rem;
 }
 
+.tip-card h4 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+@keyframes flame {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+  .add-goal-form {
+    flex-direction: column;
+  }
+
+  .add-goal-form button {
+    width: 100%;
+  }
+
+  .motivation-input textarea {
+    min-height: 100px;
+  }
+
+  .skin-type-options {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .skin-type-button {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Mood Section */
-.mood-selector {
+.mood-section {
+  animation: slideUp 0.5s ease-out;
+}
+
+.mood-buttons {
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -137,57 +531,61 @@
   flex-wrap: wrap;
 }
 
-.mood-btn {
+.mood-button {
+  background: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  border: 2px solid var(--primary-light);
-  border-radius: 15px;
-  background: transparent;
+  justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.mood-btn i {
+.mood-button:hover {
+  transform: scale(1.1);
+}
+
+.mood-button i {
   font-size: 2rem;
-  color: var(--primary);
-}
-
-.mood-btn:hover {
-  background: var(--primary-light);
-  transform: translateY(-2px);
+  margin-bottom: 0.5rem;
 }
 
 .mood-calendar {
   background: var(--white);
-  border-radius: 20px;
   padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
 }
 
 /* Meditation Section */
+.meditation-section {
+  animation: slideUp 0.5s ease-out;
+}
+
 .meditation-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .meditation-card {
   background: var(--white);
-  border-radius: 20px;
   padding: 2rem;
+  border-radius: 15px;
   text-align: center;
-  transition: all 0.3s ease;
-  border: 2px solid var(--primary-light);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .meditation-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(255, 105, 180, 0.2);
-  border-color: var(--primary);
 }
 
 .meditation-card i {
@@ -196,25 +594,594 @@
   margin-bottom: 1rem;
 }
 
+.meditation-timer {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.timer-display {
+  font-size: 3rem;
+  color: var(--primary);
+  margin: 1rem 0;
+  animation: timerPulse 2s infinite;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.timer-button {
+  background: var(--light-pink);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.timer-button:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.timer-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.timer-button:disabled:hover {
+  background: var(--light-pink);
+  color: var(--text);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-  .selfcare-tabs {
-    flex-direction: column;
-    align-items: stretch;
+  .selfcare-container {
+    padding: 1rem;
   }
 
-  .tab-btn {
-    width: 100%;
-    justify-content: center;
+  .selfcare-header h1 {
+    font-size: 2rem;
+  }
+
+  .tab-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 
   .workout-cards,
+  .routine-steps,
   .meditation-cards {
     grid-template-columns: 1fr;
   }
 
-  .mood-selector {
-    flex-direction: row;
-    justify-content: center;
+  .mood-button {
+    width: 60px;
+    height: 60px;
+  }
+
+  .mood-button i {
+    font-size: 1.5rem;
+  }
+
+  .mood-history-list {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .meditation-video,
+  .workout-video {
+    margin-bottom: 0.5rem;
+  }
+
+  .diary-entry {
+    padding: 0.8rem;
+  }
+}
+
+/* Add these new styles after the existing CSS */
+
+.diary-history {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--light-pink);
+}
+
+.diary-entry {
+  background: var(--light-pink);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.diary-entry:hover {
+  transform: translateX(5px);
+}
+
+.entry-date {
+  color: var(--primary);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.entry-content {
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.mood-button.selected {
+  background: var(--primary);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+.mood-history {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.mood-history-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.mood-history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem;
+  background: var(--light-pink);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.mood-history-item:hover {
+  transform: translateY(-3px);
+}
+
+.mood-date {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.mood-icon {
+  font-size: 1.2rem;
+}
+
+.mood-icon.great {
+  color: #FFD700;
+}
+
+.mood-icon.good {
+  color: #90EE90;
+}
+
+.mood-icon.okay {
+  color: #FFA500;
+}
+
+.mood-icon.down {
+  color: #FF6B6B;
+}
+
+.meditation-video {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background: var(--light-pink);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.meditation-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Add animation for mood selection */
+@keyframes moodSelect {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.mood-button.selected {
+  animation: moodSelect 0.3s ease-out;
+}
+
+/* Add loading animation for timer */
+@keyframes timerPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.timer-display {
+  animation: timerPulse 2s infinite;
+}
+
+.workout-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.category-section {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.category-section h3 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.workout-description {
+  color: var(--text);
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  padding: 0 1rem;
+  font-style: italic;
+}
+
+.workout-tips {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.workout-tips h3 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.tips-category {
+  background: var(--light-pink);
+  padding: 1.5rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.tips-category:hover {
+  transform: translateY(-5px);
+}
+
+.tips-category h4 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.tips-category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tips-category li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tips-category li:last-child {
+  border-bottom: none;
+}
+
+.tips-category li:before {
+  content: "•";
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .category-section {
+    padding: 1rem;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workout-description {
+    font-size: 0.8rem;
+  }
+}
+
+/* Personal Space Section */
+.personal-space-section {
+  animation: slideUp 0.5s ease-out;
+}
+
+.personal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.important-dates,
+.learning-thoughts,
+.personal-goals {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.important-dates h3,
+.learning-thoughts h3,
+.personal-goals h3 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Forms */
+.add-date-form,
+.add-thought-form,
+.add-goal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.add-date-form input,
+.add-thought-form textarea,
+.add-goal-form input,
+.add-date-form select,
+.add-thought-form select,
+.add-goal-form select {
+  padding: 0.8rem;
+  border: 2px solid var(--light-pink);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.add-thought-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.add-date-form input:focus,
+.add-thought-form textarea:focus,
+.add-goal-form input:focus,
+.add-date-form select:focus,
+.add-thought-form select:focus,
+.add-goal-form select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.add-date-form button,
+.add-thought-form button,
+.add-goal-form button {
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-date-form button:hover,
+.add-thought-form button:hover,
+.add-goal-form button:hover {
+  background: var(--plum);
+  transform: translateY(-2px);
+}
+
+/* Lists */
+.dates-list,
+.thoughts-list,
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.date-card,
+.thought-card,
+.goal-card {
+  background: var(--light-pink);
+  padding: 1rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.date-card:hover,
+.thought-card:hover,
+.goal-card:hover {
+  transform: translateX(5px);
+}
+
+.date-card h4 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.date-card .date {
+  color: var(--text);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.date-card .description {
+  color: var(--text);
+  font-style: italic;
+}
+
+.thought-card {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.thought-card::before {
+  content: '"';
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  font-size: 2rem;
+  color: var(--primary);
+  opacity: 0.5;
+}
+
+.thought-content {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.thought-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.thought-card.inspiration {
+  border-left: 4px solid #FFD700;
+}
+
+.thought-card.achievement {
+  border-left: 4px solid #90EE90;
+}
+
+.thought-card.lesson {
+  border-left: 4px solid #FF6B6B;
+}
+
+.goal-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.goal-card input[type="checkbox"] {
+  margin-top: 0.3rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+.goal-content {
+  flex: 1;
+}
+
+.goal-text {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.goal-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.goal-card.completed .goal-text {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.goal-card.high {
+  border-left: 4px solid #FF6B6B;
+}
+
+.goal-card.medium {
+  border-left: 4px solid #FFD700;
+}
+
+.goal-card.low {
+  border-left: 4px solid #90EE90;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .personal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .add-date-form,
+  .add-thought-form,
+  .add-goal-form {
+    gap: 0.8rem;
+  }
+
+  .thought-meta,
+  .goal-meta {
+    flex-direction: column;
+    gap: 0.3rem;
   }
 } 
