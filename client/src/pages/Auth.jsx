@@ -1,49 +1,95 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Auth.css';
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isLogin = location.pathname === '/login';
+
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
-    name: ''
+    confirmPassword: ''
   });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!isLogin && !formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email is invalid';
+    }
+
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+
+    if (!isLogin && formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
-  };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    if (validateForm()) {
+      // Here you would typically make an API call to your backend
+      console.log('Form submitted:', formData);
+      // For now, just redirect to home
+      navigate('/');
+    }
   };
 
   return (
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h2>{isLogin ? 'Welcome Back!' : 'Join Us!'}</h2>
-          <p>{isLogin ? 'Sign in to continue your learning journey' : 'Create an account to start learning'}</p>
+          <h1>{isLogin ? 'Welcome Back!' : 'Create Account'}</h1>
+          <p>{isLogin ? 'Sign in to continue your journey' : 'Join our community today'}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
           {!isLogin && (
             <div className="form-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Full Name</label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Enter your name"
-                required
+                placeholder="Enter your full name"
+                className={errors.name ? 'error' : ''}
               />
+              {errors.name && <span className="error-message">{errors.name}</span>}
             </div>
           )}
 
@@ -56,8 +102,9 @@ const Auth = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email"
-              required
+              className={errors.email ? 'error' : ''}
             />
+            {errors.email && <span className="error-message">{errors.email}</span>}
           </div>
 
           <div className="form-group">
@@ -69,9 +116,28 @@ const Auth = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              required
+              className={errors.password ? 'error' : ''}
             />
+            {errors.password && <span className="error-message">{errors.password}</span>}
           </div>
+
+          {!isLogin && (
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm your password"
+                className={errors.confirmPassword ? 'error' : ''}
+              />
+              {errors.confirmPassword && (
+                <span className="error-message">{errors.confirmPassword}</span>
+              )}
+            </div>
+          )}
 
           <button type="submit" className="auth-button">
             {isLogin ? 'Sign In' : 'Sign Up'}
@@ -81,12 +147,9 @@ const Auth = () => {
         <div className="auth-footer">
           <p>
             {isLogin ? "Don't have an account? " : "Already have an account? "}
-            <button
-              className="toggle-auth"
-              onClick={() => setIsLogin(!isLogin)}
-            >
+            <a href={isLogin ? '/signup' : '/login'}>
               {isLogin ? 'Sign Up' : 'Sign In'}
-            </button>
+            </a>
           </p>
         </div>
 
