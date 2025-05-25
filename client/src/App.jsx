@@ -1,8 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import Courses from './pages/Courses';
+import Progress from './pages/Progress';
+import Todo from './pages/Todo';
 import SelfCare from './pages/SelfCare';
 import Workout from './pages/Workout';
+import StudyPlanner from './pages/StudyPlanner';
+import Goals from './pages/Goals';
 import SpaceBot from './pages/SpaceBot';
 import Auth from './pages/Auth';
 import About from './pages/About';
@@ -12,24 +18,16 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <nav className="navbar">
-          <div className="nav-brand">
-            <Link to="/">SelfCare Hub</Link>
-          </div>
-          <div className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/selfcare">Self Care</Link>
-            <Link to="/spacebot">SpaceBot</Link>
-            <Link to="/about">About Us</Link>
-            <Link to="/login" className="auth-link">Login</Link>
-            <Link to="/signup" className="auth-link">Sign Up</Link>
-          </div>
-        </nav>
-
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/progress" element={<Progress />} />
+          <Route path="/todo" element={<Todo />} />
           <Route path="/selfcare" element={<SelfCare />} />
           <Route path="/workout" element={<Workout />} />
+          <Route path="/study-planner" element={<StudyPlanner />} />
+          <Route path="/goals" element={<Goals />} />
           <Route path="/spacebot" element={<SpaceBot />} />
           <Route path="/login" element={<Auth />} />
           <Route path="/signup" element={<Auth />} />
