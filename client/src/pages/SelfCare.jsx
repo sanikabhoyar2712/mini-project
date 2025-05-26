@@ -297,15 +297,23 @@ const SelfCare = () => {
   // Update handlers for personal motivation
   const handleAddSkincareGoal = () => {
     if (newSkincareGoal.trim()) {
-      const goalToAdd = {
+      const goal = {
         id: Date.now(),
         content: newSkincareGoal,
-        date: new Date().toLocaleDateString()
+        completed: false
       };
-      setSkincareGoals([...skincareGoals, goalToAdd]);
-      localStorage.setItem('skincareGoals', JSON.stringify([...skincareGoals, goalToAdd]));
+      setSkincareGoals([...skincareGoals, goal]);
       setNewSkincareGoal('');
+      localStorage.setItem('skincareGoals', JSON.stringify([...skincareGoals, goal]));
     }
+  };
+
+  const handleToggleGoal = (goalId) => {
+    const updatedGoals = personalGoals.map(goal => 
+      goal.id === goalId ? { ...goal, completed: !goal.completed } : goal
+    );
+    setPersonalGoals(updatedGoals);
+    localStorage.setItem('personalGoals', JSON.stringify(updatedGoals));
   };
 
   return (

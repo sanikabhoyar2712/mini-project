@@ -1,1 +1,218 @@
- 
+.courses-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: calc(100vh - 80px);
+  background: #fdf2f8;
+}
+
+.courses-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(236, 72, 153, 0.1), 0 2px 4px -1px rgba(236, 72, 153, 0.06);
+}
+
+.courses-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #831843;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.courses-header p {
+  font-size: 1.125rem;
+  color: #831843;
+  font-weight: 500;
+}
+
+.courses-controls {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(236, 72, 153, 0.1), 0 2px 4px -1px rgba(236, 72, 153, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.filter-section {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.filter-section h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #831843;
+  margin-bottom: 1rem;
+}
+
+.filter-buttons,
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.filter-buttons button,
+.category-buttons button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #fce7f3;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #831843;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-buttons button:hover,
+.category-buttons button:hover {
+  border-color: #ec4899;
+  color: #ec4899;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(236, 72, 153, 0.1);
+}
+
+.filter-buttons button.active,
+.category-buttons button.active {
+  background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 4px 6px rgba(236, 72, 153, 0.2);
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.course-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(236, 72, 153, 0.1), 0 2px 4px -1px rgba(236, 72, 153, 0.06);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px -1px rgba(236, 72, 153, 0.2), 0 4px 6px -1px rgba(236, 72, 153, 0.1);
+}
+
+.course-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.course-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.course-card:hover .course-thumbnail img {
+  transform: scale(1.05);
+}
+
+.course-level {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(236, 72, 153, 0.9);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  text-transform: capitalize;
+}
+
+.course-content {
+  padding: 1.5rem;
+}
+
+.course-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #831843;
+  margin-bottom: 0.75rem;
+}
+
+.course-content p {
+  font-size: 0.875rem;
+  color: #831843;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.course-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #831843;
+}
+
+.instructor {
+  font-weight: 500;
+}
+
+.duration {
+  background: #fce7f3;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+@media (max-width: 768px) {
+  .courses-container {
+    padding: 1rem;
+  }
+
+  .courses-header {
+    padding: 1.5rem;
+  }
+
+  .courses-header h1 {
+    font-size: 2rem;
+  }
+
+  .courses-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .filter-section {
+    width: 100%;
+  }
+
+  .filter-buttons,
+  .category-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .filter-buttons button,
+  .category-buttons button {
+    width: auto;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
+} 
