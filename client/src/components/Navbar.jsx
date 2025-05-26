@@ -4,7 +4,6 @@ import './Navbar.css';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // for More dropdown
 
   return (
     <nav className="navbar">
@@ -28,30 +27,15 @@ const Navbar = () => {
           <li className="nav-item">
             <Link to="/progress" className="nav-link"><i className="fas fa-chart-line"></i> Progress</Link>
           </li>
-          {/* Removed Tasks Link */}
           <li className="nav-item">
             <Link to="/selfcare" className="nav-link"><i className="fas fa-heart"></i> Self Care</Link>
-          </li>
-
-          {/* More Dropdown (3 dots icon only) */}
-          <li
-            className="nav-item dropdown"
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
-          >
-            <span className="nav-link">
-              <i className="fas fa-ellipsis-h"></i> {/* 3 dots icon */}
-            </span>
-            {isDropdownOpen && (
-              <ul className="dropdown-menu">
-                <li><Link to="/about" className="dropdown-link">About</Link></li>
-                <li><Link to="/contact" className="dropdown-link">Contact Us</Link></li>
-              </ul>
-            )}
           </li>
         </ul>
 
         <div className="nav-buttons">
+          <Link to="/contact" className="nav-button contact">
+            <i className="fas fa-envelope"></i> Contact Us
+          </Link>
           <Link to="/login" className="nav-button login">
             <i className="fas fa-sign-in-alt"></i> Login
           </Link>

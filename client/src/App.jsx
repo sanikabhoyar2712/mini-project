@@ -12,7 +12,7 @@ import Goals from './pages/Goals';
 import SpaceBot from './pages/SpaceBot';
 import Auth from './pages/Auth';
 import About from './pages/About';
-import ContactUs from './pages/ContactUs';
+import Contact from './pages/Contact';
 
 import './App.css';
 
@@ -38,7 +38,7 @@ function App() {
 
           {/* More Dropdown Pages */}
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
     </Router>
