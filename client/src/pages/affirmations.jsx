@@ -5,6 +5,7 @@ const affirmations = [
     "You are capable of achieving great things.",
     "You deserve peace and happiness.",
     // You can add up to 500+ quotes here
+    //git push test
   ];
   
   export default affirmations;
