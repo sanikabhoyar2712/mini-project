@@ -1,114 +1,113 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
 
+const quotes = [
+  {
+    text: "The beautiful thing about learning is that no one can take it away from you.",
+    author: "B.B. King",
+    emoji: "🌟"
+  },
+  {
+    text: "Education is the most powerful weapon which you can use to change the world.",
+    author: "Nelson Mandela",
+    emoji: "📚"
+  },
+  {
+    text: "Push yourself, because no one else is going to do it for you.",
+    author: "Unknown",
+    emoji: "💪"
+  },
+  {
+    text: "The expert in anything was once a beginner.",
+    author: "Helen Hayes",
+    emoji: "🌱"
+  },
+  {
+    text: "Success doesn’t just find you. You have to go out and get it.",
+    author: "Unknown",
+    emoji: "🚀"
+  }
+];
+
 const Home = () => {
+  const [showQuote, setShowQuote] = useState(true);
+  const [randomQuote, setRandomQuote] = useState(null);
+
+  useEffect(() => {
+    // Select a random quote when component mounts
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+    setRandomQuote(quote);
+
+    const timer = setTimeout(() => {
+      setShowQuote(false);
+    }, 4000); // 4 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="home">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1>Welcome to Your Learning Journey</h1>
-          <p>Discover, Learn, and Grow with our personalized learning platform</p>
-          <div className="hero-buttons">
-            <Link to="/courses" className="btn btn-primary">
-              <i className="fas fa-book"></i> Explore Courses
-            </Link>
-            <Link to="/signup" className="btn btn-outline">
-              <i className="fas fa-user-plus"></i> Get Started
-            </Link>
+      {showQuote && randomQuote ? (
+        <div className="quote-screen">
+          <div className="quote-content">
+            <span className="emoji">{randomQuote.emoji}</span>
+            <p className="quote-text">"{randomQuote.text}"</p>
+            <span className="author">— {randomQuote.author}</span>
           </div>
         </div>
-        <div className="hero-image">
-          <div className="floating-elements">
-            <i className="fas fa-graduation-cap"></i>
-            <i className="fas fa-book"></i>
-            <i className="fas fa-lightbulb"></i>
-            <i className="fas fa-star"></i>
-          </div>
-        </div>
-      </section>
+      ) : (
+        <>
+          {/* Hero Section */}
+          <section className="hero">
+            <div className="hero-content">
+              <h1>Welcome to StudySphere</h1>
+              <p>Your personal learning space designed to boost your productivity and help you grow smarter every day.</p>
+              <div className="hero-buttons">
+                <button className="btn-primary">Get Started</button>
+                <button className="btn-secondary">Learn More</button>
+              </div>
+            </div>
+            <div className="hero-image">
+              <div className="floating-elements">
+                <i className="fas fa-book"></i>
+                <i className="fas fa-laptop-code"></i>
+                <i className="fas fa-brain"></i>
+                <i className="fas fa-pencil-alt"></i>
+              </div>
+            </div>
+          </section>
 
-      {/* Features Section */}
-      <section className="features">
-        <div className="section-title">
-          <h2>Why Choose Us?</h2>
-          <p>Experience learning like never before with our unique features</p>
-        </div>
-        <div className="features-grid">
-          <div className="feature-card">
-            <i className="fas fa-heart"></i>
-            <h3>Personalized Learning</h3>
-            <p>Tailored courses that match your learning style and pace</p>
-          </div>
-          <div className="feature-card">
-            <i className="fas fa-trophy"></i>
-            <h3>Achievement System</h3>
-            <p>Earn badges and rewards as you progress through your courses</p>
-          </div>
-          <div className="feature-card">
-            <i className="fas fa-users"></i>
-            <h3>Community Support</h3>
-            <p>Connect with fellow learners and share your journey</p>
-          </div>
-          <div className="feature-card">
-            <i className="fas fa-chart-line"></i>
-            <h3>Track Progress</h3>
-            <p>Monitor your learning journey with detailed analytics</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Popular Courses Section */}
-      <section className="popular-courses">
-        <div className="section-title">
-          <h2>Popular Courses</h2>
-          <p>Start your learning journey with our most popular courses</p>
-        </div>
-        <div className="courses-grid">
-          <div className="course-card">
-            <div className="course-image">
-              <i className="fas fa-code"></i>
+          {/* Features Section */}
+          <section className="features">
+            <div className="section-title">
+              <h2>Features</h2>
+              <p>Explore the powerful tools designed to support your learning journey.</p>
             </div>
-            <div className="course-content">
-              <h3>Web Development</h3>
-              <p>Learn modern web development from scratch</p>
-              <Link to="/courses" className="btn btn-outline">Learn More</Link>
+            <div className="features-grid">
+              <div className="feature-card">
+                <i className="fas fa-check-circle"></i>
+                <h3>To-Do List</h3>
+                <p>Organize your tasks and stay on top of your study schedule.</p>
+              </div>
+              <div className="feature-card">
+                <i className="fas fa-bullseye"></i>
+                <h3>Goal Tracker</h3>
+                <p>Set milestones and track your learning progress over time.</p>
+              </div>
+              <div className="feature-card">
+                <i className="fas fa-chart-line"></i>
+                <h3>Progress Analytics</h3>
+                <p>Visualize your growth with insightful data and charts.</p>
+              </div>
+              <div className="feature-card">
+                <i className="fas fa-user-friends"></i>
+                <h3>Peer Connection</h3>
+                <p>Collaborate, share, and grow with fellow learners.</p>
+              </div>
             </div>
-          </div>
-          <div className="course-card">
-            <div className="course-image">
-              <i className="fas fa-paint-brush"></i>
-            </div>
-            <div className="course-content">
-              <h3>Digital Design</h3>
-              <p>Master the art of digital design and creativity</p>
-              <Link to="/courses" className="btn btn-outline">Learn More</Link>
-            </div>
-          </div>
-          <div className="course-card">
-            <div className="course-image">
-              <i className="fas fa-mobile-alt"></i>
-            </div>
-            <div className="course-content">
-              <h3>Mobile Development</h3>
-              <p>Create amazing mobile applications</p>
-              <Link to="/courses" className="btn btn-outline">Learn More</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="cta">
-        <div className="cta-content">
-          <h2>Ready to Start Learning?</h2>
-          <p>Join thousands of learners worldwide and begin your journey today</p>
-          <Link to="/signup" className="btn btn-primary">
-            <i className="fas fa-rocket"></i> Get Started Now
-          </Link>
-        </div>
-      </section>
+          </section>
+        </>
+      )}
     </div>
   );
 };
