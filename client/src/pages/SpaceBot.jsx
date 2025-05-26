@@ -10,7 +10,17 @@ const SpaceBot = () => {
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    // Initialize Chatbase when component mounts
+    if (window.chatbase) {
+      window.chatbase("sendMessage", { 
+        message: "Hi! I'm your personal student counselor. Ask me anything about careers, courses, or college life!" 
+      });
+    }
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,44 +34,72 @@ const SpaceBot = () => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    // Add user message
-    const userMessage = {
-      type: 'user',
-      content: input.trim()
-    };
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsTyping(true);
-
-    // Simulate bot response (replace with actual API call)
-    setTimeout(() => {
-      const botResponse = {
-        type: 'bot',
-        content: getBotResponse(input.trim())
+    try {
+      // Add user message
+      const userMessage = {
+        type: 'user',
+        content: input.trim()
       };
-      setMessages(prev => [...prev, botResponse]);
+      setMessages(prev => [...prev, userMessage]);
+      setInput('');
+      setIsTyping(true);
+      setError(null);
+
+      // Send message to Chatbase
+      if (window.chatbase) {
+        window.chatbase("sendMessage", { message: input.trim() });
+      }
+
+      // Simulate bot response (replace with actual API call)
+      setTimeout(() => {
+        try {
+          const botResponse = {
+            type: 'bot',
+            content: getBotResponse(input.trim())
+          };
+          setMessages(prev => [...prev, botResponse]);
+        } catch (err) {
+          setError('Sorry, I encountered an error. Please try again.');
+          console.error('Error generating bot response:', err);
+        } finally {
+          setIsTyping(false);
+        }
+      }, 1000);
+    } catch (err) {
+      setError('Sorry, something went wrong. Please try again.');
+      console.error('Error handling message:', err);
       setIsTyping(false);
-    }, 1000);
+    }
   };
 
   const getBotResponse = (message) => {
-    // Simple response logic (replace with actual AI integration)
-    const lowerMessage = message.toLowerCase();
-    
-    if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-      return 'Hello! How can I assist you with your learning journey today?';
+    try {
+      const lowerMessage = message.toLowerCase();
+      
+      if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+        return 'Hello! How can I assist you with your learning journey today?';
+      }
+      if (lowerMessage.includes('help')) {
+        return 'I can help you with:\n- Study planning\n- Course recommendations\n- Learning strategies\n- Progress tracking\nWhat would you like to know more about?';
+      }
+      if (lowerMessage.includes('study') || lowerMessage.includes('learn')) {
+        return 'Great! Let\'s make your learning journey effective. Would you like to:\n1. Create a study plan\n2. Get learning tips\n3. Find recommended courses';
+      }
+      if (lowerMessage.includes('thank')) {
+        return 'You\'re welcome! Feel free to ask if you need anything else.';
+      }
+      
+      return 'I understand you\'re interested in learning. Could you please provide more details about what you\'d like to know?';
+    } catch (err) {
+      console.error('Error in getBotResponse:', err);
+      throw new Error('Failed to generate response');
     }
-    if (lowerMessage.includes('help')) {
-      return 'I can help you with:\n- Study planning\n- Course recommendations\n- Learning strategies\n- Progress tracking\nWhat would you like to know more about?';
+  };
+
+  const toggleChat = () => {
+    if (window.chatbase) {
+      window.chatbase("toggleChat");
     }
-    if (lowerMessage.includes('study') || lowerMessage.includes('learn')) {
-      return 'Great! Let\'s make your learning journey effective. Would you like to:\n1. Create a study plan\n2. Get learning tips\n3. Find recommended courses';
-    }
-    if (lowerMessage.includes('thank')) {
-      return 'You\'re welcome! Feel free to ask if you need anything else.';
-    }
-    
-    return 'I understand you\'re interested in learning. Could you please provide more details about what you\'d like to know?';
   };
 
   return (
@@ -69,6 +107,9 @@ const SpaceBot = () => {
       <div className="chat-header">
         <h1>SpaceBot</h1>
         <p>Your AI Learning Assistant</p>
+        <button onClick={toggleChat} className="toggle-chat-btn">
+          Toggle Chat Widget
+        </button>
       </div>
 
       <div className="chat-messages">
@@ -98,6 +139,15 @@ const SpaceBot = () => {
                 <span></span>
                 <span></span>
                 <span></span>
+              </div>
+            </div>
+          </div>
+        )}
+        {error && (
+          <div className="message error">
+            <div className="message-content">
+              <div className="message-text error-text">
+                {error}
               </div>
             </div>
           </div>
