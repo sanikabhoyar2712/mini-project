@@ -1,98 +1,81 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import './ContactUs.css';
 
 const ContactUs = () => {
-        const [name, setName] = useState('');
-        const [email, setEmail] = useState('');
-        const [message, setMessage] = useState('');
-        const [loading, setLoading] = useState(false);
-        const [responseMessage, setResponseMessage] = useState('');
-        const [error, setError] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-        const handleSubmit = async(e) => {
-            e.preventDefault();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-            if (!name || !email || !message) {
-                alert('Please fill in all fields.');
-                return;
-            }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Thank you for contacting us!');
+    setFormData({ name: '', email: '', message: '' });
+  };
 
-            setLoading(true);
+  return (
+    <div className="contact-page">
+      <section className="contact-header">
+        <h1>Get in Touch</h1>
+        <p>We’d love to hear from you! Whether you have a question, feedback, or just want to say hello.</p>
+      </section>
 
-            try {
-                const response = await axios.post('http://localhost:5000/api/contact', {
-                    name,
-                    email,
-                    message,
-                });
+      <section className="contact-form-section">
+        <div className="contact-form-container">
+          <form onSubmit={handleSubmit} className="contact-form">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              placeholder="Enter your name"
+            />
 
-                setResponseMessage(response.data.message); // Display the response message
-                setName('');
-                setEmail('');
-                setMessage('');
-            } catch (error) {
-                setError('❌ Error sending message. Please try again.');
-                console.error('Error submitting contact form:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              placeholder="Enter your email"
+            />
 
-        return ( < div style = {
-                { textAlign: 'center', marginTop: '50px' }
-            } >
-            <
-            h2 > Contact Us < /h2> <
-            form onSubmit = { handleSubmit } >
-            <
-            input type = "text"
-            placeholder = "Your Name"
-            value = { name }
-            onChange = {
-                (e) => setName(e.target.value)
-            }
-            required /
-            >
-            <
-            br / > < br / >
+            <label htmlFor="message">Message</label>
+            <textarea
+              name="message"
+              id="message"
+              rows="5"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              placeholder="Write your message here"
+            ></textarea>
 
-            <
-            input type = "email"
-            placeholder = "Your Email"
-            value = { email }
-            onChange = {
-                (e) => setEmail(e.target.value)
-            }
-            required /
-            >
-            <
-            br / > < br / >
+            <button type="submit">
+              <i className="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </section>
 
-            <
-            textarea placeholder = "Your Message"
-            value = { message }
-            onChange = {
-                (e) => setMessage(e.target.value)
-            }
-            required /
-            >
-            <
-            br / > < br / >
+      <section className="contact-info-section">
+        <h2>Contact Information</h2>
+        <p><i className="fas fa-envelope"></i> support@space.com</p>
+        <p><i className="fas fa-phone"></i> +91 98765 43210</p>
+        <p><i className="fas fa-map-marker-alt"></i> Wardha, Maharashtra, India</p>
+      </section>
+    </div>
+  );
+};
 
-            <
-            button type = "submit"
-            disabled = { loading } > { loading ? 'Sending...' : 'Send Message' } <
-            /button> < /
-            form >
-
-            {
-                responseMessage && < p style = {
-                    { color: 'green' }
-                } > { responseMessage } < /p>} {
-                error && < p style = {
-                    { color: 'red' }
-                } > { error } < /p>} </div >
-            );
-        };
-
-        export default ContactUs;
+export default ContactUs;

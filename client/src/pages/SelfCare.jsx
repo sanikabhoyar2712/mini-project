@@ -924,7 +924,7 @@ const SelfCare = () => {
                       <input
                         type="checkbox"
                         checked={goal.completed}
-                        onChange={() => handleToggleGoal(goal.id)}
+                        
                       />
                       <div className="goal-content">
                         <p className="goal-text">{goal.content}</p>

@@ -22,7 +22,6 @@ const Auth = () => {
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -61,101 +60,115 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Here you would typically make an API call to your backend
       console.log('Form submitted:', formData);
-      // For now, just redirect to home
       navigate('/');
     }
   };
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
-        <div className="auth-header">
-          <h1>{isLogin ? 'Welcome Back!' : 'Create Account'}</h1>
-          <p>{isLogin ? 'Sign in to continue your journey' : 'Join our community today'}</p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="auth-form">
-          {!isLogin && (
-            <div className="form-group">
-              <label htmlFor="name">Full Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Enter your full name"
-                className={errors.name ? 'error' : ''}
-              />
-              {errors.name && <span className="error-message">{errors.name}</span>}
-            </div>
-          )}
-
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              className={errors.email ? 'error' : ''}
+      <div className="auth-left">
+        <div className="auth-content">
+          <div className="auth-image-box">
+            <img
+              src={isLogin ? require('../assets/love-your-life.jpg') : require('../assets/signup-image.jpg')}
+              alt={isLogin ? 'Love your life inspiration' : 'Sign up inspiration'}
+              className="auth-inspire-img"
             />
-            {errors.email && <span className="error-message">{errors.email}</span>}
+          </div>
+          <h1>{isLogin ? 'Welcome Back!' : 'Join Our Community'}</h1>
+          <p>{isLogin ? 'Sign in to continue your journey' : 'Start your journey with us today'}</p>
+        </div>
+      </div>
+      
+      <div className="auth-right">
+        <div className="auth-form-container">
+          <div className="auth-header">
+            <h2>{isLogin ? 'Sign In' : 'Create Account'}</h2>
+            <p>{isLogin ? 'Enter your credentials to continue' : 'Fill in your details to get started'}</p>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              className={errors.password ? 'error' : ''}
-            />
-            {errors.password && <span className="error-message">{errors.password}</span>}
+          <form onSubmit={handleSubmit} className="auth-form">
+            {!isLogin && (
+              <div className="form-group">
+                <div className="input-icon">
+                  <i className="fas fa-user"></i>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Full Name"
+                    className={errors.name ? 'error' : ''}
+                  />
+                </div>
+                {errors.name && <span className="error-message">{errors.name}</span>}
+              </div>
+            )}
+
+            <div className="form-group">
+              <div className="input-icon">
+                <i className="fas fa-envelope"></i>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email Address"
+                  className={errors.email ? 'error' : ''}
+                />
+              </div>
+              {errors.email && <span className="error-message">{errors.email}</span>}
+            </div>
+
+            <div className="form-group">
+              <div className="input-icon">
+                <i className="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                  className={errors.password ? 'error' : ''}
+                />
+              </div>
+              {errors.password && <span className="error-message">{errors.password}</span>}
+            </div>
+
+            {!isLogin && (
+              <div className="form-group">
+                <div className="input-icon">
+                  <i className="fas fa-lock"></i>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="Confirm Password"
+                    className={errors.confirmPassword ? 'error' : ''}
+                  />
+                </div>
+                {errors.confirmPassword && (
+                  <span className="error-message">{errors.confirmPassword}</span>
+                )}
+              </div>
+            )}
+
+            <button type="submit" className="auth-button">
+              {isLogin ? 'Sign In' : 'Create Account'}
+            </button>
+          </form>
+
+          <div className="auth-divider">
+            <span>or continue with</span>
           </div>
 
-          {!isLogin && (
-            <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                placeholder="Confirm your password"
-                className={errors.confirmPassword ? 'error' : ''}
-              />
-              {errors.confirmPassword && (
-                <span className="error-message">{errors.confirmPassword}</span>
-              )}
-            </div>
-          )}
-
-          <button type="submit" className="auth-button">
-            {isLogin ? 'Sign In' : 'Sign Up'}
-          </button>
-        </form>
-
-        <div className="auth-footer">
-          <p>
-            {isLogin ? "Don't have an account? " : "Already have an account? "}
-            <a href={isLogin ? '/signup' : '/login'}>
-              {isLogin ? 'Sign Up' : 'Sign In'}
-            </a>
-          </p>
-        </div>
-
-        <div className="social-auth">
-          <p>Or continue with</p>
-          <div className="social-buttons">
+          <div className="social-auth">
             <button className="social-button google">
               <i className="fab fa-google"></i>
               Google
@@ -164,6 +177,15 @@ const Auth = () => {
               <i className="fab fa-facebook-f"></i>
               Facebook
             </button>
+          </div>
+
+          <div className="auth-footer">
+            <p>
+              {isLogin ? "Don't have an account? " : "Already have an account? "}
+              <a href={isLogin ? '/signup' : '/login'}>
+                {isLogin ? 'Sign Up' : 'Sign In'}
+              </a>
+            </p>
           </div>
         </div>
       </div>
