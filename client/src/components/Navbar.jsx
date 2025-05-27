@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'pink');
+
+  useEffect(() => {
+    document.body.classList.remove('theme-pink', 'theme-blue');
+    document.body.classList.add(`theme-${theme}`);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   return (
     <nav className="navbar">
@@ -30,9 +37,30 @@ const Navbar = () => {
           <li className="nav-item">
             <Link to="/selfcare" className="nav-link"><i className="fas fa-heart"></i> Self Care</Link>
           </li>
+          {isMenuOpen && (
+            <div className="nav-buttons mobile">
+              <Link to="/contact" className="nav-button contact">
+                <i className="fas fa-envelope"></i> Contact Us
+              </Link>
+              <Link to="/login" className="nav-button login">
+                <i className="fas fa-sign-in-alt"></i> Login
+              </Link>
+              <Link to="/signup" className="nav-button signup">
+                <i className="fas fa-user-plus"></i> Sign Up
+              </Link>
+              <select
+                className="theme-selector"
+                value={theme}
+                onChange={(e) => setTheme(e.target.value)}
+              >
+                <option value="pink">🌸 Pink</option>
+                <option value="blue">🌊 Blue</option>
+              </select>
+            </div>
+          )}
         </ul>
 
-        <div className="nav-buttons">
+        <div className="nav-buttons desktop">
           <Link to="/contact" className="nav-button contact">
             <i className="fas fa-envelope"></i> Contact Us
           </Link>
@@ -42,6 +70,14 @@ const Navbar = () => {
           <Link to="/signup" className="nav-button signup">
             <i className="fas fa-user-plus"></i> Sign Up
           </Link>
+          <select
+            className="theme-selector"
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+          >
+            <option value="pink">🌸 Pink</option>
+            <option value="blue">🌊 Blue</option>
+          </select>
         </div>
       </div>
     </nav>

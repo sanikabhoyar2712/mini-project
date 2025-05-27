@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Home.css';
+import Footer from './Footer'; // Import Footer component
 
 const quotes = [
   {
@@ -57,6 +58,8 @@ const Home = () => {
 
   return (
     <div className="home">
+      {/* Navbar - directly included */}
+
       {showQuote && randomQuote ? (
         <div className="quote-screen">
           <div className="quote-content">
@@ -124,6 +127,9 @@ const Home = () => {
           </section>
         </>
       )}
+
+      {/* Add Footer Component here */}
+      <Footer />
     </div>
   );
 };

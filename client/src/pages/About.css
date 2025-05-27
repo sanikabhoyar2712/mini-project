@@ -4,53 +4,83 @@
   padding: 2rem;
   min-height: calc(100vh - 80px);
   background: linear-gradient(135deg, var(--white) 0%, var(--light-pink) 100%);
+  animation: fadeIn 1.5s ease-in-out;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .about-header {
   text-align: center;
   margin-bottom: 3rem;
-  animation: fadeIn 0.5s ease-in;
+  animation: fadeInDown 1s ease;
+  z-index: 1;
+  position: relative;
 }
 
 .about-header h1 {
-  font-size: 2.5rem;
-  color: var(--primary);
-  margin-bottom: 0.5rem;
-  background: linear-gradient(45deg, var(--primary), var(--plum));
+  font-size: 3rem;
+  background: linear-gradient(90deg, var(--primary), var(--plum));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px var(--light-pink);
+  animation: glowText 2s infinite alternate;
+}
+
+@keyframes glowText {
+  from {
+    text-shadow: 0 0 10px var(--light-pink);
+  }
+  to {
+    text-shadow: 0 0 20px var(--plum);
+  }
 }
 
 .about-header p {
+  font-size: 1.2rem;
+  font-style: italic;
   color: var(--text);
-  font-size: 1.1rem;
+  opacity: 0.85;
 }
 
 .about-content {
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  position: relative;
+  z-index: 2;
 }
 
 .about-section {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: var(--shadow);
-  animation: slideUp 0.5s ease-out;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  animation: slideUp 1s ease;
+  transition: all 0.4s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-section:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(255, 105, 180, 0.4);
 }
 
 .about-section h2 {
+  font-size: 2.3rem;
   color: var(--primary);
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
   text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .about-section p {
   color: var(--text);
-  line-height: 1.8;
+  font-size: 1.1rem;
   text-align: center;
+  line-height: 1.8;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -58,67 +88,62 @@
 .features-grid,
 .values-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
 }
 
 .feature-card,
 .value-card {
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
   padding: 2rem;
-  border-radius: 15px;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
-  border: 1px solid var(--light-pink);
+  border: 2px solid var(--light-pink);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
+  position: relative;
+  transition: all 0.4s ease;
+  overflow: hidden;
 }
 
 .feature-card:hover,
 .value-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(255, 105, 180, 0.35);
+  border-color: var(--plum);
 }
 
 .feature-card h3,
 .value-card h3 {
+  font-size: 1.6rem;
   color: var(--primary);
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .feature-card p,
 .value-card p {
   color: var(--text);
+  font-size: 1rem;
   line-height: 1.6;
   text-align: center;
 }
 
-.cta-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-.cta-buttons .btn {
-  padding: 0.8rem 2rem;
-  font-size: 1.1rem;
-}
-
-@keyframes fadeIn {
+@keyframes fadeInDown {
   from {
     opacity: 0;
+    transform: translateY(-30px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -132,23 +157,15 @@
   }
 
   .about-header h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .about-section {
-    padding: 1.5rem;
+    padding: 1.8rem;
   }
 
   .features-grid,
   .values-grid {
     grid-template-columns: 1fr;
   }
-
-  .cta-buttons {
-    flex-direction: column;
-  }
-
-  .cta-buttons .btn {
-    width: 100%;
-  }
-} 
+}

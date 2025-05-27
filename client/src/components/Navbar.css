@@ -187,11 +187,11 @@
   .navbar-container {
     width: 90%;
   }
-  
+
   .nav-menu {
     gap: 1.5rem;
   }
-  
+
   .nav-link {
     padding: 0.5rem 0.75rem;
   }
@@ -248,11 +248,11 @@
     pointer-events: all;
   }
 
-  .nav-buttons {
+  .nav-buttons.desktop {
     display: none;
   }
 
-  .nav-menu.active .nav-buttons {
+  .nav-buttons.mobile {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -266,4 +266,79 @@
     padding: 1rem;
     height: auto;
   }
+
+  .theme-selector {
+    width: 100%;
+    font-size: 1rem;
+  }
 }
+
+/* ===== THEME COLOR STYLES ===== */
+
+body.theme-pink {
+  --primary: #ff69b4;
+  --secondary: #ffe0f0;
+  --background: #fff0f6;
+  --primary-light: #ffc0d9;
+  --text: #333;
+}
+
+body.theme-blue {
+  --primary: #3498db;
+  --secondary: #d0eaff;
+  --background: #ecf6ff;
+  --primary-light: #aed9fb;
+  --text: #333;
+}
+
+/* Apply background and text globally */
+body {
+  background-color: var(--background);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Selector Dropdown */
+.theme-selector {
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 600;
+  background-color: white;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  transition: all 0.3s ease;
+}
+
+.theme-selector:hover {
+  background-color: var(--primary-light);
+  color: #000;
+  cursor: pointer;
+}
+
+/* Responsive visibility */
+.nav-buttons.mobile {
+  display: none;
+}
+
+.nav-buttons.desktop {
+  display: flex;
+}/* Add these to your footer styles */
+footer {
+  background-color: var(--primary);  /* Adjust background color based on theme */
+  color: var(--text);  /* Adjust text color based on theme */
+  padding: 2rem 0;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* If you have other footer elements like links, icons, etc., ensure they follow the same theme */
+footer a {
+  color: var(--secondary); /* Adjust link color */
+}
+
+footer a:hover {
+  color: var(--primary-light); /* Adjust hover state */
+}
+
