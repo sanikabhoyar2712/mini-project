@@ -9,6 +9,7 @@ const SelfCare = () => {
   const [moodHistory, setMoodHistory] = useState([]);
   const [timer, setTimer] = useState(600); // 10 minutes in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [timerInterval, setTimerInterval] = useState(null);
 
   // Add new state variables for personal space
   const [importantDates, setImportantDates] = useState([]);
@@ -18,6 +19,10 @@ const SelfCare = () => {
   const [personalGoals, setPersonalGoals] = useState([]);
   const [newGoal, setNewGoal] = useState({ content: '', deadline: '', priority: 'medium' });
 
+  // Add new state variables for achievements
+  const [achievements, setAchievements] = useState([]);
+  const [newAchievement, setNewAchievement] = useState({ content: '', category: 'general' });
+
   // Workout videos
   const workoutVideos = {
     beginner: {
@@ -25,42 +30,112 @@ const SelfCare = () => {
       duration: "20 minutes",
       level: "Beginner",
       url: "https://www.youtube.com/watch?v=2pLT-olgUJs",
-      description: "Perfect for those just starting their fitness journey"
+      description: "Perfect for those just starting their fitness journey",
+      thumbnail: "https://img.youtube.com/vi/2pLT-olgUJs/maxresdefault.jpg"
     },
     weightLoss: {
-      title: "Fat Burning HIIT",
-      duration: "25 minutes",
+      title: "WEIGHT LOSS in 7 DAYS - 40MIN Full Body Fat Burn",
+      duration: "40 minutes",
       level: "Intermediate",
-      url: "https://www.youtube.com/watch?v=ml6cT4AZdqI",
-      description: "High-intensity workout for maximum calorie burn"
+      url: "https://www.youtube.com/watch?v=Ammb_7sv_KA",
+      description: "Effective full body workout for fat burning",
+      thumbnail: "https://img.youtube.com/vi/Ammb_7sv_KA/maxresdefault.jpg"
+    },
+    weightLossStanding: {
+      title: "FULL BODY FAT LOSS in 14 Days - Standing",
+      duration: "30 minutes",
+      level: "Intermediate",
+      url: "https://www.youtube.com/watch?v=-qcA-GqCVeI",
+      description: "A non-stop standing full body workout for fat loss.",
+      thumbnail: "https://img.youtube.com/vi/-qcA-GqCVeI/maxresdefault.jpg"
+    },
+    weightLoss10Days: {
+      title: "Lose 5 Kg in 10 Days - At Home Workout",
+      duration: "~30 minutes", // Approximating duration
+      level: "Intermediate", // Assuming Intermediate
+      url: "https://www.youtube.com/watch?v=emtmqKFGhw4",
+      description: "An effective at-home workout routine for weight loss.",
+      thumbnail: "https://img.youtube.com/vi/emtmqKFGhw4/maxresdefault.jpg"
     },
     weightGain: {
       title: "Strength Training for Muscle Gain",
       duration: "30 minutes",
       level: "Intermediate",
       url: "https://www.youtube.com/watch?v=3VcKaXpzqRo",
-      description: "Build muscle and increase strength"
+      description: "Build muscle and increase strength",
+      thumbnail: "https://img.youtube.com/vi/3VcKaXpzqRo/maxresdefault.jpg"
     },
     yoga: {
       title: "Morning Yoga Flow",
       duration: "15 minutes",
       level: "All Levels",
       url: "https://www.youtube.com/watch?v=sTANio_2E0Q",
-      description: "Start your day with energy and flexibility"
+      description: "Start your day with energy and flexibility",
+      thumbnail: "https://img.youtube.com/vi/sTANio_2E0Q/maxresdefault.jpg"
     },
     core: {
       title: "Core Strength & Planks",
       duration: "15 minutes",
       level: "Beginner",
       url: "https://www.youtube.com/watch?v=ASdvN_XEl_c",
-      description: "Strengthen your core and improve posture"
+      description: "Strengthen your core and improve posture",
+      thumbnail: "https://img.youtube.com/vi/ASdvN_XEl_c/maxresdefault.jpg"
     },
     legs: {
-      title: "Lower Body & Squats",
+      title: "20 Min Lower Body Workout - Glutes & Legs",
       duration: "20 minutes",
       level: "Beginner",
-      url: "https://www.youtube.com/watch?v=YaXPRqUwItQ",
-      description: "Tone and strengthen your legs"
+      url: "https://www.youtube.com/watch?v=AA3WRECMiSg",
+      description: "Effective no-equipment workout for toning legs and glutes",
+      thumbnail: "https://img.youtube.com/vi/AA3WRECMiSg/maxresdefault.jpg"
+    },
+    fullBodySmallSpace: {
+      title: "30 Min Full Body Workout - Small Space",
+      duration: "30 minutes",
+      level: "Beginner",
+      url: "https://www.youtube.com/watch?v=73NEi4HzHPs",
+      description: "A complete full body workout suitable for small spaces.",
+      thumbnail: "https://img.youtube.com/vi/73NEi4HzHPs/maxresdefault.jpg"
+    },
+    beginnerNoEquipment: {
+      title: "20 min TOTAL BEGINNER FULL BODY Workout (No Equipment)",
+      duration: "20 minutes",
+      level: "Beginner",
+      url: "https://www.youtube.com/watch?v=ZeJLIdQenTo",
+      description: "A full body workout perfect for total beginners with no equipment.",
+      thumbnail: "https://img.youtube.com/vi/ZeJLIdQenTo/maxresdefault.jpg"
+    },
+    fullBodyStrength1: {
+      title: "FULL BODY Workout To Strengthen Muscle!",
+      duration: "~45 minutes", // Approximating duration
+      level: "Intermediate", // Assuming Intermediate
+      url: "https://m.youtube.com/watch?v=ryIe1i91EbM",
+      description: "A full body workout focused on building muscle strength.",
+      thumbnail: "https://img.youtube.com/vi/ryIe1i91EbM/maxresdefault.jpg"
+    },
+    fullBodyStrength2: {
+      title: "30 minute NO REPEAT Full Body Strength Training",
+      duration: "30 minutes",
+      level: "Intermediate", // Assuming Intermediate
+      url: "https://www.youtube.com/watch?v=tj0o8aH9vJw",
+      description: "A 30 minute no repeat full body strength training routine.",
+      thumbnail: "https://img.youtube.com/vi/tj0o8aH9vJw/maxresdefault.jpg"
+    },
+    yogaFlow: {
+      title: "20 MIN FEEL GOOD YOGA",
+      duration: "20 minutes",
+      level: "All Levels",
+      url: "https://www.youtube.com/watch?v=poZBpvLTHNw",
+      description: "A yoga flow to stretch and feel good.",
+      thumbnail: "https://img.youtube.com/vi/poZBpvLTHNw/maxresdefault.jpg"
+    },
+    yogaStrength: {
+      title: "40 MIN YOGA WORKOUT",
+      duration: "40 minutes",
+      level: "Intermediate", // Assuming Intermediate
+      url: "https://www.youtube.com/watch?v=uqJ-jANozcE",
+      description: "A full body yoga flow for strength.",
+      thumbnail: "https://img.youtube.com/vi/uqJ-jANozcE/maxresdefault.jpg"
     }
   };
 
@@ -86,6 +161,13 @@ const SelfCare = () => {
       "Don't skip warm-up",
       "Stay consistent",
       "Listen to your body"
+    ],
+    healthyDiet: [
+      "Eat plenty of fruits and vegetables",
+      "Choose lean protein sources",
+      "Include healthy fats in your diet",
+      "Limit processed foods and sugary drinks",
+      "Control portion sizes"
     ]
   };
 
@@ -108,6 +190,24 @@ const SelfCare = () => {
       duration: "10 minutes",
       type: "Focus",
       url: "https://www.youtube.com/watch?v=O-6f5wQXSu8"
+    },
+    mindfulness20Min: {
+      title: "Mindfulness Meditation in 20 Minutes",
+      duration: "20 minutes",
+      type: "Mindfulness",
+      url: "https://www.youtube.com/watch?v=64ZU2UCQdmQ"
+    },
+    fiveMinMeditation: {
+      title: "5-Minute Meditation You Can Do Anywhere",
+      duration: "5 minutes",
+      type: "Quick Relief",
+      url: "https://www.youtube.com/watch?v=inpok4MKVLM"
+    },
+    blissfulRelaxation: {
+      title: "Guided Meditation - Blissful Deep Relaxation",
+      duration: "~30 minutes", // Approximating duration
+      type: "Relaxation",
+      url: "https://www.youtube.com/watch?v=Jyy0ra2WcQQ"
     }
   };
 
@@ -150,6 +250,68 @@ const SelfCare = () => {
       "Check your products' expiration dates"
     ]
   };
+
+  // Update skincare images with professional images
+  const skincareImages = {
+    morning: null,
+    evening: null,
+    weekly: null,
+    masks: null,
+    serums: null,
+    tools: null
+  };
+
+  // Add new skincare categories
+  const skincareCategories = [
+    {
+      title: "Morning Routine",
+      icon: "sun",
+      tips: skincareTips.morning
+    },
+    {
+      title: "Evening Routine",
+      icon: "moon",
+      tips: skincareTips.evening
+    },
+    {
+      title: "Weekly Care",
+      icon: "calendar-week",
+      tips: skincareTips.weekly
+    },
+    {
+      title: "Face Masks",
+      icon: "spa",
+      tips: [
+        "Use clay masks for oily skin",
+        "Hydrating masks for dry skin",
+        "Sheet masks for quick hydration",
+        "Exfoliating masks once a week",
+        "Charcoal masks for deep cleansing"
+      ]
+    },
+    {
+      title: "Serums & Treatments",
+      icon: "tint",
+      tips: [
+        "Vitamin C for brightening",
+        "Hyaluronic acid for hydration",
+        "Retinol for anti-aging",
+        "Niacinamide for oil control",
+        "Peptides for firming"
+      ]
+    },
+    {
+      title: "Skincare Tools",
+      icon: "tools",
+      tips: [
+        "Use facial rollers for circulation",
+        "Guasha for lymphatic drainage",
+        "LED masks for skin concerns",
+        "Facial steamers for deep cleansing",
+        "Ice rollers for puffiness"
+      ]
+    }
+  ];
 
   // Timer functionality
   useEffect(() => {
@@ -203,6 +365,12 @@ const SelfCare = () => {
     }
   };
 
+  const handleDeleteEntry = (entryId) => {
+    const updatedEntries = diaryEntries.filter(entry => entry.id !== entryId);
+    setDiaryEntries(updatedEntries);
+    localStorage.setItem('diaryEntries', JSON.stringify(updatedEntries));
+  };
+
   // Mood tracking functionality
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
@@ -225,6 +393,7 @@ const SelfCare = () => {
     const savedPersonalGoals = localStorage.getItem('personalGoals');
     const savedSkincareGoals = localStorage.getItem('skincareGoals');
     const savedMotivation = localStorage.getItem('personalMotivation');
+    const savedAchievements = localStorage.getItem('achievements');
     
     if (savedDiaryEntries) {
       setDiaryEntries(JSON.parse(savedDiaryEntries));
@@ -247,6 +416,9 @@ const SelfCare = () => {
     if (savedMotivation) {
       setPersonalMotivation(savedMotivation);
     }
+    if (savedAchievements) {
+      setAchievements(JSON.parse(savedAchievements));
+    }
   }, []);
 
   // Add handlers for personal space
@@ -262,6 +434,12 @@ const SelfCare = () => {
     }
   };
 
+  const handleDeleteDate = (dateId) => {
+    const updatedDates = importantDates.filter(date => date.id !== dateId);
+    setImportantDates(updatedDates);
+    localStorage.setItem('importantDates', JSON.stringify(updatedDates));
+  };
+
   const handleAddThought = () => {
     if (newThought.content) {
       const thoughtToAdd = {
@@ -273,6 +451,12 @@ const SelfCare = () => {
       localStorage.setItem('learningThoughts', JSON.stringify([...learningThoughts, thoughtToAdd]));
       setNewThought({ content: '', category: 'general' });
     }
+  };
+
+  const handleDeleteThought = (thoughtId) => {
+    const updatedThoughts = learningThoughts.filter(thought => thought.id !== thoughtId);
+    setLearningThoughts(updatedThoughts);
+    localStorage.setItem('learningThoughts', JSON.stringify(updatedThoughts));
   };
 
   const handleAddGoal = () => {
@@ -288,6 +472,12 @@ const SelfCare = () => {
     }
   };
 
+  const handleDeleteGoal = (goalId) => {
+    const updatedGoals = personalGoals.filter(goal => goal.id !== goalId);
+    setPersonalGoals(updatedGoals);
+    localStorage.setItem('personalGoals', JSON.stringify(updatedGoals));
+  };
+
   const handleSaveMotivation = () => {
     if (personalMotivation.trim()) {
       localStorage.setItem('personalMotivation', personalMotivation);
@@ -297,22 +487,62 @@ const SelfCare = () => {
   // Update handlers for personal motivation
   const handleAddSkincareGoal = () => {
     if (newSkincareGoal.trim()) {
-      const goalToAdd = {
+      const goal = {
         id: Date.now(),
         content: newSkincareGoal,
-        date: new Date().toLocaleDateString()
+        completed: false
       };
-      setSkincareGoals([...skincareGoals, goalToAdd]);
-      localStorage.setItem('skincareGoals', JSON.stringify([...skincareGoals, goalToAdd]));
+      setSkincareGoals([...skincareGoals, goal]);
       setNewSkincareGoal('');
+      localStorage.setItem('skincareGoals', JSON.stringify([...skincareGoals, goal]));
     }
   };
+
+  const handleToggleGoal = (goalId) => {
+    const updatedGoals = personalGoals.map(goal => 
+      goal.id === goalId ? { ...goal, completed: !goal.completed } : goal
+    );
+    setPersonalGoals(updatedGoals);
+    localStorage.setItem('personalGoals', JSON.stringify(updatedGoals));
+  };
+
+  // Add handler for achievements
+  const handleAddAchievement = () => {
+    if (newAchievement.content.trim()) {
+      const achievementToAdd = {
+        id: Date.now(),
+        date: new Date().toLocaleDateString(),
+        ...newAchievement,
+      };
+      setAchievements([...achievements, achievementToAdd]);
+      localStorage.setItem('achievements', JSON.stringify([...achievements, achievementToAdd]));
+      setNewAchievement({ content: '', category: 'general' });
+    }
+  };
+
+  const handleDeleteAchievement = (achievementId) => {
+    const updatedAchievements = achievements.filter(achievement => achievement.id !== achievementId);
+    setAchievements(updatedAchievements);
+    localStorage.setItem('achievements', JSON.stringify(updatedAchievements));
+  };
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const singleHeroImageUrl = "https://images.pexels.com/photos/6005013/pexels-photo-6005013.jpeg?cs=srgb&dl=pexels-ds-stories-6005013.jpg&fm=jpg&_gl=1*zsfih9*_ga*NTI5NjI5NjY4LjE3NDgzMzIwNzg.*_ga_8JE65Q40S6*czE3NDgzMzcxNTQkbzIkZzEkdDE3NDgzMzgyMTIkajAkbDAkaDA.";
 
   return (
     <div className="selfcare-container">
       <div className="selfcare-header">
-        <h1>Self Care Hub</h1>
-        <p>Your daily dose of wellness and self-love</p>
+        <div className="selfcare-intro">
+          <h2>Nurture Your Well-being</h2>
+          <p>Your dedicated space for mental, physical, and emotional self-care.</p>
+          <div className="intro-icons">
+            <i className="fas fa-book-open"></i>
+            <i className="fas fa-dumbbell"></i>
+            <i className="fas fa-spa"></i>
+            <i className="fas fa-smile"></i>
+          </div>
+        </div>
       </div>
 
       <div className="selfcare-tabs">
@@ -376,6 +606,13 @@ const SelfCare = () => {
                 <h3>Previous Entries</h3>
                 {diaryEntries.map((entry) => (
                   <div key={entry.id} className="diary-entry">
+                    <button 
+                      className="delete-entry"
+                      onClick={() => handleDeleteEntry(entry.id)}
+                      title="Delete entry"
+                    >
+                      <i className="fas fa-trash"></i>
+                    </button>
                     <p className="entry-date">{entry.date}</p>
                     <p className="entry-content">{entry.content}</p>
                   </div>
@@ -396,120 +633,130 @@ const SelfCare = () => {
               <div className="category-section">
                 <h3>Beginner Friendly</h3>
                 <div className="workout-cards">
-                  <div className="workout-card">
+                  <a href={workoutVideos.beginner.url} target="_blank" rel="noopener noreferrer" className="workout-card">
                     <div className="workout-video">
-                      <iframe 
-                        src="https://www.youtube.com/embed/2pLT-olgUJs" 
-                        title="Beginner Workout"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
+                      <img src={workoutVideos.beginner.thumbnail} alt={workoutVideos.beginner.title} />
                     </div>
                     <h3>{workoutVideos.beginner.title}</h3>
                     <p>{workoutVideos.beginner.duration} • {workoutVideos.beginner.level}</p>
                     <p className="workout-description">{workoutVideos.beginner.description}</p>
-                    <a href={workoutVideos.beginner.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                      Watch on YouTube
-                    </a>
-                  </div>
-                  <div className="workout-card">
+                  </a>
+                  <a href={workoutVideos.core.url} target="_blank" rel="noopener noreferrer" className="workout-card">
                     <div className="workout-video">
-                      <iframe 
-                        src="https://www.youtube.com/embed/ASdvN_XEl_c" 
-                        title="Core Workout"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
+                      <img src={workoutVideos.core.thumbnail} alt={workoutVideos.core.title} />
                     </div>
                     <h3>{workoutVideos.core.title}</h3>
                     <p>{workoutVideos.core.duration} • {workoutVideos.core.level}</p>
                     <p className="workout-description">{workoutVideos.core.description}</p>
-                    <a href={workoutVideos.core.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                      Watch on YouTube
-                    </a>
-                  </div>
+                  </a>
+                  <a href={workoutVideos.fullBodySmallSpace.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.fullBodySmallSpace.thumbnail} alt={workoutVideos.fullBodySmallSpace.title} />
+                    </div>
+                    <h3>{workoutVideos.fullBodySmallSpace.title}</h3>
+                    <p>{workoutVideos.fullBodySmallSpace.duration} • {workoutVideos.fullBodySmallSpace.level}</p>
+                    <p className="workout-description">{workoutVideos.fullBodySmallSpace.description}</p>
+                  </a>
+                  <a href={workoutVideos.beginnerNoEquipment.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.beginnerNoEquipment.thumbnail} alt={workoutVideos.beginnerNoEquipment.title} />
+                    </div>
+                    <h3>{workoutVideos.beginnerNoEquipment.title}</h3>
+                    <p>{workoutVideos.beginnerNoEquipment.duration} • {workoutVideos.beginnerNoEquipment.level}</p>
+                    <p className="workout-description">{workoutVideos.beginnerNoEquipment.description}</p>
+                  </a>
                 </div>
               </div>
 
               <div className="category-section">
                 <h3>Weight Loss</h3>
                 <div className="workout-cards">
-                  <div className="workout-card">
+                  <a href={workoutVideos.weightLoss.url} target="_blank" rel="noopener noreferrer" className="workout-card">
                     <div className="workout-video">
-                      <iframe 
-                        src="https://www.youtube.com/embed/ml6cT4AZdqI" 
-                        title="HIIT Workout"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
+                      <img src={workoutVideos.weightLoss.thumbnail} alt={workoutVideos.weightLoss.title} />
                     </div>
                     <h3>{workoutVideos.weightLoss.title}</h3>
                     <p>{workoutVideos.weightLoss.duration} • {workoutVideos.weightLoss.level}</p>
                     <p className="workout-description">{workoutVideos.weightLoss.description}</p>
-                    <a href={workoutVideos.weightLoss.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                      Watch on YouTube
-                    </a>
-                  </div>
-                  <div className="workout-card">
+                  </a>
+                  <a href={workoutVideos.legs.url} target="_blank" rel="noopener noreferrer" className="workout-card">
                     <div className="workout-video">
-                      <iframe 
-                        src="https://www.youtube.com/embed/YaXPRqUwItQ" 
-                        title="Legs Workout"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
+                      <img src={workoutVideos.legs.thumbnail} alt={workoutVideos.legs.title} />
                     </div>
                     <h3>{workoutVideos.legs.title}</h3>
                     <p>{workoutVideos.legs.duration} • {workoutVideos.legs.level}</p>
                     <p className="workout-description">{workoutVideos.legs.description}</p>
-                    <a href={workoutVideos.legs.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                      Watch on YouTube
-                    </a>
-                  </div>
+                  </a>
+                  <a href={workoutVideos.weightLossStanding.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.weightLossStanding.thumbnail} alt={workoutVideos.weightLossStanding.title} />
+                    </div>
+                    <h3>{workoutVideos.weightLossStanding.title}</h3>
+                    <p>{workoutVideos.weightLossStanding.duration} • {workoutVideos.weightLossStanding.level}</p>
+                    <p className="workout-description">{workoutVideos.weightLossStanding.description}</p>
+                  </a>
+                  <a href={workoutVideos.weightLoss10Days.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.weightLoss10Days.thumbnail} alt={workoutVideos.weightLoss10Days.title} />
+                    </div>
+                    <h3>{workoutVideos.weightLoss10Days.title}</h3>
+                    <p>{workoutVideos.weightLoss10Days.duration} • {workoutVideos.weightLoss10Days.level}</p>
+                    <p className="workout-description">{workoutVideos.weightLoss10Days.description}</p>
+                  </a>
                 </div>
               </div>
 
               <div className="category-section">
                 <h3>Weight Gain & Strength</h3>
                 <div className="workout-cards">
-                  <div className="workout-card">
+                  <a href={workoutVideos.weightGain.url} target="_blank" rel="noopener noreferrer" className="workout-card">
                     <div className="workout-video">
-                      <iframe 
-                        src="https://www.youtube.com/embed/3VcKaXpzqRo" 
-                        title="Strength Training"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
+                      <img src={workoutVideos.weightGain.thumbnail} alt={workoutVideos.weightGain.title} />
                     </div>
                     <h3>{workoutVideos.weightGain.title}</h3>
                     <p>{workoutVideos.weightGain.duration} • {workoutVideos.weightGain.level}</p>
                     <p className="workout-description">{workoutVideos.weightGain.description}</p>
-                    <a href={workoutVideos.weightGain.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                      Watch on YouTube
-                    </a>
-                  </div>
-                  <div className="workout-card">
+                  </a>
+                  <a href={workoutVideos.yoga.url} target="_blank" rel="noopener noreferrer" className="workout-card">
                     <div className="workout-video">
-                      <iframe 
-                        src="https://www.youtube.com/embed/sTANio_2E0Q" 
-                        title="Yoga Flow"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
+                      <img src={workoutVideos.yoga.thumbnail} alt={workoutVideos.yoga.title} />
                     </div>
                     <h3>{workoutVideos.yoga.title}</h3>
                     <p>{workoutVideos.yoga.duration} • {workoutVideos.yoga.level}</p>
                     <p className="workout-description">{workoutVideos.yoga.description}</p>
-                    <a href={workoutVideos.yoga.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                      Watch on YouTube
-                    </a>
-                  </div>
+                  </a>
+                  <a href={workoutVideos.fullBodyStrength1.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.fullBodyStrength1.thumbnail} alt={workoutVideos.fullBodyStrength1.title} />
+                    </div>
+                    <h3>{workoutVideos.fullBodyStrength1.title}</h3>
+                    <p>{workoutVideos.fullBodyStrength1.duration} • {workoutVideos.fullBodyStrength1.level}</p>
+                    <p className="workout-description">{workoutVideos.fullBodyStrength1.description}</p>
+                  </a>
+                  <a href={workoutVideos.fullBodyStrength2.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.fullBodyStrength2.thumbnail} alt={workoutVideos.fullBodyStrength2.title} />
+                    </div>
+                    <h3>{workoutVideos.fullBodyStrength2.title}</h3>
+                    <p>{workoutVideos.fullBodyStrength2.duration} • {workoutVideos.fullBodyStrength2.level}</p>
+                    <p className="workout-description">{workoutVideos.fullBodyStrength2.description}</p>
+                  </a>
+                  <a href={workoutVideos.yogaFlow.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.yogaFlow.thumbnail} alt={workoutVideos.yogaFlow.title} />
+                    </div>
+                    <h3>{workoutVideos.yogaFlow.title}</h3>
+                    <p>{workoutVideos.yogaFlow.duration} • {workoutVideos.yogaFlow.level}</p>
+                    <p className="workout-description">{workoutVideos.yogaFlow.description}</p>
+                  </a>
+                  <a href={workoutVideos.yogaStrength.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.yogaStrength.thumbnail} alt={workoutVideos.yogaStrength.title} />
+                    </div>
+                    <h3>{workoutVideos.yogaStrength.title}</h3>
+                    <p>{workoutVideos.yogaStrength.duration} • {workoutVideos.yogaStrength.level}</p>
+                    <p className="workout-description">{workoutVideos.yogaStrength.description}</p>
+                  </a>
                 </div>
               </div>
 
@@ -536,6 +783,14 @@ const SelfCare = () => {
                     <h4>Beginner Tips</h4>
                     <ul>
                       {workoutTips.beginner.map((tip, index) => (
+                        <li key={index}>{tip}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="tips-category">
+                    <h4>Healthy Diet Tips</h4>
+                    <ul>
+                      {workoutTips.healthyDiet.map((tip, index) => (
                         <li key={index}>{tip}</li>
                       ))}
                     </ul>
@@ -586,65 +841,20 @@ const SelfCare = () => {
               </div>
             </div>
 
-            <div className="skincare-routine">
-              <h3>Your Personalized Routine</h3>
-              <div className="skin-type-selector">
-                <h4>What's Your Skin Type?</h4>
-                <div className="skin-type-options">
-                  {skinTypes.map((type) => (
-                    <button
-                      key={type.type}
-                      className={`skin-type-button ${selectedSkinType === type.type ? 'selected' : ''}`}
-                      onClick={() => setSelectedSkinType(type.type)}
-                    >
-                      {type.type.charAt(0).toUpperCase() + type.type.slice(1)}
-                    </button>
-                  ))}
-                </div>
-                {selectedSkinType && (
-                  <p className="skin-type-description">
-                    {skinTypes.find(t => t.type === selectedSkinType)?.description}
-                  </p>
-                )}
-              </div>
-
-              <div className="routine-steps">
-                <div className="routine-category">
-                  <h4><i className="fas fa-sun"></i> Morning Routine</h4>
+            <div className="routine-steps">
+              {skincareCategories.map((category, index) => (
+                <div key={index} className="routine-category">
+                  <h4><i className={`fas fa-${category.icon}`}></i> {category.title}</h4>
                   <ul>
-                    {skincareTips.morning.map((tip, index) => (
-                      <li key={index}>
+                    {category.tips.map((tip, tipIndex) => (
+                      <li key={tipIndex}>
                         <i className="fas fa-check"></i>
                         {tip}
                       </li>
                     ))}
                   </ul>
                 </div>
-
-                <div className="routine-category">
-                  <h4><i className="fas fa-moon"></i> Evening Routine</h4>
-                  <ul>
-                    {skincareTips.evening.map((tip, index) => (
-                      <li key={index}>
-                        <i className="fas fa-check"></i>
-                        {tip}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="routine-category">
-                  <h4><i className="fas fa-calendar-week"></i> Weekly Care</h4>
-                  <ul>
-                    {skincareTips.weekly.map((tip, index) => (
-                      <li key={index}>
-                        <i className="fas fa-check"></i>
-                        {tip}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="skincare-streak">
@@ -788,6 +998,54 @@ const SelfCare = () => {
                   Watch on YouTube
                 </a>
               </div>
+              <div className="meditation-card">
+                <div className="meditation-video">
+                  <iframe 
+                    src="https://www.youtube.com/embed/64ZU2UCQdmQ" 
+                    title="Mindfulness Meditation in 20 Minutes"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <h3>{meditationVideos.mindfulness20Min.title}</h3>
+                <p>{meditationVideos.mindfulness20Min.duration} • {meditationVideos.mindfulness20Min.type}</p>
+                <a href={meditationVideos.mindfulness20Min.url} target="_blank" rel="noopener noreferrer" className="start-button">
+                  Watch on YouTube
+                </a>
+              </div>
+              <div className="meditation-card">
+                <div className="meditation-video">
+                  <iframe 
+                    src="https://www.youtube.com/embed/inpok4MKVLM" 
+                    title="5-Minute Meditation You Can Do Anywhere"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <h3>{meditationVideos.fiveMinMeditation.title}</h3>
+                <p>{meditationVideos.fiveMinMeditation.duration} • {meditationVideos.fiveMinMeditation.type}</p>
+                <a href={meditationVideos.fiveMinMeditation.url} target="_blank" rel="noopener noreferrer" className="start-button">
+                  Watch on YouTube
+                </a>
+              </div>
+              <div className="meditation-card">
+                <div className="meditation-video">
+                  <iframe 
+                    src="https://www.youtube.com/embed/Jyy0ra2WcQQ" 
+                    title="Guided Meditation - Blissful Deep Relaxation"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <h3>{meditationVideos.blissfulRelaxation.title}</h3>
+                <p>{meditationVideos.blissfulRelaxation.duration} • {meditationVideos.blissfulRelaxation.type}</p>
+                <a href={meditationVideos.blissfulRelaxation.url} target="_blank" rel="noopener noreferrer" className="start-button">
+                  Watch on YouTube
+                </a>
+              </div>
             </div>
             <div className="meditation-timer">
               <h3>Meditation Timer</h3>
@@ -846,6 +1104,13 @@ const SelfCare = () => {
                 <div className="dates-list">
                   {importantDates.map((date) => (
                     <div key={date.id} className="date-card">
+                      <button 
+                         className="delete-item"
+                         onClick={() => handleDeleteDate(date.id)}
+                         title="Delete date"
+                      >
+                         <i className="fas fa-trash"></i>
+                      </button>
                       <h4>{date.title}</h4>
                       <p className="date">{new Date(date.date).toLocaleDateString()}</p>
                       <p className="description">{date.description}</p>
@@ -876,6 +1141,13 @@ const SelfCare = () => {
                 <div className="thoughts-list">
                   {learningThoughts.map((thought) => (
                     <div key={thought.id} className={`thought-card ${thought.category}`}>
+                       <button 
+                         className="delete-item"
+                         onClick={() => handleDeleteThought(thought.id)}
+                         title="Delete thought"
+                      >
+                         <i className="fas fa-trash"></i>
+                      </button>
                       <p className="thought-content">{thought.content}</p>
                       <div className="thought-meta">
                         <span className="category">{thought.category}</span>
@@ -913,6 +1185,13 @@ const SelfCare = () => {
                 <div className="goals-list">
                   {personalGoals.map((goal) => (
                     <div key={goal.id} className={`goal-card ${goal.priority} ${goal.completed ? 'completed' : ''}`}>
+                       <button 
+                         className="delete-item"
+                         onClick={() => handleDeleteGoal(goal.id)}
+                         title="Delete goal"
+                      >
+                         <i className="fas fa-trash"></i>
+                      </button>
                       <input
                         type="checkbox"
                         checked={goal.completed}
@@ -925,6 +1204,48 @@ const SelfCare = () => {
                           <span className="priority">{goal.priority} priority</span>
                         </div>
                       </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* New Achievements Section */}
+              <div className="achievements">
+                <h3>Achievements</h3>
+                <div className="add-achievement-form">
+                  <input
+                    type="text"
+                    placeholder="Describe your achievement..."
+                    value={newAchievement.content}
+                    onChange={(e) => setNewAchievement({...newAchievement, content: e.target.value})}
+                  />
+                   <select
+                    value={newAchievement.category}
+                    onChange={(e) => setNewAchievement({...newAchievement, category: e.target.value})}
+                  >
+                    <option value="general">General</option>
+                    <option value="personal">Personal Growth</option>
+                    <option value="professional">Professional</option>
+                    <option value="fitness">Fitness & Health</option>
+                    <option value="creative">Creative</option>
+                  </select>
+                  <button onClick={handleAddAchievement}>Add Achievement</button>
+                </div>
+                <div className="achievements-list">
+                  {achievements.map((achievement) => (
+                    <div key={achievement.id} className="achievement-card">
+                       <button 
+                         className="delete-item"
+                         onClick={() => handleDeleteAchievement(achievement.id)}
+                         title="Delete achievement"
+                      >
+                         <i className="fas fa-trash"></i>
+                      </button>
+                      <p className="achievement-content">{achievement.content}</p>
+                       <div className="achievement-meta">
+                         <span className="category">{achievement.category}</span>
+                         <span className="date">{achievement.date}</span>
+                       </div>
                     </div>
                   ))}
                 </div>

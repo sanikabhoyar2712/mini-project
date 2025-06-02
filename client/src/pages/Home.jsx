@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
-import Footer from './Footer';
 
 const quotes = [
   {
@@ -37,12 +36,13 @@ const Home = () => {
   const [randomQuote, setRandomQuote] = useState(null);
 
   useEffect(() => {
+    // Select a random quote when component mounts
     const quote = quotes[Math.floor(Math.random() * quotes.length)];
     setRandomQuote(quote);
 
     const timer = setTimeout(() => {
       setShowQuote(false);
-    }, 4000);
+    }, 4000); // 4 seconds
 
     return () => clearTimeout(timer);
   }, []);
@@ -67,18 +67,19 @@ const Home = () => {
         </div>
       ) : (
         <>
+          {/* Hero Section */}
           <section className="hero">
             <div className="hero-content">
               <h1>Welcome to StudySphere</h1>
-              <p>
-                Your personal learning space designed to boost your productivity and help you grow smarter every day.
-              </p>
+              <p>Your personal learning space designed to boost your productivity and help you grow smarter every day.</p>
               <div className="hero-buttons">
                 <button className="get-started-btn" onClick={handleGetStarted}>
-                  Get Started <i className="fas fa-arrow-right"></i>
+                  Get Started
+                  <i className="fas fa-arrow-right"></i>
                 </button>
                 <button className="about-btn" onClick={handleAbout}>
-                  About Us <i className="fas fa-info-circle"></i>
+                  About Us
+                  <i className="fas fa-info-circle"></i>
                 </button>
               </div>
             </div>
@@ -92,12 +93,11 @@ const Home = () => {
             </div>
           </section>
 
+          {/* Features Section */}
           <section className="features">
             <div className="section-title">
               <h2>Features</h2>
-              <p>
-                Explore the powerful tools designed to support your learning journey.
-              </p>
+              <p>Explore the powerful tools designed to support your learning journey.</p>
             </div>
             <div className="features-grid">
               <div className="feature-card">
@@ -124,7 +124,6 @@ const Home = () => {
           </section>
         </>
       )}
-      <Footer />
     </div>
   );
 };

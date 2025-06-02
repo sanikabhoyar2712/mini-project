@@ -1,97 +1,309 @@
-.contact-page {
-    padding: 2rem;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, var(--background) 0%, var(--primary-light) 100%);
+/* Courses Page Styling */
+.courses-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.courses-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.courses-header h1 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.courses-header p {
+  font-size: 1.1rem;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+.courses-search-filter {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.search-bar {
+  flex: 1;
+  position: relative;
+  max-width: 600px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid var(--primary-light);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--background);
+  border: 2px solid var(--primary-light);
+  border-radius: 12px;
+  color: var(--primary);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-toggle:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.filters-container {
+  background-color: var(--background);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.filter-group {
+  margin-bottom: 1rem;
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-options button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--primary-light);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-options button:hover {
+  background-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.filter-options button.active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.course-card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.course-thumbnail {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.course-thumbnail img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bookmark-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.bookmark-btn:hover {
+  background-color: white;
+  transform: scale(1.1);
+}
+
+.course-content {
+  padding: 1.5rem;
+}
+
+.course-category {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--background);
+  color: var(--primary);
+  border-radius: 20px;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.course-title {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.course-description {
+  color: var(--text);
+  opacity: 0.8;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.course-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+.course-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.course-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--background);
+}
+
+.course-level {
+  padding: 0.25rem 0.75rem;
+  background-color: var(--background);
+  color: var(--primary);
+  border-radius: 20px;
+  font-size: 0.875rem;
+}
+
+.course-link {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.course-link:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .courses-container {
+    padding: 1rem;
   }
-  
-  .contact-header {
-    text-align: center;
-    margin-bottom: 2rem;
+
+  .courses-header h1 {
+    font-size: 2rem;
   }
-  
-  .contact-header h1 {
-    font-size: 2.5rem;
-    color: var(--primary); /* Pink color */
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+
+  .courses-search-filter {
+    flex-direction: column;
   }
-  
-  .contact-header p {
-    font-size: 1.2rem;
-    color: var(--text);
+
+  .search-bar {
+    max-width: 100%;
   }
-  
-  .contact-form-section {
-    display: flex;
+
+  .filter-toggle {
+    width: 100%;
     justify-content: center;
-    margin-bottom: 3rem;
   }
-  
-  .contact-form-container {
-    width: 100%;
-    max-width: 600px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
+  .courses-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .contact-form label {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: var(--primary); /* Pink color */
+}
+
+@media screen and (max-width: 480px) {
+  .courses-header h1 {
+    font-size: 1.75rem;
   }
-  
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid var(--primary);
-    border-radius: 8px;
-    resize: none;
+
+  .course-meta {
+    flex-direction: column;
+    gap: 0.5rem;
   }
-  
-  .contact-form button {
-    margin-top: 1.5rem;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    background: var(--primary); /* Pink button */
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
+
+  .course-footer {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
   }
-  
-  .contact-form button:hover {
-    background: var(--secondary); /* Hover effect with secondary pink */
-  }
-  
-  .contact-info-section {
+
+  .course-link {
     text-align: center;
-    font-size: 1.2rem;
-    color: var(--text);
   }
-  
-  .contact-info-section h2 {
-    margin-bottom: 1rem;
-    color: var(--primary);
-  }
-  
-  .contact-info-section p {
-    margin: 0.3rem 0;
-  }
-  
-  .contact-info-section i {
-    margin-right: 8px;
-  }
-  
-  @media (max-width: 768px) {
-    .contact-form-container {
-      padding: 1.5rem;
-    }
-  }
-  
+} 
