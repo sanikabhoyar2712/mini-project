@@ -1,7 +1,15 @@
-import React from 'react';
-import './Footer.css';  // Ensure this file is linked to the correct CSS
+import React, { useState, useEffect } from 'react';
+import './Footer.css';
 
 const Footer = () => {
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'pink');
+
+  useEffect(() => {
+    document.body.className = '';
+    document.body.classList.add(`theme-${theme}`);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -23,6 +31,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
+
         <div className="footer-column">
           <h3>Quick Links</h3>
           <ul>
@@ -33,6 +42,7 @@ const Footer = () => {
             <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
+
         <div className="footer-column">
           <h3>Resources</h3>
           <ul>
@@ -42,6 +52,7 @@ const Footer = () => {
             <li><a href="/tutorials">Tutorials</a></li>
           </ul>
         </div>
+
         <div className="footer-column">
           <h3>Contact Info</h3>
           <ul>
@@ -51,6 +62,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
+
       <div className="footer-bottom">
         <p>&copy; {new Date().getFullYear()} StudySphere. All rights reserved.</p>
       </div>

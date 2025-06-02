@@ -87,8 +87,28 @@
   transform: translateY(-2px);
 }
 
-/* Dropdown menu */
-.dropdown-menu {
+/* Theme Selector Dropdown */
+.theme-selector-container {
+  position: relative;
+}
+
+.theme-selector {
+  background-color: transparent;
+  color: var(--primary);
+  border: none;
+  padding: 0.4rem 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.theme-selector:hover {
+  background-color: var(--primary-light);
+  color: #000;
+}
+
+.theme-dropdown {
   position: absolute;
   top: 100%;
   right: 0;
@@ -104,24 +124,24 @@
   pointer-events: none;
 }
 
-.dropdown:hover .dropdown-menu {
+.theme-selector-container:hover .theme-dropdown {
   opacity: 1;
   transform: translateY(0);
   pointer-events: all;
 }
 
-.dropdown-link {
+.theme-dropdown li {
+  padding: 0.75rem 1rem;
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  color: var(--text);
-  text-decoration: none;
+  cursor: pointer;
   border-radius: 6px;
   transition: all 0.3s ease;
 }
 
-.dropdown-link:hover {
+.theme-dropdown li:hover {
   background-color: var(--background);
   color: var(--primary);
 }
@@ -238,7 +258,7 @@
     font-size: 1.1rem;
   }
 
-  .dropdown-menu {
+  .theme-dropdown {
     position: static;
     box-shadow: none;
     padding: 0;
@@ -322,7 +342,9 @@ body {
 
 .nav-buttons.desktop {
   display: flex;
-}/* Add these to your footer styles */
+}
+
+/* Footer styles */
 footer {
   background-color: var(--primary);  /* Adjust background color based on theme */
   color: var(--text);  /* Adjust text color based on theme */
@@ -341,4 +363,3 @@ footer a {
 footer a:hover {
   color: var(--primary-light); /* Adjust hover state */
 }
-

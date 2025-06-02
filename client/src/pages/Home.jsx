@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
-import Footer from './Footer'; // Import Footer component
+import Footer from './Footer';
 
 const quotes = [
   {
@@ -37,13 +37,12 @@ const Home = () => {
   const [randomQuote, setRandomQuote] = useState(null);
 
   useEffect(() => {
-    // Select a random quote when component mounts
     const quote = quotes[Math.floor(Math.random() * quotes.length)];
     setRandomQuote(quote);
 
     const timer = setTimeout(() => {
       setShowQuote(false);
-    }, 4000); // 4 seconds
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -58,8 +57,6 @@ const Home = () => {
 
   return (
     <div className="home">
-      {/* Navbar - directly included */}
-
       {showQuote && randomQuote ? (
         <div className="quote-screen">
           <div className="quote-content">
@@ -70,19 +67,18 @@ const Home = () => {
         </div>
       ) : (
         <>
-          {/* Hero Section */}
           <section className="hero">
             <div className="hero-content">
               <h1>Welcome to StudySphere</h1>
-              <p>Your personal learning space designed to boost your productivity and help you grow smarter every day.</p>
+              <p>
+                Your personal learning space designed to boost your productivity and help you grow smarter every day.
+              </p>
               <div className="hero-buttons">
                 <button className="get-started-btn" onClick={handleGetStarted}>
-                  Get Started
-                  <i className="fas fa-arrow-right"></i>
+                  Get Started <i className="fas fa-arrow-right"></i>
                 </button>
                 <button className="about-btn" onClick={handleAbout}>
-                  About Us
-                  <i className="fas fa-info-circle"></i>
+                  About Us <i className="fas fa-info-circle"></i>
                 </button>
               </div>
             </div>
@@ -96,11 +92,12 @@ const Home = () => {
             </div>
           </section>
 
-          {/* Features Section */}
           <section className="features">
             <div className="section-title">
               <h2>Features</h2>
-              <p>Explore the powerful tools designed to support your learning journey.</p>
+              <p>
+                Explore the powerful tools designed to support your learning journey.
+              </p>
             </div>
             <div className="features-grid">
               <div className="feature-card">
@@ -127,8 +124,6 @@ const Home = () => {
           </section>
         </>
       )}
-
-      {/* Add Footer Component here */}
       <Footer />
     </div>
   );
