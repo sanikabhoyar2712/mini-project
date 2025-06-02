@@ -4,6 +4,9 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Auth from './pages/Auth';
+import SelfCare from './pages/SelfCare';
+import Todo from './pages/Todo';
 
 import './App.css';
 
