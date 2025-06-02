@@ -13,7 +13,7 @@ import SpaceBot from './pages/SpaceBot';
 import Auth from './pages/Auth';
 import About from './pages/About';
 import Contact from './pages/Contact';
-
+// trial
 import './App.css';
 
 function App() {
