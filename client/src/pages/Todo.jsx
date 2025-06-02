@@ -2,183 +2,154 @@ import React, { useState, useEffect } from 'react';
 import './Todo.css';
 
 const Todo = () => {
-  const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState('');
-  const [filter, setFilter] = useState('all');
-  const [category, setCategory] = useState('personal');
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedFilter, setSelectedFilter] = useState('All');
 
+  const categories = ['All', 'Work', 'Personal', 'Shopping', 'Health', 'General'];
+  const filters = ['All', 'Active', 'Completed'];
+
+  // Load tasks from local storage on mount
   useEffect(() => {
-    // Load todos from localStorage
-    const savedTodos = localStorage.getItem('todos');
-    if (savedTodos) {
-      setTodos(JSON.parse(savedTodos));
+    const savedTasks = localStorage.getItem('tasks');
+    if (savedTasks) {
+      const loadedTasks = JSON.parse(savedTasks);
+      const tasksWithProps = loadedTasks.map(task => ({
+        ...task,
+        category: task.category || 'General',
+        isCut: task.isCut || false
+      }));
+      setTasks(tasksWithProps);
     }
   }, []);
 
+  // Save tasks to local storage whenever the tasks state changes
   useEffect(() => {
-    // Save todos to localStorage
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
-    const newTodo = {
-      id: Date.now(),
-      text: input.trim(),
-      completed: false,
-      category,
-      createdAt: new Date().toISOString(),
-      priority: 'medium'
-    };
-
-    setTodos([...todos, newTodo]);
-    setInput('');
+  const handleAddTask = () => {
+    if (newTask.trim()) {
+      const task = {
+        id: Date.now(),
+        text: newTask,
+        completed: false,
+        category: selectedCategory === 'All' ? 'General' : selectedCategory,
+        isCut: false,
+      };
+      setTasks([...tasks, task]);
+      setNewTask('');
+    }
   };
 
-  const toggleTodo = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
+  const handleToggleCut = (id) => {
+    const updatedTasks = tasks.map(task =>
+      task.id === id ? { ...task, isCut: !task.isCut } : task
+    );
+    setTasks(updatedTasks);
   };
 
-  const deleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+  const handleToggleComplete = (id) => {
+    const updatedTasks = tasks.map(task =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    );
+    setTasks(updatedTasks);
   };
 
-  const filteredTodos = todos.filter(todo => {
-    if (filter === 'active') return !todo.completed;
-    if (filter === 'completed') return todo.completed;
-    return true;
+  const filteredTasks = tasks.filter(task => {
+    const categoryMatch = selectedCategory === 'All' || task.category === selectedCategory;
+    let filterMatch = false;
+    if (selectedFilter === 'All') {
+      filterMatch = true;
+    } else if (selectedFilter === 'Active') {
+      filterMatch = !task.completed && !task.isCut;
+    } else if (selectedFilter === 'Completed') {
+      filterMatch = task.completed && !task.isCut;
+    }
+    return categoryMatch && filterMatch;
   });
 
-  const getPriorityColor = (priority) => {
-    switch (priority) {
-      case 'high': return '#ef4444';
-      case 'medium': return '#f59e0b';
-      case 'low': return '#10b981';
-      default: return '#6b7280';
-    }
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const handleFilterClick = (filter) => {
+    setSelectedFilter(filter);
   };
 
   return (
     <div className="todo-container">
       <div className="todo-header">
-        <h1>Task Manager</h1>
+        <h1>To Do List</h1>
         <p>Organize your tasks and boost productivity</p>
       </div>
 
-      <div className="todo-content">
-        <div className="todo-sidebar">
-          <div className="category-section">
-            <h3>Categories</h3>
-            <div className="category-list">
-              <button 
-                className={`category-btn ${category === 'personal' ? 'active' : ''}`}
-                onClick={() => setCategory('personal')}
-              >
-                Personal
-              </button>
-              <button 
-                className={`category-btn ${category === 'work' ? 'active' : ''}`}
-                onClick={() => setCategory('work')}
-              >
-                Work
-              </button>
-              <button 
-                className={`category-btn ${category === 'study' ? 'active' : ''}`}
-                onClick={() => setCategory('study')}
-              >
-                Study
-              </button>
-            </div>
-          </div>
-
-          <div className="filter-section">
-            <h3>Filter Tasks</h3>
-            <div className="filter-list">
-              <button
-                className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-                onClick={() => setFilter('all')}
-              >
-                All Tasks
-              </button>
-              <button
-                className={`filter-btn ${filter === 'active' ? 'active' : ''}`}
-                onClick={() => setFilter('active')}
-              >
-                Active
-              </button>
-              <button
-                className={`filter-btn ${filter === 'completed' ? 'active' : ''}`}
-                onClick={() => setFilter('completed')}
-              >
-                Completed
-              </button>
-            </div>
-          </div>
+      <div className="todo-main-content">
+        <div className="task-input">
+          <input
+            type="text"
+            placeholder="Add a new task..."
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+            onKeyPress={(e) => { if (e.key === 'Enter') handleAddTask(); }}
+          />
+          <button onClick={handleAddTask}>Add Task</button>
         </div>
 
-        <div className="todo-main">
-          <form onSubmit={handleSubmit} className="todo-form">
-            <div className="input-group">
+        <div className="task-list">
+          {filteredTasks.length === 0 && tasks.length > 0 && (
+            <div className="empty-state">
+              <i className="fas fa-filter"></i>
+              <p>No tasks match the current filters.</p>
+              <span>Try adjusting your category or filter selections.</span>
+            </div>
+          )}
+          {tasks.length === 0 && filteredTasks.length === 0 && (
+            <div className="empty-state">
+              <i className="fas fa-clipboard-list"></i>
+              <p>Your To Do list is empty!</p>
+              <span>Add a task above to get started.</span>
+            </div>
+          )}
+          {filteredTasks.map(task => (
+            <div key={task.id} className={`task-item ${task.completed ? 'completed' : ''} ${task.isCut ? 'cut' : ''}`}>
               <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Add a new task..."
-                className="todo-input"
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => handleToggleComplete(task.id)}
+                disabled={task.isCut}
               />
-              <button type="submit" className="add-button">
-                <i className="fas fa-plus"></i> Add Task
+              <span className="task-text">{task.text}</span>
+              {task.category && <span className="task-category-badge">{task.category}</span>}
+              <button className="delete-task" onClick={() => handleToggleCut(task.id)} title={task.isCut ? 'Uncut Task' : 'Cut Task'}>
+                <i className={`fas ${task.isCut ? 'fa-minus-circle' : 'fa-trash'}`}></i>
               </button>
             </div>
-          </form>
+          ))}
+        </div>
+      </div>
 
-          <div className="todo-list">
-            {filteredTodos.length === 0 ? (
-              <div className="empty-state">
-                <i className="fas fa-tasks"></i>
-                <p>No tasks to display</p>
-                <span>Add a new task to get started</span>
-              </div>
-            ) : (
-              filteredTodos.map(todo => (
-                <div key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
-                  <div className="todo-content">
-                    <div className="todo-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={todo.completed}
-                        onChange={() => toggleTodo(todo.id)}
-                        id={`todo-${todo.id}`}
-                      />
-                      <label htmlFor={`todo-${todo.id}`}></label>
-                    </div>
-                    <div className="todo-details">
-                      <span className="todo-text">{todo.text}</span>
-                      <div className="todo-meta">
-                        <span className="todo-category">{todo.category}</span>
-                        <span 
-                          className="todo-priority"
-                          style={{ backgroundColor: getPriorityColor(todo.priority) }}
-                        >
-                          {todo.priority}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => deleteTodo(todo.id)}
-                    className="delete-button"
-                  >
-                    <i className="fas fa-trash"></i>
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
+      <div className="todo-sidebar">
+        <div className="sidebar-section category-section">
+            <h3>Categories</h3>
+            <ul>
+               {categories.map(category => (
+                   <li key={category} onClick={() => handleCategoryClick(category)} className={selectedCategory === category ? 'active' : ''}>
+                       {category}
+                   </li>
+               ))}
+            </ul>
+        </div>
+        <div className="sidebar-section filter-section">
+            <h3>Filters</h3>
+            <ul>
+               {filters.map(filter => (
+                   <li key={filter} onClick={() => handleFilterClick(filter)} className={selectedFilter === filter ? 'active' : ''}>
+                       {filter}
+                   </li>
+               ))}
+            </ul>
         </div>
       </div>
     </div>

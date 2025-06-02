@@ -99,6 +99,49 @@
 .hero-buttons {
   display: flex;
   gap: 1rem;
+  margin-top: 2rem;
+}
+
+.get-started-btn,
+.about-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.get-started-btn:hover,
+.about-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+}
+
+.get-started-btn:active,
+.about-btn:active {
+  transform: translateY(-1px);
+}
+
+.get-started-btn i,
+.about-btn i {
+  transition: transform 0.3s ease;
+}
+
+.get-started-btn:hover i {
+  transform: translateX(4px);
+}
+
+.about-btn:hover i {
+  transform: rotate(15deg);
 }
 
 .hero-image {
@@ -158,11 +201,15 @@
   padding: 6rem 2rem;
   background: var(--white);
   position: relative;
+  overflow: hidden;
 }
 
 .section-title {
   text-align: center;
   margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
 }
 
 .section-title h2 {
@@ -183,46 +230,78 @@
 }
 
 .features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .feature-card {
+  flex: 0 0 calc(25% - 1.5rem);
   background: rgba(255, 255, 255, 0.9);
-  padding: 2rem;
+  padding: 2rem 1rem;
   border-radius: 20px;
   text-align: center;
-  transition: var(--transition);
+  transition: all 0.4s ease;
   border: 2px solid var(--primary-light);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+  min-width: 0;
 }
 
+.feature-card:nth-child(1) { animation-delay: 0.2s; }
+.feature-card:nth-child(2) { animation-delay: 0.4s; }
+.feature-card:nth-child(3) { animation-delay: 0.6s; }
+.feature-card:nth-child(4) { animation-delay: 0.8s; }
+
 .feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(255, 105, 180, 0.15);
   border-color: var(--primary);
 }
 
 .feature-card i {
   font-size: 2.5rem;
   color: var(--primary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  transition: transform 0.4s ease;
+}
+
+.feature-card:hover i {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .feature-card h3 {
   color: var(--text);
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .feature-card p {
   color: var(--text);
   opacity: 0.8;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0 auto;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Popular Courses Section */
@@ -341,6 +420,15 @@
     max-width: 400px;
     height: 400px;
   }
+
+  .features-grid {
+    gap: 1.5rem;
+  }
+  
+  .feature-card {
+    flex: 0 0 calc(50% - 1.5rem);
+    margin-bottom: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -352,9 +440,26 @@
     font-size: 2rem;
   }
 
-  .features-grid,
-  .courses-grid {
-    grid-template-columns: 1fr;
+  .features {
+    padding: 4rem 1rem;
+  }
+  
+  .feature-card {
+    flex: 0 0 calc(50% - 1rem);
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 2rem auto 0;
+  }
+
+  .get-started-btn,
+  .about-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -367,9 +472,15 @@
     font-size: 2rem;
   }
 
-  .feature-card,
-  .course-card {
-    padding: 1.5rem;
+  .features-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .feature-card {
+    flex: 0 0 100%;
+    max-width: 320px;
+    margin-bottom: 1rem;
   }
 
   .quote-text {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
 const quotes = [
@@ -23,13 +24,14 @@ const quotes = [
     emoji: "🌱"
   },
   {
-    text: "Success doesn’t just find you. You have to go out and get it.",
+    text: "Success doesn't just find you. You have to go out and get it.",
     author: "Unknown",
     emoji: "🚀"
   }
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
   const [showQuote, setShowQuote] = useState(true);
   const [randomQuote, setRandomQuote] = useState(null);
 
@@ -44,6 +46,14 @@ const Home = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  const handleGetStarted = () => {
+    navigate('/signup');
+  };
+
+  const handleAbout = () => {
+    navigate('/about');
+  };
 
   return (
     <div className="home">
@@ -63,8 +73,14 @@ const Home = () => {
               <h1>Welcome to StudySphere</h1>
               <p>Your personal learning space designed to boost your productivity and help you grow smarter every day.</p>
               <div className="hero-buttons">
-                <button className="btn-primary">Get Started</button>
-                <button className="btn-secondary">Learn More</button>
+                <button className="get-started-btn" onClick={handleGetStarted}>
+                  Get Started
+                  <i className="fas fa-arrow-right"></i>
+                </button>
+                <button className="about-btn" onClick={handleAbout}>
+                  About Us
+                  <i className="fas fa-info-circle"></i>
+                </button>
               </div>
             </div>
             <div className="hero-image">
@@ -86,23 +102,23 @@ const Home = () => {
             <div className="features-grid">
               <div className="feature-card">
                 <i className="fas fa-check-circle"></i>
-                <h3>To-Do List</h3>
-                <p>Organize your tasks and stay on top of your study schedule.</p>
+                <h3>Smart Tasks</h3>
+                <p>Organize and prioritize your study tasks efficiently.</p>
               </div>
               <div className="feature-card">
                 <i className="fas fa-bullseye"></i>
-                <h3>Goal Tracker</h3>
-                <p>Set milestones and track your learning progress over time.</p>
-              </div>
-              <div className="feature-card">
-                <i className="fas fa-chart-line"></i>
-                <h3>Progress Analytics</h3>
-                <p>Visualize your growth with insightful data and charts.</p>
+                <h3>Goal Tracking</h3>
+                <p>Set and achieve your learning milestones with ease.</p>
               </div>
               <div className="feature-card">
                 <i className="fas fa-user-friends"></i>
-                <h3>Peer Connection</h3>
-                <p>Collaborate, share, and grow with fellow learners.</p>
+                <h3>Study Groups</h3>
+                <p>Connect and learn with peers worldwide.</p>
+              </div>
+              <div className="feature-card">
+                <i className="fas fa-chart-line"></i>
+                <h3>Progress Insights</h3>
+                <p>Track your growth with intuitive analytics.</p>
               </div>
             </div>
           </section>
