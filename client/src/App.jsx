@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Auth from './pages/Auth';
+import SelfCare from './pages/SelfCare';
+import Todo from './pages/Todo';
 import './App.css';
 
 function App() {
@@ -12,15 +14,14 @@ function App() {
     <Router>
       <div className="App">
         <Navbar />
-        {/* Temporary test content to see if anything renders */}
-        <h1>Test Content</h1>
-        {/* End of temporary test content */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Auth />} />
           <Route path="/signup" element={<Auth />} />
+          <Route path="/selfcare" element={<SelfCare />} />
+          <Route path="/todo" element={<Todo />} />
         </Routes>
       </div>
     </Router>

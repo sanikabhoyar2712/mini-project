@@ -1,18 +1,18 @@
 /* Professional Wellness Platform CSS */
 :root {
-  --primary-color: #1a237e;
-  --secondary-color: #283593;
-  --accent-color: #3949ab;
-  --accent-light: #5c6bc0;
-  --background-color: #f5f7ff;
-  --text-color: #1a237e;
+  --primary-color: #E91E63; /* Deep Pink */
+  --secondary-color: #F06292; /* Light Pink */
+  --accent-color: #FF80AB; /* Rosy Pink */
+  --accent-light: #F48FB1; /* Pale Pink */
+  --background-color: #FCE4EC; /* Extra Light Pink */
+  --text-color: #4A4A4A; /* Keep text dark for readability */
   --border-radius: 16px;
-  --box-shadow: 0 10px 20px rgba(26, 35, 126, 0.15);
+  --box-shadow: 0 10px 20px rgba(233, 30, 99, 0.15); /* Pink shadow */
   --transition: all 0.3s ease;
 }
 
 body {
-  background: linear-gradient(135deg, #f5f7ff 0%, #e8eaf6 100%);
+  background: linear-gradient(135deg, var(--background-color) 0%, #F8BBD0 100%); /* Pink gradient background */
   color: var(--text-color);
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
@@ -27,6 +27,47 @@ body {
 /* Hero Section */
 .selfcare-header {
   margin-bottom: 3rem;
+}
+
+.selfcare-intro {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); /* Adjusted gradient for more contrast */
+  padding: 3rem 2rem; /* Increased padding */
+  border-radius: var(--border-radius); /* Apply border radius */
+  box-shadow: var(--box-shadow); /* Add box shadow */
+  text-align: center;
+  color: white; /* White text for contrast on pink background */
+}
+
+.selfcare-intro h2 {
+  font-size: 2.5rem; /* Larger heading */
+  margin-bottom: 1rem;
+  color: white; /* White heading color */
+  font-weight: 700;
+}
+
+.selfcare-intro p {
+  font-size: 1.2rem; /* Slightly larger paragraph text */
+  opacity: 0.9;
+  max-width: 800px;
+  margin: 0 auto 2rem auto; /* Center paragraph and add bottom margin */
+  color: white; /* White paragraph color */
+}
+
+.intro-icons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Space between icons */
+  font-size: 2.5rem; /* Larger icon size */
+  color: white; /* White icons */
+}
+
+.intro-icons i {
+  transition: transform 0.3s ease;
+}
+
+.intro-icons i:hover {
+  transform: scale(1.2); /* Scale on hover */
+  color: var(--background-color); /* Highlight color on hover */
 }
 
 .hero-image {

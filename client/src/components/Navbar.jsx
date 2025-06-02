@@ -12,17 +12,19 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="nav-logo">
+      <Link to="/" className="navbar-logo">
         LearnHub
       </Link>
       
-      <button className="mobile-menu-btn" onClick={toggleMenu}>
+      <button className="menu-icon" onClick={toggleMenu}>
         <FaBars />
       </button>
 
-      <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+      <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
         <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
+        <Link to="/selfcare" className="nav-link">Self Care</Link>
+        <Link to="/todo" className="nav-link">To Do</Link>
+        <Link to="/about" className="nav-link">About</Link>
         <Link to="/contact" className="contact-btn">Contact Us</Link>
         <Link to="/login" className="login-btn">Login</Link>
         <Link to="/signup" className="signup-btn">Sign Up</Link>

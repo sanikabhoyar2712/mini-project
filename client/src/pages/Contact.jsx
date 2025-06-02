@@ -2,60 +2,6 @@ import React, { useState } from 'react';
 import './Contact.css';
 import contactHeroImg from '../assets/contact-hero.jpg';
 
-const contactTopics = [
-  {
-    title: 'Email Us',
-    content: (
-      <a href="mailto:support@yourdomain.com">
-        <i className="fas fa-envelope"></i> support@yourdomain.com
-      </a>
-    ),
-  },
-  {
-    title: 'Call Us',
-    content: (
-      <a href="tel:+919876543210">
-        <i className="fas fa-phone"></i> +91 98765 43210
-      </a>
-    ),
-  },
-  {
-    title: 'Visit Us',
-    content: (
-      <span>
-        <i className="fas fa-map-marker-alt"></i> Wardha, Maharashtra, India
-      </span>
-    ),
-  },
-  {
-    title: 'Contact Form',
-    content: (
-      <a href="#contact-form">
-        <i className="fas fa-paper-plane"></i> Fill out our contact form below
-      </a>
-    ),
-  },
-  {
-    title: 'Social Media',
-    content: (
-      <span className="contact-socials">
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-      </span>
-    ),
-  },
-  {
-    title: 'WhatsApp Us',
-    content: (
-      <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
-        <i className="fab fa-whatsapp"></i> +91 98765 43210
-      </a>
-    ),
-  },
-];
-
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState('');
@@ -78,14 +24,51 @@ const Contact = () => {
         <h1>Contact Us</h1>
         <p>We're here to help. Find the right way to reach us below!</p>
       </div>
+
       <div className="contact-cards-grid">
-        {contactTopics.map((topic, idx) => (
-          <div className="contact-card" key={idx}>
-            <h2>{topic.title}</h2>
-            <div className="contact-card-content">{topic.content}</div>
+        <div className="contact-card">
+          <h2>Email Us</h2>
+          <div className="contact-card-content">
+            <a href="mailto:support@yourdomain.com"><i className="fas fa-envelope"></i> support@yourdomain.com</a>
           </div>
-        ))}
+        </div>
+        <div className="contact-card">
+          <h2>Call Us</h2>
+          <div className="contact-card-content">
+            <a href="tel:+919876543210"><i className="fas fa-phone"></i> +91 98765 43210</a>
+          </div>
+        </div>
+        <div className="contact-card">
+          <h2>Visit Us</h2>
+          <div className="contact-card-content">
+            <span><i className="fas fa-map-marker-alt"></i> Wardha, Maharashtra, India</span>
+          </div>
+        </div>
+        <div className="contact-card">
+          <h2>Contact Form</h2>
+          <div className="contact-card-content">
+            <a href="#contact-form"><i className="fas fa-paper-plane"></i> Fill out our contact form below</a>
+          </div>
+        </div>
+        <div className="contact-card">
+          <h2>Social Media</h2>
+          <div className="contact-card-content">
+            <span className="contact-socials">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
+            </span>
+          </div>
+        </div>
+        <div className="contact-card">
+          <h2>WhatsApp Us</h2>
+          <div className="contact-card-content">
+            <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i> +91 98765 43210</a>
+          </div>
+        </div>
       </div>
+
       <div className="contact-form-section" id="contact-form">
         <h2>Send Us a Message</h2>
         <form className="contact-form" onSubmit={handleSubmit}>
@@ -129,4 +112,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

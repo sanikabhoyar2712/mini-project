@@ -533,11 +533,15 @@ const SelfCare = () => {
   return (
     <div className="selfcare-container">
       <div className="selfcare-header">
-        <div className="hero-image">
-          <img 
-            src={singleHeroImageUrl}
-            alt="Hero section image"
-          />
+        <div className="selfcare-intro">
+          <h2>Nurture Your Well-being</h2>
+          <p>Your dedicated space for mental, physical, and emotional self-care.</p>
+          <div className="intro-icons">
+            <i className="fas fa-book-open"></i>
+            <i className="fas fa-dumbbell"></i>
+            <i className="fas fa-spa"></i>
+            <i className="fas fa-smile"></i>
+          </div>
         </div>
       </div>
 
