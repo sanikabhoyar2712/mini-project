@@ -23,13 +23,14 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background);
+  background-color: lightblue; /* Add a background color for visibility */
   color: var(--text);
 }
 
-.app {
+.App {
   min-height: 100vh;
-  background: var(--background);
+  background: lightgreen; /* Add a different background color for the App container */
+  padding-top: 6rem; /* Add padding to prevent content from being hidden behind the fixed navbar */
 }
 
 .navbar {

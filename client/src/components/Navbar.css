@@ -42,72 +42,65 @@
   color: var(--secondary);
 }
 
-.menu-icon {
+.mobile-menu-btn {
   display: none;
   font-size: 1.8rem;
   cursor: pointer;
   color: var(--primary);
+  background: none;
+  border: none;
 }
 
-.nav-menu {
+.nav-links {
   display: flex;
   list-style: none;
   align-items: center;
-  justify-content: center;
   gap: 2rem;
   margin: 0;
   padding: 0;
-  grid-column: 3 / 4;
 }
 
-.nav-item {
-  position: relative;
-}
-
-.nav-link {
+.nav-links a {
   text-decoration: none;
   color: var(--text);
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   border-radius: 8px;
 }
 
-.nav-link i {
-  font-size: 1.1rem;
-  transition: transform 0.3s ease;
-}
-
-.nav-link:hover {
+.nav-links a:hover {
   color: var(--primary);
   background-color: var(--background);
 }
 
-.nav-link:hover i {
-  transform: translateY(-2px);
+/* Button styles */
+.contact-btn,
+.login-btn,
+.signup-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  height: 38px;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
 }
 
-/* Add spacing after the last navigation item */
-.nav-menu .nav-item:last-child {
-  padding-right: 1.5rem; /* Adjust this value as needed */
-}
-
-/* Specific styling for Courses nav link to match button style */
-.nav-link.courses {
-  background-color: var(--background);
-  color: var(--primary);
-  border: 1px solid var(--primary-light);
-  padding: 0.5rem 1rem; /* Match button padding */
-}
-
-.nav-link.courses:hover {
+.contact-btn:hover,
+.login-btn:hover,
+.signup-btn:hover {
   background-color: var(--primary-light);
-  color: var(--primary);
-  transform: translateY(-2px); /* Keep button hover effect */
+  transform: translateY(-2px);
 }
 
 /* Dropdown menu */
@@ -218,12 +211,12 @@
     grid-column: auto;
   }
   
-  .menu-icon {
+  .mobile-menu-btn {
     display: block;
     grid-column: 3 / 4;
   }
   
-  .nav-menu {
+  .nav-links {
     display: none;
     flex-direction: column;
     width: 100%;
@@ -239,21 +232,17 @@
     grid-column: auto;
   }
   
-  .nav-menu.active {
+  .nav-links.active {
     display: flex;
     opacity: 1;
   }
   
-  .nav-item {
+  .nav-links a {
     width: 100%;
     text-align: center;
   }
   
-  .nav-link {
-    padding: 1rem;
-  }
-  
-  .nav-link:hover {
+  .nav-links a:hover {
     background-color: var(--background);
     border-radius: 0;
   }
@@ -287,7 +276,7 @@
     grid-column: auto;
   }
   
-  .nav-menu.active .nav-buttons {
+  .nav-links.active .nav-buttons {
     display: flex;
   }
   
@@ -302,15 +291,41 @@
 }
 
 @media screen and (max-width: 768px) {
-  .navbar-container {
-    padding: 0 0.5rem;
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .navbar-logo {
-    font-size: 1.5rem;
+  .mobile-menu-btn {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
   }
 
-  .menu-icon {
-    font-size: 1.5rem;
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    display: none; /* Hide by default on smaller screens */
+    
+  }
+  
+  .nav-links.active {
+    display: flex; /* Show when active */
+  }
+
+  .nav-links a {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 2rem;
+  }
+  
+  .contact-btn,
+  .login-btn,
+  .signup-btn {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 2rem;
+    box-sizing: border-box; /* Include padding in width */
   }
 }
