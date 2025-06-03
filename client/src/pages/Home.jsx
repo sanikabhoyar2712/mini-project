@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import Footer from '../components/Footer';
 
 const quotes = [
   {
@@ -30,19 +31,37 @@ const quotes = [
   }
 ];
 
+const testimonials = [
+  {
+    name: "Amit Sharma",
+    text: "From daily goals to self-care, StudySphere keeps me on track—both academically and personally!",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+  },
+  {
+    name: "Priya Singh",
+    text: "An all-in-one platform that truly understands a student’s learning journey. Highly recommended!",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+  },
+  
+  {
+    name: "Sneha Patel",
+    text: "StudySphere made learning so much more organized and fun. The personalized tools are just perfect!",
+    avatar: "https://randomuser.me/api/portraits/women/65.jpg"
+  }
+];
+
 const Home = () => {
   const navigate = useNavigate();
   const [showQuote, setShowQuote] = useState(true);
   const [randomQuote, setRandomQuote] = useState(null);
 
   useEffect(() => {
-    // Select a random quote when component mounts
     const quote = quotes[Math.floor(Math.random() * quotes.length)];
     setRandomQuote(quote);
 
     const timer = setTimeout(() => {
       setShowQuote(false);
-    }, 4000); // 4 seconds
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -68,18 +87,18 @@ const Home = () => {
       ) : (
         <>
           {/* Hero Section */}
-          <section className="hero">
+          <section className="hero notion-hero">
             <div className="hero-content">
-              <h1>Welcome to StudySphere</h1>
-              <p>Your personal learning space designed to boost your productivity and help you grow smarter every day.</p>
+              <h1>Welcome to <span className="brand">StudySphere</span></h1>
+              <p className="hero-subtitle">
+                Organize your learning, track your progress, and achieve your goals — all in one beautiful workspace.
+              </p>
               <div className="hero-buttons">
                 <button className="get-started-btn" onClick={handleGetStarted}>
-                  Get Started
-                  <i className="fas fa-arrow-right"></i>
+                  Get Started Free
                 </button>
                 <button className="about-btn" onClick={handleAbout}>
-                  About Us
-                  <i className="fas fa-info-circle"></i>
+                  Learn More
                 </button>
               </div>
             </div>
@@ -90,15 +109,13 @@ const Home = () => {
                 <i className="fas fa-brain"></i>
                 <i className="fas fa-pencil-alt"></i>
               </div>
+              <img src="https://www.notion.so/cdn-cgi/image/format=auto,width=1024,quality=80/front-static/pages/home/hero.png" alt="Workspace" className="notion-illustration" />
             </div>
           </section>
 
           {/* Features Section */}
-          <section className="features">
-            <div className="section-title">
-              <h2>Features</h2>
-              <p>Explore the powerful tools designed to support your learning journey.</p>
-            </div>
+          <section className="features notion-features">
+            <h2>Why StudySphere?</h2>
             <div className="features-grid">
               <div className="feature-card">
                 <i className="fas fa-check-circle"></i>
@@ -122,8 +139,23 @@ const Home = () => {
               </div>
             </div>
           </section>
+
+          {/* Testimonials Section */}
+          <section className="testimonials">
+            <h2>What our users say</h2>
+            <div className="testimonials-grid">
+              {testimonials.map((t, idx) => (
+                <div className="testimonial-card" key={idx}>
+                  <img src={t.avatar} alt={t.name} className="testimonial-avatar" />
+                  <p className="testimonial-text">"{t.text}"</p>
+                  <span className="testimonial-name">{t.name}</span>
+                </div>
+              ))}
+            </div>
+          </section>
         </>
       )}
+      <Footer />
     </div>
   );
 };

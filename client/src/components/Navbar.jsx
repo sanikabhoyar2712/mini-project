@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaBars, FaPalette, FaAngleDown } from 'react-icons/fa'; // Added FaPalette and FaAngleDown
+import { FaBars } from 'react-icons/fa';
 import './Navbar.css';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+<<<<<<< HEAD
     const [isThemeDropdownOpen, setIsThemeDropdownOpen] = useState(false);
     // const [currentTheme, setCurrentTheme] = useState('default'); // Removed unused state
 
@@ -45,6 +46,11 @@ const Navbar = () => {
         setIsThemeDropdownOpen(false);
         // Close mobile menu if open
         if (isMenuOpen) setIsMenuOpen(false);
+=======
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+>>>>>>> 10a814256538f8be92a9f6b5cb2331358c965f54
     };
 
     return (
@@ -63,6 +69,7 @@ const Navbar = () => {
                     <Link to="/selfcare" className="nav-link" onClick={() => setIsMenuOpen(false)}>Self Care</Link>
                     <Link to="/todo" className="nav-link" onClick={() => setIsMenuOpen(false)}>To Do</Link>
                     <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</Link>
+<<<<<<< HEAD
                     <Link to="/courses" className="nav-link" onClick={() => setIsMenuOpen(false)}>Courses</Link>
 
                     {/* Theme Dropdown */}
@@ -79,6 +86,8 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
+=======
+>>>>>>> 10a814256538f8be92a9f6b5cb2331358c965f54
                 </div>
 
                 <div className="nav-buttons">

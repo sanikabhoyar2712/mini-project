@@ -54,54 +54,91 @@
   to { opacity: 0; visibility: hidden; }
 }
 
-/* Hero Section */
-.hero {
-  min-height: 80vh;
+/* Notion/Khan Academy Inspired Hero Section */
+.notion-hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4rem 2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.1;
-  animation: backgroundMove 20s linear infinite;
-}
-
-.hero-content {
-  max-width: 600px;
-  z-index: 1;
-}
-
-.hero-content h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.2;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  color: var(--text);
+  padding: 3rem 2rem 2rem 2rem;
+  background: #f7f6f3;
+  border-radius: 18px;
   margin-bottom: 2rem;
-  opacity: 0.9;
+  flex-wrap: wrap;
+}
+.notion-hero .hero-content {
+  max-width: 500px;
+}
+.notion-hero .brand {
+  color: var(--primary);
+  font-weight: bold;
+}
+.notion-hero .notion-illustration {
+  max-width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
 }
 
+/* Hero Image with Floating Icons and Background */
+.hero-image {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  /* No background property here, handled inline in JSX */
+}
+.floating-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  pointer-events: none;
+}
+.floating-elements i {
+  position: absolute;
+  font-size: 3rem;
+  color: var(--primary);
+  animation: float 6s ease-in-out infinite;
+}
+.floating-elements i:nth-child(1) {
+  top: 20%;
+  left: 20%;
+  animation-delay: 0s;
+}
+.floating-elements i:nth-child(2) {
+  top: 60%;
+  left: 30%;
+  animation-delay: 1s;
+}
+.floating-elements i:nth-child(3) {
+  top: 30%;
+  left: 70%;
+  animation-delay: 2s;
+}
+.floating-elements i:nth-child(4) {
+  top: 70%;
+  left: 60%;
+  animation-delay: 3s;
+}
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+}
+
+/* Hero Buttons */
 .hero-buttons {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
 }
-
 .get-started-btn,
 .about-btn {
   display: inline-flex;
@@ -118,117 +155,30 @@
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
 }
-
 .get-started-btn:hover,
 .about-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
   background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
 }
-
 .get-started-btn:active,
 .about-btn:active {
   transform: translateY(-1px);
 }
 
-.get-started-btn i,
-.about-btn i {
-  transition: transform 0.3s ease;
-}
-
-.get-started-btn:hover i {
-  transform: translateX(4px);
-}
-
-.about-btn:hover i {
-  transform: rotate(15deg);
-}
-
-.hero-image {
-  position: relative;
-  width: 500px;
-  height: 500px;
-}
-
-.floating-elements {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.floating-elements i {
-  position: absolute;
-  font-size: 3rem;
-  color: var(--primary);
-  animation: float 6s ease-in-out infinite;
-}
-
-.floating-elements i:nth-child(1) {
-  top: 20%;
-  left: 20%;
-  animation-delay: 0s;
-}
-
-.floating-elements i:nth-child(2) {
-  top: 60%;
-  left: 30%;
-  animation-delay: 1s;
-}
-
-.floating-elements i:nth-child(3) {
-  top: 30%;
-  left: 70%;
-  animation-delay: 2s;
-}
-
-.floating-elements i:nth-child(4) {
-  top: 70%;
-  left: 60%;
-  animation-delay: 3s;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(10deg);
-  }
-}
-
 /* Features Section */
-.features {
-  padding: 6rem 2rem;
-  background: var(--white);
-  position: relative;
-  overflow: hidden;
+.notion-features {
+  background: #fff;
+  border-radius: 18px;
+  padding: 2rem;
+  margin-bottom: 2rem;
 }
-
-.section-title {
+.notion-features h2 {
   text-align: center;
-  margin-bottom: 4rem;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s ease forwards;
-}
-
-.section-title h2 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   color: var(--primary);
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
 }
-
-.section-title p {
-  color: var(--text);
-  opacity: 0.8;
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
 .features-grid {
   display: flex;
   flex-wrap: wrap;
@@ -238,7 +188,6 @@
   margin: 0 auto;
   padding: 0 1rem;
 }
-
 .feature-card {
   flex: 0 0 calc(25% - 1.5rem);
   background: rgba(255, 255, 255, 0.9);
@@ -247,23 +196,9 @@
   text-align: center;
   transition: all 0.4s ease;
   border: 2px solid var(--primary-light);
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s ease forwards;
-  min-width: 0;
+  min-width: 220px;
+  box-shadow: 0 2px 8px rgba(255, 105, 180, 0.03);
 }
-
-.feature-card:nth-child(1) { animation-delay: 0.2s; }
-.feature-card:nth-child(2) { animation-delay: 0.4s; }
-.feature-card:nth-child(3) { animation-delay: 0.6s; }
-.feature-card:nth-child(4) { animation-delay: 0.8s; }
-
-.feature-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 15px 35px rgba(255, 105, 180, 0.15);
-  border-color: var(--primary);
-}
-
 .feature-card i {
   font-size: 2.5rem;
   color: var(--primary);
@@ -273,18 +208,12 @@
   -webkit-text-fill-color: transparent;
   transition: transform 0.4s ease;
 }
-
-.feature-card:hover i {
-  transform: scale(1.1) rotate(5deg);
-}
-
 .feature-card h3 {
   color: var(--text);
   margin-bottom: 0.8rem;
   font-size: 1.2rem;
   font-weight: 600;
 }
-
 .feature-card p {
   color: var(--text);
   opacity: 0.8;
@@ -292,202 +221,156 @@
   line-height: 1.4;
   margin: 0 auto;
 }
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Popular Courses Section */
-.popular-courses {
-  padding: 6rem 2rem;
-  background: var(--background);
-}
-
-.courses-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.course-card {
-  background: var(--white);
-  border-radius: 20px;
-  overflow: hidden;
-  transition: var(--transition);
-  border: 2px solid var(--primary-light);
-}
-
-.course-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(255, 105, 180, 0.15);
   border-color: var(--primary);
 }
-
-.course-image {
-  height: 200px;
-  background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.feature-card:hover i {
+  transform: scale(1.1) rotate(5deg);
 }
 
-.course-image i {
-  font-size: 4rem;
-  color: var(--white);
-}
-
-.course-content {
+/* Testimonials Section */
+.testimonials {
+  background: #f7f6f3;
+  border-radius: 18px;
   padding: 2rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
-
-.course-content h3 {
-  color: var(--text);
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
-
-.course-content p {
-  color: var(--text);
-  opacity: 0.8;
+.testimonials h2 {
+  font-size: 2rem;
+  color: var(--primary);
   margin-bottom: 1.5rem;
+}
+.testimonials-grid {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.testimonial-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-width: 220px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+.testimonial-text {
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.testimonial-name {
+  font-weight: bold;
+  color: var(--primary);
 }
 
 /* Call to Action Section */
-.cta {
-  padding: 6rem 2rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+.cta-section {
+  background: var(--primary);
+  color: #fff;
+  border-radius: 18px;
+  padding: 2rem;
   text-align: center;
-  color: var(--white);
-}
-
-.cta-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.cta h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--white);
-}
-
-.cta p {
-  font-size: 1.2rem;
   margin-bottom: 2rem;
-  opacity: 0.9;
 }
-
-.cta .btn-primary {
-  background: var(--white);
+.cta-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.cta-btn {
+  background: #fff;
   color: var(--primary);
-  font-size: 1.2rem;
-  padding: 1rem 2rem;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
 }
-
-.cta .btn-primary:hover {
-  background: var(--background);
-  transform: translateY(-5px);
+.cta-btn:hover {
+  background: #ffe3db;
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .hero {
+  .notion-hero {
     flex-direction: column;
     text-align: center;
-    padding: 4rem 1rem;
+    padding: 3rem 1rem 2rem 1rem;
   }
-
-  .hero-content {
-    margin-bottom: 3rem;
+  .notion-hero .hero-content {
+    margin-bottom: 2rem;
   }
-
-  .hero-buttons {
-    justify-content: center;
+  .notion-hero .notion-illustration {
+    max-width: 90vw;
+    margin: 0 auto;
   }
-
   .hero-image {
-    width: 100%;
-    max-width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
+    margin: 0 auto;
   }
-
   .features-grid {
     gap: 1.5rem;
   }
-  
   .feature-card {
     flex: 0 0 calc(50% - 1.5rem);
     margin-bottom: 1.5rem;
   }
+  .testimonials-grid {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2.5rem;
+  .notion-hero .hero-content h1 {
+    font-size: 2.2rem;
   }
-
-  .section-title h2 {
-    font-size: 2rem;
-  }
-
-  .features {
-    padding: 4rem 1rem;
-  }
-  
-  .feature-card {
-    flex: 0 0 calc(50% - 1rem);
-    padding: 1.5rem 1rem;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-    margin: 2rem auto 0;
-  }
-
-  .get-started-btn,
-  .about-btn {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-buttons {
-    flex-direction: column;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
   .features-grid {
     flex-direction: column;
     align-items: center;
   }
-  
   .feature-card {
     flex: 0 0 100%;
     max-width: 320px;
     margin-bottom: 1rem;
   }
+}
 
-  .quote-text {
-    font-size: 1.5rem;
+@media (max-width: 600px) {
+  .notion-hero {
+    padding: 2rem 0.5rem 1rem 0.5rem;
   }
-
-  .author {
-    font-size: 1rem;
+  .notion-hero .hero-content h1 {
+    font-size: 2rem;
+  }
+  .notion-hero .notion-illustration {
+    max-width: 98vw;
+  }
+  .hero-image {
+    width: 90vw;
+    height: 90vw;
+    min-width: 220px;
+    min-height: 220px;
+  }
+  .notion-features {
+    padding: 1rem;
+  }
+  .testimonials {
+    padding: 1rem;
+  }
+  .cta-section {
+    padding: 1rem;
   }
 }
