@@ -1,18 +1,32 @@
 /* Professional Wellness Platform CSS */
+/* Assuming these are globally defined, otherwise define them here or link to app.css */
 :root {
   --primary-color: #E91E63; /* Deep Pink */
   --secondary-color: #F06292; /* Light Pink */
   --accent-color: #FF80AB; /* Rosy Pink */
   --accent-light: #F48FB1; /* Pale Pink */
-  --background-color: #FCE4EC; /* Extra Light Pink */
-  --text-color: #4A4A4A; /* Keep text dark for readability */
+  --background-color: #FCE4EC; /* Extra Light Pink - for main body background */
+  --content-background: #FFFFFF; /* White - for card/content backgrounds */
+  --text-color: #4A4A4A; /* Dark text for readability */
+  --light-text-color: #666666; /* Lighter grey for secondary text */
+  --border-color-light: rgba(26, 35, 126, 0.1); /* Light border for elements */
+  --border-color-medium: rgba(26, 35, 126, 0.2); /* Medium border for inputs */
+  --shadow-color: rgba(233, 30, 99, 0.15); /* Pink shadow */
+  --input-background: rgba(255, 255, 255, 0.6); /* Slightly transparent white for inputs */
+  --delete-color: #e74c3c; /* Red for delete buttons */
+  --delete-hover-color: #c0392b; /* Darker red for delete hover */
+  --success-color: #27ae60; /* Green for success/fitness */
+  --warning-color: #f39c12; /* Orange for warning/creative */
+  --info-color: #FFD700; /* Yellow for info/inspiration */
+  --danger-color: #FF6B6B; /* Red for danger/high priority */
+  --glass-effect: rgba(255, 255, 255, 0.4); /* For frosted glass effect */
   --border-radius: 16px;
-  --box-shadow: 0 10px 20px rgba(233, 30, 99, 0.15); /* Pink shadow */
+  --box-shadow: 0 10px 20px var(--shadow-color);
   --transition: all 0.3s ease;
 }
 
 body {
-  background: linear-gradient(135deg, var(--background-color) 0%, #F8BBD0 100%); /* Pink gradient background */
+  background: linear-gradient(135deg, var(--background-color) 0%, var(--secondary-color) 100%); /* Using a variable for the second color */
   color: var(--text-color);
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
@@ -30,35 +44,35 @@ body {
 }
 
 .selfcare-intro {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); /* Adjusted gradient for more contrast */
-  padding: 3rem 2rem; /* Increased padding */
-  border-radius: var(--border-radius); /* Apply border radius */
-  box-shadow: var(--box-shadow); /* Add box shadow */
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  padding: 3rem 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   text-align: center;
-  color: white; /* White text for contrast on pink background */
+  color: var(--content-background); /* Use content-background for white text */
 }
 
 .selfcare-intro h2 {
-  font-size: 2.5rem; /* Larger heading */
+  font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: white; /* White heading color */
+  color: var(--content-background); /* Use content-background for white heading */
   font-weight: 700;
 }
 
 .selfcare-intro p {
-  font-size: 1.2rem; /* Slightly larger paragraph text */
+  font-size: 1.2rem;
   opacity: 0.9;
   max-width: 800px;
-  margin: 0 auto 2rem auto; /* Center paragraph and add bottom margin */
-  color: white; /* White paragraph color */
+  margin: 0 auto 2rem auto;
+  color: var(--content-background); /* Use content-background for white paragraph */
 }
 
 .intro-icons {
   display: flex;
   justify-content: center;
-  gap: 2rem; /* Space between icons */
-  font-size: 2.5rem; /* Larger icon size */
-  color: white; /* White icons */
+  gap: 2rem;
+  font-size: 2.5rem;
+  color: var(--content-background); /* Use content-background for white icons */
 }
 
 .intro-icons i {
@@ -66,7 +80,7 @@ body {
 }
 
 .intro-icons i:hover {
-  transform: scale(1.2); /* Scale on hover */
+  transform: scale(1.2);
   color: var(--background-color); /* Highlight color on hover */
 }
 
@@ -103,14 +117,14 @@ body {
 
 .tab-button {
   padding: 1.3rem 2.8rem;
-  border: 1px solid rgba(26, 35, 126, 0.2);
-  background: white;
+  border: 1px solid var(--border-color-medium); /* Use variable for border */
+  background: var(--content-background); /* Use content-background for white */
   color: var(--primary-color);
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: var(--transition);
   font-weight: 600;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Keep general black shadow */
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -119,20 +133,20 @@ body {
 
 .tab-button:hover {
   background: var(--accent-color);
-  color: white;
+  color: var(--content-background); /* Use content-background for white */
   transform: translateY(-5px);
   box-shadow: var(--box-shadow);
 }
 
 .tab-button.active {
   background: var(--accent-color);
-  color: white;
+  color: var(--content-background); /* Use content-background for white */
   border-color: var(--accent-color);
 }
 
 /* Content Sections */
 .selfcare-content {
-  background: white;
+  background: var(--content-background); /* Use content-background for white */
   border-radius: var(--border-radius);
   padding: 2.5rem;
   box-shadow: var(--box-shadow);
@@ -148,11 +162,11 @@ body {
 .diary-prompt {
   text-align: center;
   margin-bottom: 2.5rem;
-  background: linear-gradient(135deg, #f5f7ff 0%, #e8eaf6 100%);
+  background: linear-gradient(135deg, #f5f7ff 0%, #e8eaf6 100%); /* This gradient is still hardcoded. If you want it themed, replace the colors with variables or create new ones */
   padding: 2.5rem;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light); /* Use variable for border */
 }
 
 .diary-prompt h3 {
@@ -166,24 +180,26 @@ body {
   width: 100%;
   min-height: 300px;
   padding: 2rem;
-  border: 2px solid rgba(26, 35, 126, 0.2);
+  border: 2px solid var(--border-color-medium); /* Use variable for border */
   border-radius: var(--border-radius);
   margin-bottom: 1.5rem;
   font-family: inherit;
   font-size: 1.2rem;
   resize: vertical;
   transition: var(--transition);
+  color: var(--text-color); /* Ensure text color is dynamic */
+  background-color: var(--content-background); /* Ensure textarea background is dynamic */
 }
 
 .diary-textarea:focus {
   border-color: var(--accent-color);
   outline: none;
-  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1); /* This shadow color is hardcoded blue, consider a themed one */
 }
 
 .save-button {
   background: var(--accent-color);
-  color: white;
+  color: var(--content-background); /* Use content-background for white */
   border: none;
   padding: 1.3rem 2.8rem;
   border-radius: var(--border-radius);
@@ -216,12 +232,12 @@ body {
 }
 
 .diary-entry {
-  background: white;
+  background: var(--content-background); /* Use content-background for white */
   padding: 2.5rem;
   border-radius: var(--border-radius);
   margin-bottom: 2rem;
   box-shadow: var(--box-shadow);
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light); /* Use variable for border */
   position: relative;
   transition: var(--transition);
 }
@@ -232,7 +248,7 @@ body {
 }
 
 .entry-date {
-  color: #666;
+  color: var(--light-text-color); /* Use light-text-color for grey */
   font-size: 1rem;
   margin-bottom: 0.8rem;
   font-weight: 500;
@@ -250,7 +266,7 @@ body {
   right: 1.5rem;
   background: none;
   border: none;
-  color: #e74c3c;
+  color: var(--delete-color); /* Use variable for red */
   cursor: pointer;
   opacity: 1;
   transition: var(--transition);
@@ -259,7 +275,7 @@ body {
 }
 
 .delete-entry:hover {
-  color: #c0392b;
+  color: var(--delete-hover-color); /* Use variable for darker red */
   transform: scale(1.2);
 }
 
@@ -295,7 +311,7 @@ body {
 }
 
 .workout-header p {
-  color: #666;
+  color: var(--light-text-color); /* Use light-text-color for grey */
   font-size: 1.1rem;
 }
 
@@ -306,17 +322,17 @@ body {
 
 /* Styling for Workout Categories */
 .workout-category-section {
-  background: white;
+  background: var(--content-background); /* Use content-background for white */
   padding: 2.5rem;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   transition: transform 0.3s ease;
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light); /* Use variable for border */
 }
 
 .workout-category-section:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12); /* Keep general black shadow or create a new themed shadow variable */
 }
 
 .workout-category-section h3 {
@@ -349,18 +365,18 @@ body {
 }
 
 .workout-card {
-  background: white;
+  background: var(--content-background); /* Use content-background for white */
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Keep general black shadow or create a new themed shadow variable */
   transition: all 0.4s ease;
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light); /* Use variable for border */
   position: relative;
 }
 
 .workout-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Keep general black shadow or create a new themed shadow variable */
 }
 
 .workout-video {
@@ -390,7 +406,7 @@ body {
 }
 
 .workout-card p {
-  color: #666;
+  color: var(--light-text-color); /* Use light-text-color for grey */
   font-size: 1rem;
   margin: 0 1.5rem;
   display: flex;
@@ -415,7 +431,7 @@ body {
 .workout-level {
   display: inline-block;
   background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
-  color: white;
+  color: var(--content-background); /* Use content-background for white */
   padding: 0.4rem 0.8rem;
   border-radius: 12px;
   font-size: 0.9rem;
@@ -425,12 +441,12 @@ body {
 
 /* Workout Tips */
 .workout-tips {
-  background: var(--glass);
+  background: var(--glass-effect); /* Use glass-effect variable */
   padding: 2.5rem;
   border-radius: 18px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Keep general black shadow or create a new themed shadow variable */
   margin-top: 2rem;
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light); /* Use variable for border */
   backdrop-filter: blur(8px);
 }
 
@@ -449,17 +465,17 @@ body {
 }
 
 .tips-category {
-  background: var(--white);
+  background: var(--content-background); /* Use content-background for white */
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.08);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.08); /* Keep general black shadow or create a new themed shadow variable */
   transition: all 0.3s ease;
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light); /* Use variable for border */
 }
 
 .tips-category:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(44, 62, 80, 0.12);
+  box-shadow: 0 8px 20px rgba(44, 62, 80, 0.12); /* Keep general black shadow or create a new themed shadow variable */
 }
 
 .tips-category h4 {
@@ -478,7 +494,7 @@ body {
 
 .tips-category li {
   padding: 1rem 0;
-  border-bottom: 1px solid rgba(26, 35, 126, 0.1);
+  border-bottom: 1px solid var(--border-color-light); /* Use variable for border */
   color: var(--text-color);
   font-size: 1.1rem;
   display: flex;
@@ -512,16 +528,17 @@ body {
 .important-dates,
 .learning-thoughts,
 .personal-goals {
-  background: var(--white);
+  background: var(--content-background); /* Use content-background for white */
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Keep general black shadow or create a new themed shadow variable */
+  border: 1px solid var(--border-color-light); /* Added border for consistency */
 }
 
 .important-dates h3,
 .learning-thoughts h3,
 .personal-goals h3 {
-  color: var(--primary);
+  color: var(--primary-color); /* Changed from --primary to --primary-color */
   margin-bottom: 1.5rem;
   text-align: center;
   font-size: 1.5rem;
@@ -544,10 +561,12 @@ body {
 .add-thought-form select,
 .add-goal-form select {
   padding: 0.8rem;
-  border: 2px solid var(--light-pink);
+  border: 2px solid var(--secondary-color); /* Changed from --light-pink to --secondary-color */
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+  background: var(--input-background); /* Use input-background for slightly transparent white */
+  color: var(--text-color); /* Ensure text color is dynamic */
 }
 
 .add-thought-form textarea {
@@ -562,14 +581,14 @@ body {
 .add-thought-form select:focus,
 .add-goal-form select:focus {
   outline: none;
-  border-color: var(--primary);
+  border-color: var(--primary-color); /* Changed from --primary to --primary-color */
 }
 
 .add-date-form button,
 .add-thought-form button,
 .add-goal-form button {
-  background: var(--primary);
-  color: var(--white);
+  background: var(--primary-color); /* Changed from --primary to --primary-color */
+  color: var(--content-background); /* Changed from --white to --content-background */
   padding: 0.8rem;
   border: none;
   border-radius: 8px;
@@ -580,7 +599,7 @@ body {
 .add-date-form button:hover,
 .add-thought-form button:hover,
 .add-goal-form button:hover {
-  background: var(--plum);
+  background: var(--accent-light); /* Changed from --plum to --accent-light or create a new plum variable */
   transform: translateY(-2px);
 }
 
@@ -596,10 +615,11 @@ body {
 .date-card,
 .thought-card,
 .goal-card {
-  background: var(--light-pink);
+  background: var(--secondary-color); /* Changed from --light-pink to --secondary-color */
   padding: 1rem;
   border-radius: 10px;
   transition: transform 0.3s ease;
+  color: var(--content-background); /* Added for better visibility on pink background */
 }
 
 .date-card:hover,
@@ -609,24 +629,28 @@ body {
 }
 
 .date-card h4 {
-  color: var(--primary);
+  color: var(--primary-color); /* Changed from --primary to --primary-color */
   margin-bottom: 0.5rem;
 }
 
 .date-card .date {
-  color: var(--text);
+  color: var(--text-color); /* Changed from --text to --text-color */
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
 }
 
 .date-card .description {
-  color: var(--text);
+  color: var(--text-color); /* Changed from --text to --text-color */
   font-style: italic;
 }
 
 .thought-card {
   position: relative;
   padding-left: 2rem;
+  background: var(--content-background); /* Ensure thought card background is white */
+  color: var(--text-color); /* Ensure text is readable */
+  border: 1px solid var(--border-color-light); /* Added border */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
 }
 
 .thought-card::before {
@@ -635,7 +659,7 @@ body {
   left: 0.5rem;
   top: 0.5rem;
   font-size: 2rem;
-  color: var(--primary);
+  color: var(--primary-color); /* Changed from --primary to --primary-color */
   opacity: 0.5;
 }
 
@@ -648,25 +672,28 @@ body {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
-  color: var(--text);
+  color: var(--light-text-color); /* Changed from --text to --light-text-color */
 }
 
 .thought-card.inspiration {
-  border-left: 4px solid #FFD700;
+  border-left: 4px solid var(--info-color); /* Using info-color variable */
 }
 
 .thought-card.achievement {
-  border-left: 4px solid #90EE90;
+  border-left: 4px solid var(--success-color); /* Using success-color variable */
 }
 
 .thought-card.lesson {
-  border-left: 4px solid #FF6B6B;
+  border-left: 4px solid var(--danger-color); /* Using danger-color variable */
 }
 
 .goal-card {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
+  background: var(--content-background); /* Ensure goal card background is white */
+  border: 1px solid var(--border-color-light); /* Added border */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
 }
 
 .goal-card input[type="checkbox"] {
@@ -689,7 +716,7 @@ body {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
-  color: var(--text);
+  color: var(--light-text-color); /* Changed from --text to --light-text-color */
 }
 
 .goal-card.completed .goal-text {
@@ -698,15 +725,15 @@ body {
 }
 
 .goal-card.high {
-  border-left: 4px solid #FF6B6B;
+  border-left: 4px solid var(--danger-color); /* Using danger-color variable */
 }
 
 .goal-card.medium {
-  border-left: 4px solid #FFD700;
+  border-left: 4px solid var(--warning-color); /* Using warning-color variable */
 }
 
 .goal-card.low {
-  border-left: 4px solid #90EE90;
+  border-left: 4px solid var(--success-color); /* Using success-color variable */
 }
 
 /* Responsive Design */
@@ -736,7 +763,7 @@ body {
   border-radius: var(--border-radius);
   margin-bottom: 2rem;
   box-shadow: var(--box-shadow);
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light);
 }
 
 .routine-image img {
@@ -751,18 +778,18 @@ body {
 }
 
 .routine-category {
-  background: white;
+  background: var(--content-background); /* Use content-background for white */
   padding: 2.5rem;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   transition: transform 0.3s ease;
   margin-bottom: 2rem;
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light);
 }
 
 .routine-category:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(26, 35, 126, 0.2);
+  box-shadow: 0 20px 40px var(--shadow-color); /* Use themed shadow for consistency */
 }
 
 .routine-category h4 {
@@ -781,7 +808,7 @@ body {
 
 .routine-category li {
   padding: 1.2rem 0;
-  border-bottom: 1px solid rgba(26, 35, 126, 0.1);
+  border-bottom: 1px solid var(--border-color-light);
   color: var(--text-color);
   font-size: 1.2rem;
   display: flex;
@@ -802,15 +829,15 @@ body {
   .routine-image {
     height: 350px;
   }
-  
+
   .routine-category {
     padding: 2rem;
   }
-  
+
   .routine-category h4 {
     font-size: 1.6rem;
   }
-  
+
   .routine-category li {
     font-size: 1.1rem;
   }
@@ -818,12 +845,12 @@ body {
 
 /* Update styling for Personal Motivation */
 .personal-motivation {
-  background: var(--glass);
+  background: var(--glass-effect); /* Use glass-effect variable */
   padding: 2.5rem;
   border-radius: 18px;
   box-shadow: var(--box-shadow);
   margin-top: 2rem;
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light);
   backdrop-filter: blur(8px);
   text-align: center;
 }
@@ -839,30 +866,30 @@ body {
   width: 100%;
   min-height: 150px;
   padding: 1.5rem;
-  border: 2px solid rgba(26, 35, 126, 0.2);
+  border: 2px solid var(--border-color-medium);
   border-radius: var(--border-radius);
   font-family: inherit;
   font-size: 1.1rem;
   resize: vertical;
   transition: var(--transition);
-  background: rgba(255, 255, 255, 0.6); /* Slightly transparent white background */
+  background: var(--input-background); /* Slightly transparent white background */
   color: var(--text-color);
 }
 
 .motivation-input textarea:focus {
   border-color: var(--accent-color);
   outline: none;
-  box-shadow: 0 0 0 4px rgba(57, 73, 171, 0.1);
+  box-shadow: 0 0 0 4px rgba(57, 73, 171, 0.1); /* This shadow is hardcoded blue, consider a themed one */
 }
 
 /* Update styling for Skincare Streak */
 .skincare-streak {
-  background: var(--glass);
+  background: var(--glass-effect); /* Use glass-effect variable */
   padding: 2.5rem;
   border-radius: 18px;
   box-shadow: var(--box-shadow);
   margin-top: 2rem;
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light);
   backdrop-filter: blur(8px);
   text-align: center;
 }
@@ -925,12 +952,12 @@ body {
 }
 
 .skincare-goals {
-  background: var(--glass);
+  background: var(--glass-effect); /* Use glass-effect variable */
   padding: 2.5rem;
   border-radius: 18px;
   box-shadow: var(--box-shadow);
   margin-top: 2rem;
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light);
   backdrop-filter: blur(8px);
 }
 
@@ -951,24 +978,24 @@ body {
 .skincare-goals .add-goal-form input[type="text"] {
   flex-grow: 1;
   padding: 1rem;
-  border: 2px solid rgba(26, 35, 126, 0.2);
+  border: 2px solid var(--border-color-medium);
   border-radius: var(--border-radius);
   font-family: inherit;
   font-size: 1rem;
   transition: var(--transition);
-  background: rgba(255, 255, 255, 0.6); /* Slightly transparent white background */
+  background: var(--input-background); /* Slightly transparent white background */
   color: var(--text-color);
 }
 
 .skincare-goals .add-goal-form input[type="text"]:focus {
-   border-color: var(--accent-color);
+    border-color: var(--accent-color);
   outline: none;
-  box-shadow: 0 0 0 4px rgba(57, 73, 171, 0.1);
+  box-shadow: 0 0 0 4px rgba(57, 73, 171, 0.1); /* This shadow is hardcoded blue, consider a themed one */
 }
 
 .skincare-goals .add-goal-form button {
   background: var(--accent-color);
-  color: white;
+  color: var(--content-background); /* Use content-background for white */
   border: none;
   padding: 1rem 2rem;
   border-radius: var(--border-radius);
@@ -988,18 +1015,18 @@ body {
 }
 
 .skincare-goals .goal-item {
-  background: var(--white);
+  background: var(--content-background); /* Use content-background for white */
   padding: 1.5rem;
   border-radius: var(--border-radius);
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08); /* Keep general black shadow or create a new themed shadow variable */
+  border: 1px solid var(--border-color-light);
   transition: transform 0.3s ease;
 }
 
 .skincare-goals .goal-item:hover {
   transform: translateX(5px);
-  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.12);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.12); /* Keep general black shadow or create a new themed shadow variable */
 }
 
 .skincare-goals .goal-item .goal-content {
@@ -1010,7 +1037,7 @@ body {
 }
 
 .skincare-goals .goal-item .goal-date {
-  color: #666;
+  color: var(--light-text-color);
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -1051,17 +1078,17 @@ body {
 
 /* Achievements Section Styling */
 .achievements {
-  background: var(--glass);
+  background: var(--glass-effect); /* Use glass-effect variable */
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Keep general black shadow or create a new themed shadow variable */
   margin-top: 2rem;
-  border: 1px solid rgba(26, 35, 126, 0.1);
+  border: 1px solid var(--border-color-light);
   backdrop-filter: blur(8px);
 }
 
 .achievements h3 {
-  color: var(--primary);
+  color: var(--primary-color); /* Changed from --primary to --primary-color */
   margin-bottom: 1.5rem;
   text-align: center;
   font-size: 1.5rem;
@@ -1076,20 +1103,22 @@ body {
 
 .add-achievement-form input[type="text"] {
   padding: 0.8rem;
-  border: 2px solid var(--light-pink);
+  border: 2px solid var(--secondary-color); /* Changed from --light-pink to --secondary-color */
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+  background: var(--input-background); /* Use input-background for slightly transparent white */
+  color: var(--text-color);
 }
 
 .add-achievement-form input[type="text"]:focus {
   outline: none;
-  border-color: var(--primary);
+  border-color: var(--primary-color); /* Changed from --primary to --primary-color */
 }
 
 .add-achievement-form button {
-  background: var(--primary);
-  color: var(--white);
+  background: var(--primary-color); /* Changed from --primary to --primary-color */
+  color: var(--content-background); /* Changed from --white to --content-background */
   padding: 0.8rem;
   border: none;
   border-radius: 8px;
@@ -1098,7 +1127,7 @@ body {
 }
 
 .add-achievement-form button:hover {
-  background: var(--plum);
+  background: var(--accent-light); /* Changed from --plum to --accent-light or create a new plum variable */
   transform: translateY(-2px);
 }
 
@@ -1109,11 +1138,13 @@ body {
 }
 
 .achievement-card {
-  background: var(--light-pink);
+  background: var(--content-background); /* Changed from --light-pink to --content-background */
   padding: 1rem 2.5rem 1rem 1rem;
   border-radius: 10px;
   transition: transform 0.3s ease;
   position: relative;
+  border: 1px solid var(--border-color-light); /* Added border for consistency */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
 }
 
 .achievement-card:hover {
@@ -1121,13 +1152,13 @@ body {
 }
 
 .achievement-card .achievement-content {
-  color: var(--text);
+  color: var(--text-color); /* Changed from --text to --text-color */
   margin-bottom: 0.8rem;
   line-height: 1.5;
 }
 
 .achievement-card .achievement-date {
-  color: #666;
+  color: var(--light-text-color); /* Changed from #666 to --light-text-color */
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -1142,17 +1173,17 @@ body {
 }
 
 .achievement-card.fitness {
-  border-left: 4px solid #27ae60;
+  border-left: 4px solid var(--success-color); /* Using success-color variable */
 }
 
 .achievement-card.creative {
-  border-left: 4px solid #f39c12;
+  border-left: 4px solid var(--warning-color); /* Using warning-color variable */
 }
 
 .achievement-card .achievement-meta {
   display: block;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--light-text-color); /* Changed from #666 to --light-text-color */
   margin-top: 0;
   line-height: 1.6;
 }
@@ -1168,7 +1199,7 @@ body {
   right: 0.5rem;
   background: none;
   border: none;
-  color: #e74c3c;
+  color: var(--delete-color); /* Use variable for red */
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -1177,7 +1208,7 @@ body {
 }
 
 .delete-item:hover {
-  color: #c0392b;
+  color: var(--delete-hover-color); /* Use variable for darker red */
   opacity: 1;
   transform: scale(1.1);
 }
@@ -1225,4 +1256,4 @@ body {
     font-size: 0.9rem;
     padding: 0.2rem;
   }
-} 
+}
