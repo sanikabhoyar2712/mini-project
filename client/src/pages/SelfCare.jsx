@@ -9,7 +9,6 @@ const SelfCare = () => {
   const [moodHistory, setMoodHistory] = useState([]);
   const [timer, setTimer] = useState(600); // 10 minutes in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [timerInterval, setTimerInterval] = useState(null);
 
   // Add new state variables for personal space
   const [importantDates, setImportantDates] = useState([]);
@@ -212,20 +211,9 @@ const SelfCare = () => {
   };
 
   // Update skincare state
-  const [skincareStreak, setSkincareStreak] = useState(0);
-  const [lastSkincareDate, setLastSkincareDate] = useState(null);
-  const [selectedSkinType, setSelectedSkinType] = useState('');
   const [personalMotivation, setPersonalMotivation] = useState('');
   const [skincareGoals, setSkincareGoals] = useState([]);
   const [newSkincareGoal, setNewSkincareGoal] = useState('');
-
-  const skinTypes = [
-    { type: 'dry', description: 'Feels tight and rough, may have flaky patches' },
-    { type: 'oily', description: 'Shiny appearance, prone to breakouts' },
-    { type: 'combination', description: 'Mix of dry and oily areas' },
-    { type: 'normal', description: 'Balanced, not too dry or oily' },
-    { type: 'sensitive', description: 'Easily irritated, may have redness' }
-  ];
 
   const skincareTips = {
     morning: [
@@ -248,6 +236,27 @@ const SelfCare = () => {
       "Give your skin a break from makeup",
       "Deep clean your makeup brushes",
       "Check your products' expiration dates"
+    ],
+    masks: [
+      "Use clay masks for oily skin",
+      "Hydrating masks for dry skin",
+      "Sheet masks for quick hydration",
+      "Exfoliating masks once a week",
+      "Charcoal masks for deep cleansing"
+    ],
+    serums: [
+      "Vitamin C for brightening",
+      "Hyaluronic acid for hydration",
+      "Retinol for anti-aging",
+      "Niacinamide for oil control",
+      "Peptides for firming"
+    ],
+    tools: [
+      "Use facial rollers for circulation",
+      "Guasha for lymphatic drainage",
+      "LED masks for skin concerns",
+      "Facial steamers for deep cleansing",
+      "Ice rollers for puffiness"
     ]
   };
 
@@ -281,35 +290,17 @@ const SelfCare = () => {
     {
       title: "Face Masks",
       icon: "spa",
-      tips: [
-        "Use clay masks for oily skin",
-        "Hydrating masks for dry skin",
-        "Sheet masks for quick hydration",
-        "Exfoliating masks once a week",
-        "Charcoal masks for deep cleansing"
-      ]
+      tips: skincareTips.masks
     },
     {
       title: "Serums & Treatments",
       icon: "tint",
-      tips: [
-        "Vitamin C for brightening",
-        "Hyaluronic acid for hydration",
-        "Retinol for anti-aging",
-        "Niacinamide for oil control",
-        "Peptides for firming"
-      ]
+      tips: skincareTips.serums
     },
     {
       title: "Skincare Tools",
       icon: "tools",
-      tips: [
-        "Use facial rollers for circulation",
-        "Guasha for lymphatic drainage",
-        "LED masks for skin concerns",
-        "Facial steamers for deep cleansing",
-        "Ice rollers for puffiness"
-      ]
+      tips: skincareTips.tools
     }
   ];
 
@@ -498,17 +489,9 @@ const SelfCare = () => {
     }
   };
 
-  const handleToggleGoal = (goalId) => {
-    const updatedGoals = personalGoals.map(goal => 
-      goal.id === goalId ? { ...goal, completed: !goal.completed } : goal
-    );
-    setPersonalGoals(updatedGoals);
-    localStorage.setItem('personalGoals', JSON.stringify(updatedGoals));
-  };
-
   // Add handler for achievements
   const handleAddAchievement = () => {
-    if (newAchievement.content.trim()) {
+    if (newAchievement.content) {
       const achievementToAdd = {
         id: Date.now(),
         date: new Date().toLocaleDateString(),
@@ -525,10 +508,6 @@ const SelfCare = () => {
     setAchievements(updatedAchievements);
     localStorage.setItem('achievements', JSON.stringify(updatedAchievements));
   };
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const singleHeroImageUrl = "https://images.pexels.com/photos/6005013/pexels-photo-6005013.jpeg?cs=srgb&dl=pexels-ds-stories-6005013.jpg&fm=jpg&_gl=1*zsfih9*_ga*NTI5NjI5NjY4LjE3NDgzMzIwNzg.*_ga_8JE65Q40S6*czE3NDgzMzcxNTQkbzIkZzEkdDE3NDgzMzgyMTIkajAkbDAkaDA.";
 
   return (
     <div className="selfcare-container">
@@ -861,7 +840,7 @@ const SelfCare = () => {
               <h3>Your Skincare Streak</h3>
               <div className="streak-counter">
                 <i className="fas fa-fire"></i>
-                <span>{skincareStreak} Days</span>
+                <span>{skincareGoals.length} Days</span>
               </div>
               <p>Keep up the great work! Every day of care counts.</p>
             </div>

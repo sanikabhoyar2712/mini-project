@@ -6,18 +6,18 @@ import './Navbar.css';
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isThemeDropdownOpen, setIsThemeDropdownOpen] = useState(false);
-    const [currentTheme, setCurrentTheme] = useState('default'); // 'default', 'pink-theme', 'blue-theme'
+    // const [currentTheme, setCurrentTheme] = useState('default'); // Removed unused state
 
     // Load theme from localStorage on component mount
     useEffect(() => {
         const savedTheme = localStorage.getItem('websiteTheme');
         if (savedTheme) {
             document.body.classList.add(savedTheme);
-            setCurrentTheme(savedTheme);
+            // setCurrentTheme(savedTheme); // Removed unused state update
         } else {
             // Set a default theme if none is saved (e.g., 'blue-theme' or 'default')
             document.body.classList.add('blue-theme'); // Or your preferred default
-            setCurrentTheme('blue-theme');
+            // setCurrentTheme('blue-theme'); // Removed unused state update
             localStorage.setItem('websiteTheme', 'blue-theme');
         }
     }, []);
@@ -40,7 +40,7 @@ const Navbar = () => {
         // Save to localStorage
         localStorage.setItem('websiteTheme', themeClass);
         // Update state
-        setCurrentTheme(themeClass);
+        // setCurrentTheme(themeClass); // Removed unused state update
         // Close dropdown
         setIsThemeDropdownOpen(false);
         // Close mobile menu if open
@@ -63,6 +63,7 @@ const Navbar = () => {
                     <Link to="/selfcare" className="nav-link" onClick={() => setIsMenuOpen(false)}>Self Care</Link>
                     <Link to="/todo" className="nav-link" onClick={() => setIsMenuOpen(false)}>To Do</Link>
                     <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</Link>
+                    <Link to="/courses" className="nav-link" onClick={() => setIsMenuOpen(false)}>Courses</Link>
 
                     {/* Theme Dropdown */}
                     <div className="nav-item dropdown" onMouseEnter={() => setIsThemeDropdownOpen(true)} onMouseLeave={() => setIsThemeDropdownOpen(false)}>
