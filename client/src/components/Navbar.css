@@ -8,44 +8,14 @@
    move the :root and body.theme-name blocks to that global file.
 */
 
-/* Global Variables for Pink Theme (default) */
-:root {
-    --primary: #FF69B4; /* Pink */
-    --primary-light: #FF85C0;
-    --primary-dark: #FF357F;
-    --secondary: #FFC0CB; /* Light Pink */
-    --background: #FFEBF0; /* Light Pink Background - This will be the navbar's background as well */
-    --background-light: #F8C8D3; /* Lighter Pink Background - Use for cards/sections or hover effects */
-    --text: #333; /* Main text color */
-    --text-on-primary: #ffffff; /* Text color when on primary background */
-    --shadow-color: rgba(0, 0, 0, 0.1); /* General shadow color */
-    --border-color: #e0e0e0; /* General border color */
-    --primary-rgb: 255, 105, 180; /* RGB for text-shadow for pink */
-}
-
-/* Blue Theme Variables */
-body.blue-theme {
-    --primary: #4A90E2; /* Blue */
-    --primary-light: #7AC4F7;
-    --primary-dark: #006BB3;
-    --secondary: #A4C8E1; /* Light Blue */
-    --background: #E5F3FE; /* Light Blue Background */
-    --background-light: #C1E0F5; /* Lighter Blue Background */
-    --text: #333;
-    --text-on-primary: #ffffff;
-    --shadow-color: rgba(0, 0, 0, 0.15); /* Slightly stronger shadow for blue */
-    --border-color: #e0e0e0;
-    --primary-rgb: 74, 144, 226; /* RGB for text-shadow for blue */
-}
-
 /* Navbar layout */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem; /* More generous padding */
-    background-color: var(--background); /* Use theme background from your variables */
-    box-shadow: 0 6px 20px var(--shadow-color); /* Uses theme shadow color */
+    background-color: #FFF0F5; /* Light Pink Background */
+    box-shadow: 0 6px 20px rgba(255, 182, 193, 0.3); /* General shadow color */
     position: fixed;
     top: 0;
     left: 0;
@@ -57,19 +27,19 @@ body.blue-theme {
 }
 
 .navbar-container {
-    display: grid;
-    grid-template-columns: auto auto 1fr auto; /* Features on the left */
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     width: 95%;
-    max-width: 1400px; /* Adjusted max-width */
-    margin: 0 auto; /* Center the container */
+    max-width: 1400px;
+    margin: 0 auto;
     padding: 0 1rem;
 }
 
 .navbar-logo {
     grid-column: 1 / 2;
     font-size: 2rem; /* Larger for more impact */
-    color: var(--primary); /* Uses theme primary color */
+    color: #FFB6C1; /* Baby Pink */
     text-decoration: none;
     font-weight: 700; /* Bolder font for the logo */
     display: flex;
@@ -80,11 +50,11 @@ body.blue-theme {
 
 .navbar-logo:hover {
     transform: scale(1.1) rotate(-3deg); /* More dynamic hover effect */
-    text-shadow: 0 0 8px rgba(var(--primary-rgb, 0, 0, 0), 0.3); /* Subtle glow on hover, fallback for --primary-rgb */
+    text-shadow: 0 0 8px rgba(255, 182, 193, 0.3); /* Baby Pink RGB */
 }
 
 .navbar-logo svg { /* Use svg for react-icons instead of i */
-    color: var(--secondary); /* Uses theme secondary color */
+    color: #FFC0CB; /* Light Pink */
     font-size: 2.2rem; /* Larger icon */
     animation: bounce 2s infinite ease-in-out; /* Continuous gentle bounce */
 }
@@ -102,7 +72,7 @@ body.blue-theme {
     display: none; /* Hidden by default for desktop */
     font-size: 2.2rem; /* Larger and more prominent */
     cursor: pointer;
-    color: var(--primary); /* Uses theme primary color */
+    color: #FFB6C1; /* Baby Pink */
     transition: transform 0.4s ease, color 0.3s ease;
     background: none; /* Reset button default style */
     border: none; /* Reset button default style */
@@ -111,18 +81,16 @@ body.blue-theme {
 
 .menu-icon:hover {
     transform: rotate(180deg); /* Full rotation for a dramatic effect */
-    color: var(--secondary); /* Change color on hover */
+    color: #FFC0CB; /* Light Pink */
 }
 
 .nav-menu {
     display: flex;
     list-style: none;
     align-items: center;
-    justify-content: flex-start; /* Aligned to the left */
-    gap: 2.5rem; /* Increased spacing between items */
+    gap: 2rem;
     margin: 0;
     padding: 0;
-    grid-column: 2 / 3;
 }
 
 .nav-item {
@@ -131,7 +99,7 @@ body.blue-theme {
 
 .nav-link {
     text-decoration: none;
-    color: var(--text); /* Uses theme text color */
+    color: #333; /* Main text color */
     padding: 0.85rem 1.4rem; /* More generous padding */
     font-size: 1.05rem; /* Slightly larger font */
     font-weight: 600; /* Bolder for prominence */
@@ -153,7 +121,7 @@ body.blue-theme {
     left: 0;
     width: 100%;
     height: 3px; /* Thicker underline */
-    background-color: var(--primary); /* Uses theme primary color */
+    background-color: #FFB6C1; /* Baby Pink */
     transform: scaleX(0);
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Springy underline effect */
     transform-origin: bottom right;
@@ -170,15 +138,15 @@ body.blue-theme {
 }
 
 .nav-link:hover {
-    color: var(--primary); /* Uses theme primary color */
-    background-color: var(--background-light); /* Uses theme background-light for hover */
+    color: #FFB6C1; /* Baby Pink */
+    background-color: #FFE4E1; /* Lighter Pink Background */
     transform: translateY(-5px); /* More significant lift */
-    box-shadow: 0 8px 16px var(--shadow-color); /* Uses theme shadow color */
+    box-shadow: 0 8px 16px rgba(255, 182, 193, 0.3); /* General shadow color */
 }
 
 .nav-link:hover svg { /* Use svg for react-icons */
     transform: translateY(-5px) rotate(10deg); /* Stronger icon animation */
-    color: var(--secondary); /* Change icon color on hover */
+    color: #FFC0CB; /* Light Pink */
 }
 
 /* Dropdown menu for Themes */
@@ -186,18 +154,18 @@ body.blue-theme {
     position: absolute;
     top: 120%; /* Further down for more breathing room and dramatic entrance */
     right: 0; /* Aligns to the right of its parent nav-item */
-    background-color: var(--background); /* Use theme background */
+    background-color: #FFF0F5; /* Light Pink Background */
     border-radius: 15px; /* Even more rounded corners */
     padding: 1rem; /* More internal padding */
     list-style: none;
     min-width: 160px; /* Adjusted width for theme options */
-    box-shadow: 0 12px 40px var(--shadow-color); /* Uses theme shadow color */
+    box-shadow: 0 12px 40px rgba(255, 182, 193, 0.3); /* General shadow color */
     opacity: 0;
     transform: translateY(30px) scale(0.9); /* Stronger initial transform */
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Slower, more pronounced spring */
     pointer-events: none;
     transform-origin: top right;
-    border: 1px solid var(--border-color); /* Subtle border */
+    border: 1px solid #FFB6C1; /* Subtle border */
     z-index: 1001; /* Ensure dropdown is above other content */
 }
 
@@ -219,7 +187,7 @@ body.blue-theme {
     align-items: center;
     gap: 0.8rem; /* More space */
     padding: 0.9rem 1.4rem; /* More padding */
-    color: var(--text); /* Uses theme text color */
+    color: #333; /* Main text color */
     text-decoration: none;
     border-radius: 10px; /* Consistent rounded corners */
     transition: all 0.25s ease-in-out;
@@ -227,8 +195,8 @@ body.blue-theme {
 }
 
 .dropdown-link:hover {
-    background-color: var(--primary-light); /* Use theme primary-light */
-    color: var(--primary); /* Use theme primary */
+    background-color: #FFC0CB; /* Light Pink */
+    color: #FFB6C1; /* Baby Pink */
     transform: translateX(8px); /* More pronounced slide effect */
 }
 
@@ -263,207 +231,90 @@ body.blue-theme {
 .nav-buttons {
     display: flex;
     align-items: center;
-    gap: 1.2rem; /* Increased spacing between buttons */
-    justify-content: flex-end;
-    margin-left: auto;
-    grid-column: 4 / 5;
+    gap: 1rem;
+    margin-left: 2rem;
 }
 
 .nav-button {
-    padding: 0.75rem 1.4rem; /* More substantial padding */
-    border-radius: 12px; /* Consistent rounded corners */
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
     text-decoration: none;
-    font-size: 1.05rem; /* Larger font */
-    font-weight: 600; /* Bolder font */
-    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth, springy transition */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.7rem;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
     white-space: nowrap;
-    height: 46px; /* Taller buttons for a more robust feel */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* General button shadow */
+    background-color: #FFB6C1; /* Baby Pink */
+    color: #FFFFFF;
+    border: none;
 }
 
+.nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3); /* General shadow color */
+    background-color: #FF69B4; /* Darker Pink */
+}
+
+/* Remove individual button styles since they'll all use the same style */
 .nav-button.contact,
-.nav-button.login {
-    background-color: var(--background-light); /* Uses lighter background for these */
-    color: var(--primary); /* Uses primary color */
-    border: 1px solid var(--primary-light); /* Uses primary-light for border */
-}
-
-.nav-button.contact:hover,
-.nav-button.login:hover {
-    background-color: var(--primary-light); /* Uses primary-light on hover */
-    transform: translateY(-5px); /* Consistent, more dramatic lift */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-}
-
+.nav-button.login,
 .nav-button.signup {
-    background-color: var(--primary); /* Uses primary color */
-    color: var(--text-on-primary); /* Text color for primary background */
-    border: 1px solid var(--primary); /* Uses primary color for border */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow for emphasis */
-    position: relative; /* For button glow effect */
-    overflow: hidden;
-}
-
-.nav-button.signup:before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background: rgba(255, 255, 255, 0.15); /* Light shimmery effect */
-    border-radius: 50%;
-    transition: all 0.5s ease-out;
-    transform: translate(-50%, -50%) scale(0);
-    z-index: 1;
-}
-
-.nav-button.signup:hover:before {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0;
-}
-
-.nav-button.signup:hover {
-    background-color: var(--primary-dark); /* Uses primary-dark on hover */
-    transform: translateY(-5px); /* Consistent lift */
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4); /* Even stronger, more captivating shadow */
+    background-color: #FFB6C1; /* Baby Pink */
+    color: #FFFFFF;
 }
 
 /* Responsive styles */
 @media screen and (max-width: 1024px) {
     .navbar-container {
-        grid-template-columns: auto 1fr auto;
-        padding: 0 1rem;
-    }
-
-    .navbar-logo {
-        grid-column: auto;
-        font-size: 1.8rem;
-    }
-
-    .navbar-logo svg { /* Use svg for react-icons */
-        font-size: 2rem;
-    }
-
-    .menu-icon {
-        display: block;
-        grid-column: 3 / 4;
+        padding: 0 0.5rem;
     }
 
     .nav-menu {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        height: auto;
-        position: absolute;
-        top: 75px; /* Adjusted for slightly larger elements */
-        left: 0;
-        opacity: 0;
-        transition: all 0.4s ease-out; /* Smoother slide-in */
-        background-color: var(--background); /* Uses theme background */
-        box-shadow: 0 15px 30px var(--shadow-color); /* Stronger mobile menu shadow */
-        padding: 1.5rem 0; /* More padding */
-        grid-column: auto;
-        align-items: flex-start;
-        border-bottom-left-radius: 15px; /* Rounded corners for mobile menu */
-        border-bottom-right-radius: 15px;
-        border-top: 1px solid var(--border-color); /* Add border top for mobile menu */
-    }
-
-    .nav-menu.active {
-        display: flex;
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .nav-item {
-        width: 100%;
-        text-align: left;
-        padding: 0 1rem; /* Padding for mobile items */
-    }
-
-    .nav-link {
-        padding: 1rem 1.5rem;
-        border-radius: 10px; /* Maintain some rounding in mobile */
-    }
-
-    .nav-link:hover {
-        background-color: var(--background-light); /* Uses theme background-light */
-        transform: translateY(-2px); /* Slightly less lift for mobile */
-        box-shadow: none; /* No shadow for mobile hover */
-    }
-
-    /* Mobile Dropdown Specifics */
-    .nav-item.dropdown .dropdown-menu {
-        position: static; /* Stack dropdown items in mobile */
-        width: auto; /* Adjust width dynamically */
-        padding: 0.5rem 0; /* Reduced padding for mobile dropdown */
-        box-shadow: none;
-        border-radius: 0;
-        background-color: transparent;
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        pointer-events: all;
-        border: none; /* No border for mobile dropdown */
-        margin-left: 1.5rem; /* Indent mobile dropdown items */
-        margin-top: 0.5rem;
-    }
-    .nav-item.dropdown .dropdown-arrow {
-        display: inline-block; /* Keep arrow for mobile */
-        transform: rotate(0deg); /* Reset rotation for closed state */
-    }
-    .nav-item.dropdown .dropdown-menu.active .dropdown-arrow {
-        transform: rotate(180deg); /* Rotate arrow when theme dropdown is open in mobile */
-    }
-
-    .dropdown-link {
-        padding: 0.8rem 1rem; /* Adjusted padding for mobile dropdown links */
-        justify-content: flex-start; /* Align dropdown links to left */
+        gap: 1.5rem;
     }
 
     .nav-buttons {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        align-items: flex-start;
-        margin-top: 1.5rem; /* More space */
-        grid-column: auto;
-        padding: 0 1rem;
-    }
-
-    .nav-menu.active .nav-buttons {
-        display: flex;
+        gap: 0.8rem;
+        margin-left: 1.5rem;
     }
 
     .nav-button {
-        width: 100%;
-        margin-bottom: 0.8rem;
-        height: 48px; /* Taller mobile buttons */
-    }
-
-    .nav-button:last-child {
-        margin-bottom: 0;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
 }
 
 @media screen and (max-width: 768px) {
     .navbar-container {
-        padding: 0 0.8rem;
+        padding: 0 0.5rem;
     }
 
-    .navbar-logo {
-        font-size: 1.6rem;
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        flex-direction: column;
+        background-color: #FFF0F5; /* Light Pink Background */
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(255, 182, 193, 0.3); /* General shadow color */
+        padding: 2rem 0;
+        gap: 2rem;
     }
 
-    .navbar-logo svg { /* Use svg for react-icons */
-        font-size: 1.8rem;
+    .nav-menu.active {
+        left: 0;
     }
 
-    .menu-icon {
-        font-size: 2rem;
+    .nav-buttons {
+        flex-direction: column;
+        width: 100%;
+        margin: 1rem 0;
+        gap: 1rem;
+    }
+
+    .nav-button {
+        width: 80%;
+        text-align: center;
     }
 }

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Courses.css';
 
 // Define the engineeringBranches data structure directly in Courses.js
-const engineeringBranches = {
+const engineeringBranches = { // eslint-disable-line no-unused-vars
   computerScience: {
     name: "Computer Science Engineering",
     levels: {

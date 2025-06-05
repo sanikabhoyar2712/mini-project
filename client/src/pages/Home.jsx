@@ -39,7 +39,7 @@ const testimonials = [
   },
   {
     name: "Priya Singh",
-    text: "An all-in-one platform that truly understands a student’s learning journey. Highly recommended!",
+    text: "An all-in-one platform that truly understands a student's learning journey. Highly recommended!",
     avatar: "https://randomuser.me/api/portraits/women/44.jpg"
   },
   
@@ -89,9 +89,9 @@ const Home = () => {
           {/* Hero Section */}
           <section className="hero notion-hero">
             <div className="hero-content">
-              <h1>Welcome to <span className="brand">StudySphere</span></h1>
+              <h1>Welcome to <span className="brand">Serena</span></h1>
               <p className="hero-subtitle">
-                Organize your learning, track your progress, and achieve your goals — all in one beautiful workspace.
+                where peace meets progress
               </p>
               <div className="hero-buttons">
                 <button className="get-started-btn" onClick={handleGetStarted}>
@@ -103,39 +103,43 @@ const Home = () => {
               </div>
             </div>
             <div className="hero-image">
-              <div className="floating-elements">
-                <i className="fas fa-book"></i>
-                <i className="fas fa-laptop-code"></i>
-                <i className="fas fa-brain"></i>
-                <i className="fas fa-pencil-alt"></i>
-              </div>
-              <img src="https://www.notion.so/cdn-cgi/image/format=auto,width=1024,quality=80/front-static/pages/home/hero.png" alt="Workspace" className="notion-illustration" />
+              <img src="/images/my-background.jpg" alt="Workspace" className="notion-illustration" />
             </div>
           </section>
 
           {/* Features Section */}
           <section className="features notion-features">
-            <h2>Why StudySphere?</h2>
+            <h2>Why Serena?</h2>
             <div className="features-grid">
               <div className="feature-card">
-                <i className="fas fa-check-circle"></i>
-                <h3>Smart Tasks</h3>
-                <p>Organize and prioritize your study tasks efficiently.</p>
+                <i className="fas fa-calendar-alt"></i>
+                <h3>Smart Study Planner</h3>
+                <p>Organize your tasks and deadlines with a personalized calendar to stay on top of your goals.</p>
               </div>
               <div className="feature-card">
-                <i className="fas fa-bullseye"></i>
-                <h3>Goal Tracking</h3>
-                <p>Set and achieve your learning milestones with ease.</p>
+                <i className="fas fa-graduation-cap"></i>
+                <h3>Course Dashboard</h3>
+                <p>Access and manage all your enrolled courses in one place, with structured modules and note-taking tools.</p>
               </div>
               <div className="feature-card">
-                <i className="fas fa-user-friends"></i>
-                <h3>Study Groups</h3>
-                <p>Connect and learn with peers worldwide.</p>
+                <i className="fas fa-heartbeat"></i>
+                <h3>Self-Care Integration</h3>
+                <p>Balance productivity with wellness through scheduled breaks, hydration reminders, and mental health tips.</p>
               </div>
               <div className="feature-card">
                 <i className="fas fa-chart-line"></i>
-                <h3>Progress Insights</h3>
-                <p>Track your growth with intuitive analytics.</p>
+                <h3>Learning Insights</h3>
+                <p>Analyze your productivity with weekly summaries, time tracking, and goal achievement stats.</p>
+              </div>
+              <div className="feature-card">
+                <i className="fas fa-tasks"></i>
+                <h3>To-Do List with Progress Tracker</h3>
+                <p>Break down your study sessions into manageable tasks and visually track your daily progress.</p>
+              </div>
+              <div className="feature-card">
+                <i className="fas fa-bell"></i>
+                <h3>Smart Reminders & Notifications</h3>
+                <p>Get timely alerts for upcoming tasks, missed deadlines, and scheduled breaks to stay focused and on track.</p>
               </div>
             </div>
           </section>

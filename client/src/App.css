@@ -1,46 +1,8 @@
 /*
    THIS IS YOUR GLOBAL CSS FILE (src/app.css)
 
-   This file now defines both your default (pink) and blue themes
-   using CSS variables. All other components (Navbar, Todo, etc.)
-   should use these variables to get their colors.
+   This file contains global CSS styles for the application.
 */
-
-/* --- Theme Variable Definitions (Global) --- */
-
-:root {
-    /* Pink Theme (Default) */
-    --primary: #FF69B4; /* Hot Pink */
-    --primary-light: #FFB6C1; /* Light Pink */
-    --primary-dark: #FF357F; /* A slightly darker pink for hover/active states where needed */
-    --secondary: #DDA0DD; /* Plum (used as a secondary accent) */
-    --accent: #FFC0CB; /* Pink (used as another accent) */
-    --background: #FFF0F5; /* Lavender Blush (main background) */
-    --background-light: #FFE4E1; /* Misty Rose (lighter background for cards/sections) */
-    --text: #4A4A4A; /* Main text color */
-    --text-on-primary: #FFFFFF; /* Text color on primary/dark backgrounds */
-    --white: #FFFFFF;
-    --shadow-color: rgba(0, 0, 0, 0.1); /* General shadow color */
-    --border-color: #F0F0F0; /* General border color */
-    --transition: all 0.3s ease;
-    --primary-rgb: 255, 105, 180; /* RGB for effects like text-shadow */
-}
-
-body.blue-theme {
-    /* Blue Theme Overrides */
-    --primary: #4A90E2; /* Blue */
-    --primary-light: #7AC4F7; /* Light Blue */
-    --primary-dark: #006BB3; /* Dark Blue */
-    --secondary: #A4C8E1; /* Light Blue (secondary accent) */
-    --accent: #A4C8E1; /* Light Blue (another accent) */
-    --background: #E5F3FE; /* Light Blue Background */
-    --background-light: #C1E0F5; /* Lighter Blue Background for cards/sections */
-    --text: #333333; /* Darker text for blue theme contrast */
-    --text-on-primary: #FFFFFF;
-    --shadow-color: rgba(0, 0, 0, 0.15); /* Slightly stronger shadow for blue */
-    --border-color: #D0D0D0; /* Slightly darker border for blue */
-    --primary-rgb: 74, 144, 226; /* RGB for effects like text-shadow */
-}
 
 /* --- Global Base Styles --- */
 
@@ -55,27 +17,26 @@ body {
         Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* IMPORTANT: Use theme variables for background and text color */
-    background-color: var(--background);
-    color: var(--text);
-    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for theme change */
+    background-color: #FFF0F5; /* Lavender Blush (main background) */
+    color: #4A4A4A; /* Main text color */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition */
 }
 
 .app {
     min-height: 100vh;
-    background: var(--background); /* Ensure app background also follows theme */
+    background: #FFF0F5; /* Lavender Blush (main background) */
     transition: background 0.5s ease;
 }
 
 /* --- Navbar Styles (Keep as is, but ensure it uses variables) --- */
 
 .navbar {
-    background: var(--white); /* Navbar background should be white */
+    background: #FFFFFF; /* Navbar background should be white */
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 10px var(--shadow-color); /* Use theme shadow */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* General shadow color */
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -83,12 +44,12 @@ body {
 }
 
 .nav-brand a {
-    color: var(--primary); /* Use primary */
+    color: #FF69B4; /* Hot Pink */
     font-size: 1.5rem;
     font-weight: bold;
     text-decoration: none;
-    /* Keeping the linear gradient for brand, but using variables if available */
-    background: linear-gradient(45deg, var(--primary), var(--secondary)); /* Use primary and secondary */
+    /* Keeping the linear gradient for brand */
+    background: linear-gradient(45deg, #FF69B4, #DDA0DD); /* Hot Pink and Plum */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: transform 0.3s ease, background 0.3s ease; /* Transition background for brand */
@@ -105,7 +66,7 @@ body {
 }
 
 .nav-links a {
-    color: var(--text); /* Use text color */
+    color: #4A4A4A; /* Main text color */
     text-decoration: none;
     font-weight: 500;
     padding: 0.5rem 1rem;
@@ -114,23 +75,23 @@ body {
 }
 
 .nav-links a:hover {
-    color: var(--primary); /* Use primary on hover */
-    background: var(--background-light); /* Use background-light on hover */
+    color: #FF69B4; /* Hot Pink */
+    background: #FFE4E1; /* Misty Rose */
 }
 
 .nav-links a.active {
-    color: var(--text-on-primary); /* Text color on primary */
-    background: var(--primary); /* Primary background for active */
+    color: #FFFFFF; /* White */
+    background: #FF69B4; /* Hot Pink */
 }
 
 .auth-link {
-    background: var(--primary); /* Primary background */
-    color: var(--text-on-primary) !important; /* Text on primary */
+    background: #FF69B4; /* Hot Pink */
+    color: #FFFFFF !important; /* White */
 }
 
 .auth-link:hover {
-    background: var(--primary-dark) !important; /* Darker primary on hover */
-    color: var(--text-on-primary) !important;
+    background: #FF357F !important; /* Darker Pink */
+    color: #FFFFFF !important; /* White */
     transform: translateY(-2px);
 }
 
@@ -181,17 +142,17 @@ body {
 
 /* --- Card Styles --- */
 .card {
-    background: var(--background-light); /* Use theme background-light for cards */
+    background: #FFE4E1; /* Misty Rose */
     border-radius: 20px;
     padding: 2rem;
-    box-shadow: var(--shadow-color); /* Use theme shadow */
-    transition: var(--transition);
-    border: 1px solid var(--border-color); /* Add a border that follows theme */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* General shadow color */
+    transition: all 0.3s ease;
+    border: 1px solid #F0F0F0; /* General border color */
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px var(--shadow-color); /* Stronger shadow on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
 }
 
 /* --- Button Styles --- */
@@ -211,37 +172,37 @@ body {
 }
 
 .btn-primary {
-    background: var(--primary);
-    color: var(--text-on-primary);
+    background: #FF69B4; /* Hot Pink */
+    color: #FFFFFF;
 }
 
 .btn-primary:hover {
-    background: var(--primary-dark); /* Use primary-dark for hover */
+    background: #FF357F; /* Darker Pink */
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2); /* Use RGB variable for shadow */
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2); /* Hot Pink RGB */
 }
 
 .btn-secondary {
-    background: var(--secondary);
-    color: var(--text-on-primary); /* Text on secondary background */
+    background: #DDA0DD; /* Plum */
+    color: #FFFFFF; /* White */
 }
 
 .btn-secondary:hover {
-    background: var(--accent); /* Accent on hover */
+    background: #FFC0CB; /* Pink */
     transform: translateY(-2px);
 }
 
 .btn-outline {
     background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
+    border: 2px solid #FF69B4; /* Hot Pink */
+    color: #FF69B4; /* Hot Pink */
 }
 
 .btn-outline:hover {
-    background: var(--primary);
-    color: var(--text-on-primary);
+    background: #FF69B4; /* Hot Pink */
+    color: #FFFFFF; /* White */
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
 }
 
 /* --- Grid Layout (Keep as is) --- */
@@ -292,14 +253,14 @@ body {
 }
 
 .section-title h2 {
-    color: var(--primary-dark); /* Use primary-dark for titles */
+    color: #FF357F; /* Darker Pink */
     font-size: 2.5rem;
     margin-bottom: 1rem;
     transition: color 0.3s ease;
 }
 
 .section-title p {
-    color: var(--text); /* Use theme text color */
+    color: #4A4A4A; /* Main text color */
     opacity: 0.8;
     max-width: 600px;
     margin: 0 auto;
@@ -310,8 +271,8 @@ body {
 .spinner {
     width: 40px;
     height: 40px;
-    border: 4px solid var(--primary-light); /* Use primary-light */
-    border-top: 4px solid var(--primary); /* Use primary */
+    border: 4px solid #FFB6C1; /* Light Pink */
+    border-top: 4px solid #FF69B4; /* Hot Pink */
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -328,14 +289,14 @@ body {
     right: 2rem;
     padding: 1rem 2rem;
     border-radius: 10px;
-    background: var(--background-light); /* Use background-light */
-    box-shadow: var(--shadow-color); /* Use theme shadow */
+    background: #FFE4E1; /* Misty Rose */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* General shadow color */
     display: flex;
     align-items: center;
     gap: 0.5rem;
     animation: slideIn 0.3s ease-out;
-    border: 1px solid var(--border-color); /* Use theme border */
-    color: var(--text); /* Use theme text color */
+    border: 1px solid #F0F0F0; /* General border color */
+    color: #4A4A4A; /* Main text color */
 }
 
 @keyframes slideIn {
@@ -355,14 +316,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--background); /* Use theme background */
+    background: #FFF0F5; /* Lavender Blush */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--primary-light); /* Use primary-light */
+    background: #FFB6C1; /* Light Pink */
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary); /* Use primary on hover */
+    background: #FF69B4; /* Hot Pink */
 }

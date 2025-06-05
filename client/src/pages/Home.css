@@ -1,6 +1,12 @@
 .home {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--background) 0%, var(--primary-light) 100%);
+  background-image: url('../assets/my-background.jpg'); /* Replace with the URL or path to your background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Ensure content appears above the background */
+  position: relative; /* Added position relative */
+  z-index: 1; /* Added z-index to ensure it's a stacking context */
 }
 
 /* Fullscreen Quote Splash */
@@ -60,10 +66,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 3rem 2rem 2rem 2rem;
-  background: #f7f6f3;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white - ensures content is visible above background image */
   border-radius: 18px;
   margin-bottom: 2rem;
   flex-wrap: wrap;
+  min-height: 100vh; /* Make the hero section take up at least the full viewport height */
+  position: relative; /* Added position relative to ensure content is above background image */
+  z-index: 2; /* Added z-index to ensure content is above the home background */
 }
 .notion-hero .hero-content {
   max-width: 500px;
@@ -73,7 +82,9 @@
   font-weight: bold;
 }
 .notion-hero .notion-illustration {
-  max-width: 350px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.07);
 }
@@ -81,8 +92,8 @@
 /* Hero Image with Floating Icons and Background */
 .hero-image {
   position: relative;
-  width: 500px;
-  height: 500px;
+  width: 800px;
+  height: 800px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -168,10 +179,12 @@
 
 /* Features Section */
 .notion-features {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white - ensures content is visible above background image */
   border-radius: 18px;
   padding: 2rem;
   margin-bottom: 2rem;
+  position: relative; /* Added position relative */
+  z-index: 2; /* Added z-index */
 }
 .notion-features h2 {
   text-align: center;
@@ -185,58 +198,49 @@
   justify-content: center;
   gap: 1.5rem;
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  margin: 0 auto; /* Added this to center the grid */
 }
 .feature-card {
-  flex: 0 0 calc(25% - 1.5rem);
-  background: rgba(255, 255, 255, 0.9);
-  padding: 2rem 1rem;
-  border-radius: 20px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
   text-align: center;
-  transition: all 0.4s ease;
-  border: 2px solid var(--primary-light);
-  min-width: 220px;
-  box-shadow: 0 2px 8px rgba(255, 105, 180, 0.03);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 1 1 300px; /* Allow shrinking and growing, with a base of 300px */
+  min-width: 200px; /* Ensure a minimum width to prevent content from being too squished */
 }
 .feature-card i {
-  font-size: 2.5rem;
-  color: var(--primary);
-  margin-bottom: 1.2rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: transform 0.4s ease;
+  font-size: 3rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
 }
 .feature-card h3 {
-  color: var(--text);
-  margin-bottom: 0.8rem;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
 }
 .feature-card p {
-  color: var(--text);
-  opacity: 0.8;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  margin: 0 auto;
+  font-size: 1rem;
+  color: #555;
 }
 .feature-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 15px 35px rgba(255, 105, 180, 0.15);
-  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 .feature-card:hover i {
-  transform: scale(1.1) rotate(5deg);
+  color: var(--primary);
 }
 
 /* Testimonials Section */
 .testimonials {
-  background: #f7f6f3;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white - ensures content is visible above background image */
   border-radius: 18px;
   padding: 2rem;
   margin-bottom: 2rem;
   text-align: center;
+  position: relative; /* Added position relative */
+  z-index: 2; /* Added z-index */
 }
 .testimonials h2 {
   font-size: 2rem;
@@ -316,8 +320,8 @@
     margin: 0 auto;
   }
   .hero-image {
-    width: 350px;
-    height: 350px;
+    width: 600px;
+    height: 600px;
     margin: 0 auto;
   }
   .features-grid {
@@ -346,6 +350,11 @@
     max-width: 320px;
     margin-bottom: 1rem;
   }
+  .hero-image {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 600px) {
@@ -359,8 +368,8 @@
     max-width: 98vw;
   }
   .hero-image {
-    width: 90vw;
-    height: 90vw;
+    width: 98vw;
+    height: 98vw;
     min-width: 220px;
     min-height: 220px;
   }

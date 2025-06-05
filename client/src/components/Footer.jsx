@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Footer.css';
 
 const Footer = () => {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'pink');
-
-  useEffect(() => {
-    document.body.className = '';
-    document.body.classList.add(`theme-${theme}`);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
 
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-column">
-          <h3>StudySphere</h3>
+          <h3>Serena</h3>
           <p>Empowering lifelong learners with the best tools and resources to achieve their goals.</p>
           <div className="footer-social">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
@@ -64,7 +57,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} StudySphere. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Serena. All rights reserved.</p>
       </div>
     </footer>
   );
