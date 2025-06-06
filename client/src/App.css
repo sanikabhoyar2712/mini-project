@@ -1,324 +1,329 @@
-:root {
-  --primary: #FF69B4; /* Hot Pink */
-  --primary-light: #FFB6C1; /* Light Pink */
-  --secondary: #DDA0DD; /* Plum */
-  --accent: #FFC0CB; /* Pink */
-  --background: #FFF0F5; /* Lavender Blush */
-  --text: #4A4A4A;
-  --white: #FFFFFF;
-  --light-pink: #FFE4E1; /* Misty Rose */
-  --plum: #DDA0DD; /* Plum */
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
-}
+/*
+   THIS IS YOUR GLOBAL CSS FILE (src/app.css)
+
+   This file contains global CSS styles for the application.
+*/
+
+/* --- Global Base Styles --- */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background);
-  color: var(--text);
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #FFF0F5; /* Lavender Blush (main background) */
+    color: #4A4A4A; /* Main text color */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition */
 }
 
 .app {
-  min-height: 100vh;
-  background: var(--background);
+    min-height: 100vh;
+    background: #FFF0F5; /* Lavender Blush (main background) */
+    transition: background 0.5s ease;
 }
 
+/* --- Navbar Styles (Keep as is, but ensure it uses variables) --- */
+
 .navbar {
-  background: var(--white);
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+    background: #FFFFFF; /* Navbar background should be white */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* General shadow color */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease; /* Smooth shadow change */
 }
 
 .nav-brand a {
-  color: var(--primary);
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: none;
-  background: linear-gradient(45deg, var(--primary), var(--plum));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: transform 0.3s ease;
+    color: #FF69B4; /* Hot Pink */
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    /* Keeping the linear gradient for brand */
+    background: linear-gradient(45deg, #FF69B4, #DDA0DD); /* Hot Pink and Plum */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease, background 0.3s ease; /* Transition background for brand */
 }
 
 .nav-brand a:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .nav-links {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
 }
 
 .nav-links a {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  transition: all 0.3s ease;
+    color: #4A4A4A; /* Main text color */
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: var(--primary);
-  background: var(--light-pink);
+    color: #FF69B4; /* Hot Pink */
+    background: #FFE4E1; /* Misty Rose */
 }
 
 .nav-links a.active {
-  color: var(--white);
-  background: var(--primary);
+    color: #FFFFFF; /* White */
+    background: #FF69B4; /* Hot Pink */
 }
 
 .auth-link {
-  background: var(--primary);
-  color: var(--white) !important;
+    background: #FF69B4; /* Hot Pink */
+    color: #FFFFFF !important; /* White */
 }
 
 .auth-link:hover {
-  background: var(--plum) !important;
-  color: var(--white) !important;
-  transform: translateY(-2px);
+    background: #FF357F !important; /* Darker Pink */
+    color: #FFFFFF !important; /* White */
+    transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
-  .navbar {
-    padding: 1rem;
-    flex-direction: column;
-    gap: 1rem;
-  }
+    .navbar {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
 
-  .nav-links {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
 
-  .nav-links a {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
-  }
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
 }
 
-/* Import Font Awesome for icons */
+/* --- Font Imports (Keep as is) --- */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* Page Transitions */
+/* --- Page Transitions (Keep as is) --- */
 .page-enter {
-  opacity: 0;
-  transform: translateY(20px);
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .page-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms, transform 300ms;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms, transform 300ms;
 }
 
 .page-exit {
-  opacity: 1;
+    opacity: 1;
 }
 
 .page-exit-active {
-  opacity: 0;
-  transition: opacity 300ms;
+    opacity: 0;
+    transition: opacity 300ms;
 }
 
-/* Card Styles */
+/* --- Card Styles --- */
 .card {
-  background: var(--white);
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
+    background: #FFE4E1; /* Misty Rose */
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* General shadow color */
+    transition: all 0.3s ease;
+    border: 1px solid #F0F0F0; /* General border color */
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
 }
 
-/* Button Styles */
+/* --- Button Styles --- */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    outline: none;
 }
 
 .btn-primary {
-  background: var(--primary);
-  color: var(--white);
+    background: #FF69B4; /* Hot Pink */
+    color: #FFFFFF;
 }
 
 .btn-primary:hover {
-  background: var(--primary-light);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+    background: #FF357F; /* Darker Pink */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2); /* Hot Pink RGB */
 }
 
 .btn-secondary {
-  background: var(--secondary);
-  color: var(--white);
+    background: #DDA0DD; /* Plum */
+    color: #FFFFFF; /* White */
 }
 
 .btn-secondary:hover {
-  background: var(--accent);
-  transform: translateY(-2px);
+    background: #FFC0CB; /* Pink */
+    transform: translateY(-2px);
 }
 
 .btn-outline {
-  background: transparent;
-  border: 2px solid var(--primary);
-  color: var(--primary);
+    background: transparent;
+    border: 2px solid #FF69B4; /* Hot Pink */
+    color: #FF69B4; /* Hot Pink */
 }
 
 .btn-outline:hover {
-  background: var(--primary);
-  color: var(--white);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+    background: #FF69B4; /* Hot Pink */
+    color: #FFFFFF; /* White */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
 }
 
-/* Grid Layout */
+/* --- Grid Layout (Keep as is) --- */
 .grid {
-  display: grid;
-  gap: 2rem;
+    display: grid;
+    gap: 2rem;
 }
 
 .grid-2 {
-  grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .grid-3 {
-  grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .grid-4 {
-  grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 /* Responsive Grid */
 @media (max-width: 1024px) {
-  .grid-4 {
-    grid-template-columns: repeat(3, 1fr);
-  }
+    .grid-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
-  .grid-3, .grid-4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .grid-3, .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 480px) {
-  .grid-2, .grid-3, .grid-4 {
-    grid-template-columns: 1fr;
-  }
+    .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* Section Styles */
+/* --- Section Styles --- */
 .section {
-  padding: 4rem 0;
+    padding: 4rem 0;
 }
 
 .section-title {
-  text-align: center;
-  margin-bottom: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 .section-title h2 {
-  color: var(--primary);
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+    color: #FF357F; /* Darker Pink */
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
 }
 
 .section-title p {
-  color: var(--text);
-  opacity: 0.8;
-  max-width: 600px;
-  margin: 0 auto;
+    color: #4A4A4A; /* Main text color */
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+    transition: color 0.3s ease;
 }
 
-/* Loading Spinner */
+/* --- Loading Spinner --- */
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid var(--primary-light);
-  border-top: 4px solid var(--primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #FFB6C1; /* Light Pink */
+    border-top: 4px solid #FF69B4; /* Hot Pink */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-/* Toast Notifications */
+/* --- Toast Notifications --- */
 .toast {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  padding: 1rem 2rem;
-  border-radius: 10px;
-  background: var(--white);
-  box-shadow: var(--shadow);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  animation: slideIn 0.3s ease-out;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    background: #FFE4E1; /* Misty Rose */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* General shadow color */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: slideIn 0.3s ease-out;
+    border: 1px solid #F0F0F0; /* General border color */
+    color: #4A4A4A; /* Main text color */
 }
 
 @keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-/* Custom Scrollbar */
+/* --- Custom Scrollbar --- */
 ::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+    background: #FFF0F5; /* Lavender Blush */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-light);
-  border-radius: 4px;
+    background: #FFB6C1; /* Light Pink */
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-} 
+    background: #FF69B4; /* Hot Pink */
+}

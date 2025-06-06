@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa'; // Removed FaPalette and FaAngleDown
+import { FaBars } from 'react-icons/fa';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -14,7 +14,7 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="navbar-container">
                 <Link to="/" className="navbar-logo">
-                    <i className="fas fa-graduation-cap"></i> LearnHub
+                    <i className="fas fa-graduation-cap"></i> Serena
                 </Link>
 
                 <button className="menu-icon" onClick={toggleMenu}>
@@ -25,6 +25,7 @@ const Navbar = () => {
                     <Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link>
                     <Link to="/selfcare" className="nav-link" onClick={() => setIsMenuOpen(false)}>Self Care</Link>
                     <Link to="/todo" className="nav-link" onClick={() => setIsMenuOpen(false)}>To Do</Link>
+                    <Link to="/courses" className="nav-link" onClick={() => setIsMenuOpen(false)}>Courses</Link>
                     <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</Link>
                 </div>
 

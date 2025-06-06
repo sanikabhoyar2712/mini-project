@@ -4,13 +4,13 @@
     max-width: 1200px; /* Increased max width */
     margin: 2rem auto;
     /* Use theme variables for background and border */
-    background: var(--background); /* Main background of the todo container */
+    background: #FFF0F5; /* Lavender Blush (main background) */
     border-radius: 24px;
-    box-shadow: 0 15px 40px var(--shadow-color); /* Use theme shadow color */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* General shadow color */
     font-family: 'Poppins', sans-serif;
     position: relative; /* Needed for potential pseudo-elements */
     overflow: hidden; /* Hide overflowing background effects */
-    border: 1px solid var(--border-color); /* Add a subtle border that changes with theme */
+    border: 1px solid #F0F0F0; /* General border color */
 
     /* Grid layout for larger screens */
     display: grid;
@@ -41,7 +41,7 @@
 }
 
 .todo-header h1 {
-    color: var(--primary-dark); /* Use a darker shade of primary for the main heading */
+    color: #FF357F; /* Darker Pink */
     font-size: 3.5rem; /* Slightly larger font */
     margin-bottom: 0.8rem;
     font-weight: 800;
@@ -59,13 +59,13 @@
     transform: translateX(-50%);
     width: 100px; /* Wider underline */
     height: 5px; /* Thicker underline */
-    background: linear-gradient(90deg, var(--primary-light) 0%, var(--primary-dark) 100%); /* Use theme primary gradient */
+    background: linear-gradient(90deg, #FFB6C1 0%, #FF357F 100%); /* Light Pink and Darker Pink */
     border-radius: 3px;
     transition: background 0.3s ease;
 }
 
 .todo-header p {
-    color: var(--text); /* Use theme text color */
+    color: #4A4A4A; /* Main text color */
     font-size: 1.4rem; /* Slightly larger font */
     font-style: italic; /* Add a touch of style */
     transition: color 0.3s ease;
@@ -78,12 +78,12 @@
 
 .todo-sidebar {
     /* Styles for the sidebar area */
-    background: var(--background-light); /* Use a lighter background from theme */
+    background: #FFE4E1; /* Misty Rose */
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 5px 15px var(--shadow-color); /* Use theme shadow color */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* General shadow color */
     height: fit-content; /* Adjust height to content */
-    border: 1px solid var(--border-color); /* Subtle border */
+    border: 1px solid #F0F0F0; /* General border color */
     transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transition */
 }
 
@@ -98,9 +98,9 @@
 .sidebar-section h3 {
     font-size: 1.2rem; /* Slightly larger heading */
     font-weight: 600;
-    color: var(--primary); /* Use theme primary color */
+    color: #FF69B4; /* Hot Pink */
     margin-bottom: 1rem;
-    border-bottom: 2px solid var(--primary-light); /* Subtle underline from primary-light */
+    border-bottom: 2px solid #FFB6C1; /* Light Pink */
     padding-bottom: 0.5rem;
     transition: color 0.3s ease, border-color 0.3s ease;
 }
@@ -116,35 +116,35 @@
 
 .sidebar-section li {
     padding: 0.8rem 1rem; /* Padding for clickable area */
-    background-color: var(--background-light); /* Use lighter background for list items */
-    border: 1px solid var(--border-color); /* Light gray border */
+    background-color: #FFE4E1; /* Misty Rose */
+    border: 1px solid #F0F0F0; /* General border color */
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
-    color: var(--text); /* Use theme text color */
+    color: #4A4A4A; /* Main text color */
     transition: all 0.3s ease;
     text-align: left;
 }
 
 .sidebar-section li:hover {
-    background-color: var(--primary-light); /* Light primary color on hover */
-    border-color: var(--primary); /* Primary color border on hover */
-    color: var(--text-on-primary); /* Text color for primary background on hover */
+    background-color: #FFB6C1; /* Light Pink */
+    border-color: #FF69B4; /* Hot Pink */
+    color: #FFFFFF; /* White */
     transform: translateX(4px); /* Slight slide effect on hover */
 }
 
 .sidebar-section li.active {
-    background: linear-gradient(90deg, var(--primary-light) 0%, var(--primary-dark) 100%); /* Theme primary gradient */
-    color: var(--text-on-primary); /* White text on active primary background */
-    border-color: var(--primary-dark); /* Dark primary border */
+    background: linear-gradient(90deg, #FFB6C1 0%, #FF357F 100%); /* Light Pink and Darker Pink */
+    color: #FFFFFF; /* White */
+    border-color: #FF357F; /* Dark primary border */
     font-weight: 600;
-    box-shadow: 0 2px 8px var(--shadow-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* General shadow color */
 }
 
 .task-category-badge {
     display: inline-block;
-    background-color: var(--secondary); /* Use theme secondary color for badges */
-    color: var(--primary-dark); /* Dark primary text for contrast */
+    background-color: #DDA0DD; /* Plum */
+    color: #FF357F; /* Darker Pink */
     font-size: 0.8rem;
     font-weight: 600;
     padding: 0.3rem 0.8rem;
@@ -158,10 +158,10 @@
     display: flex;
     gap: 1.5rem;
     margin-bottom: 3rem;
-    background: var(--background-light); /* Use lighter background for input area */
+    background: #FFE4E1; /* Misty Rose */
     padding: 1.8rem;
     border-radius: 15px;
-    box-shadow: 0 8px 20px var(--shadow-color); /* Use theme shadow color */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* General shadow color */
     align-items: center;
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
@@ -169,23 +169,23 @@
 .task-input input[type="text"] {
     flex-grow: 1;
     padding: 1.2rem 1.5rem;
-    border: 2px solid var(--border-color); /* Use theme border color */
+    border: 2px solid #F0F0F0; /* General border color */
     border-radius: 8px;
     font-size: 1.1rem;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    color: var(--text);
-    background-color: var(--background); /* Input background matching main theme */
+    color: #4A4A4A; /* Main text color */
+    background-color: #FFF0F5; /* Lavender Blush */
 }
 
 .task-input input[type="text"]:focus {
     outline: none;
-    border-color: var(--primary); /* Use theme primary color */
-    box-shadow: 0 0 0 4px var(--primary-light); /* Use theme primary-light for focus glow */
+    border-color: #FF69B4; /* Hot Pink */
+    box-shadow: 0 0 0 4px #FFB6C1; /* Light Pink */
 }
 
 .task-input button {
-    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%); /* Theme primary gradient */
-    color: var(--text-on-primary); /* White text on primary background */
+    background: linear-gradient(135deg, #FFB6C1 0%, #FF357F 100%); /* Light Pink and Darker Pink */
+    color: #FFFFFF; /* White */
     border: none;
     padding: 1.2rem 2.5rem;
     border-radius: 8px;
@@ -193,13 +193,13 @@
     font-size: 1.1rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px var(--shadow-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .task-input button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px var(--shadow-color);
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%); /* Reverse gradient on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #FF357F 0%, #FFB6C1 100%); /* Darker Pink and Light Pink */
 }
 
 .task-list {
@@ -208,15 +208,15 @@
 }
 
 .task-item {
-    background: var(--background-light); /* Use lighter background for task items */
+    background: #FFE4E1; /* Misty Rose */
     padding: 1.5rem;
     border-radius: 12px;
     display: flex;
     align-items: center;
     gap: 1rem;
-    box-shadow: 0 2px 8px var(--shadow-color); /* Use theme shadow color */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* General shadow color */
     transition: all 0.4s ease; /* Slightly longer transition */
-    border: 1px solid var(--border-color); /* Light gray border */
+    border: 1px solid #F0F0F0; /* General border color */
     position: relative;
     overflow: hidden; /* For subtle internal effects */
 }
@@ -238,19 +238,19 @@
 
 .task-item:hover {
     transform: translateX(8px);
-    box-shadow: 0 6px 18px var(--shadow-color); /* Stronger hover shadow */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* Stronger hover shadow */
 }
 
 .task-item.completed {
-    background-color: var(--background); /* Revert to main background for completed */
-    border-color: var(--primary-light); /* Lighter primary border */
+    background-color: #FFF0F5; /* Lavender Blush */
+    border-color: #FFB6C1; /* Light Pink */
     opacity: 0.9; /* Slightly less transparency */
     transition: all 0.4s ease; /* Ensure smooth transition to completed state */
 }
 
 .task-item.completed .task-text {
     text-decoration: line-through;
-    color: var(--text); /* Use theme text color */
+    color: #4A4A4A; /* Main text color */
     font-style: italic;
 }
 
@@ -287,7 +287,7 @@
     min-width: 20px;
     height: 20px;
     cursor: pointer;
-    accent-color: var(--primary); /* Uses theme primary color for accent */
+    accent-color: #FF357F; /* Uses theme primary color for accent */
     margin-right: 0.5rem;
     position: relative; /* Needed for custom styles */
     transition: accent-color 0.3s ease;
@@ -302,15 +302,15 @@
     left: 0;
     width: 100%;
     height: 100%;
-    border: 2px solid var(--primary-light); /* Use theme primary-light for border */
+    border: 2px solid #FFB6C1; /* Use theme primary-light for border */
     border-radius: 4px;
-    background-color: var(--background-light); /* Use theme background-light */
+    background-color: #FFE4E1; /* Use theme background-light */
     transition: all 0.3s ease;
 }
 
 .task-item input[type="checkbox"]:checked::before {
-    background-color: var(--primary); /* Use theme primary color */
-    border-color: var(--primary); /* Use theme primary color */
+    background-color: #FF357F; /* Use theme primary color */
+    border-color: #FF357F; /* Use theme primary color */
 }
 
 .task-item input[type="checkbox"]::after {
@@ -321,7 +321,7 @@
     left: 50%;
     transform: translate(-50%, -50%) scale(0); /* Start scaled down */
     font-size: 1rem;
-    color: var(--text-on-primary); /* White text on primary background */
+    color: #FFFFFF; /* White text on primary background */
     transition: transform 0.3s ease 0.1s; /* Delay the checkmark animation slightly */
 }
 
@@ -332,7 +332,7 @@
 .task-text {
     flex-grow: 1;
     font-size: 1.15rem;
-    color: var(--text); /* Use theme text color */
+    color: #4A4A4A; /* Main text color */
     word-break: break-word;
     transition: color 0.3s ease, text-decoration 0.3s ease, font-style 0.3s ease;
 }
@@ -340,7 +340,7 @@
 .delete-task {
     background: none;
     border: none;
-    color: var(--primary-dark); /* Use a darker primary for delete */
+    color: #FF357F; /* Use a darker primary for delete */
     cursor: pointer;
     font-size: 1.4rem;
     transition: color 0.3s ease, transform 0.3s ease;
@@ -356,17 +356,17 @@
 .empty-state {
     text-align: center;
     padding: 4rem 2rem;
-    background: var(--background-light); /* Use lighter background for empty state */
+    background: #FFE4E1; /* Misty Rose */
     border-radius: 16px;
-    box-shadow: 0 4px 15px var(--shadow-color); /* Use theme shadow */
-    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* General shadow */
+    border: 1px solid #F0F0F0;
     grid-column: 1 / -1; /* Span across both columns when empty */
     transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .empty-state i {
     font-size: 4rem;
-    color: var(--primary); /* Use theme primary for icon */
+    color: #FF357F; /* Use theme primary for icon */
     margin-bottom: 1.8rem;
     transition: color 0.3s ease;
 }
@@ -375,13 +375,13 @@
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 0.8rem;
-    color: var(--text); /* Use theme text color */
+    color: #4A4A4A; /* Main text color */
     transition: color 0.3s ease;
 }
 
 .empty-state span {
     font-size: 1.1rem;
-    color: var(--text); /* Use theme text color */
+    color: #4A4A4A; /* Main text color */
     transition: color 0.3s ease;
 }
 
