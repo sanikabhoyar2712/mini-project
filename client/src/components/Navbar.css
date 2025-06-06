@@ -1,316 +1,471 @@
+/*
+   IMPORTANT:
+   The CSS variables block ( :root, body.blue-theme, body.pink-theme )
+   should ideally be in your global CSS file (e.g., src/index.css or src/App.css),
+   NOT just in this component's CSS file. This ensures site-wide theming.
+
+   If this is your ONLY CSS file, keep them here. If you have a global CSS file,
+   move the :root and body.theme-name blocks to that global file.
+*/
+
+/* Global Variables for Pink Theme (default) */
+:root {
+    --primary: #FF69B4; /* Pink */
+    --primary-light: #FF85C0;
+    --primary-dark: #FF357F;
+    --secondary: #FFC0CB; /* Light Pink */
+    --background: #FFEBF0; /* Light Pink Background - This will be the navbar's background as well */
+    --background-light: #F8C8D3; /* Lighter Pink Background - Use for cards/sections or hover effects */
+    --text: #333; /* Main text color */
+    --text-on-primary: #ffffff; /* Text color when on primary background */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* General shadow color */
+    --border-color: #e0e0e0; /* General border color */
+    --primary-rgb: 255, 105, 180; /* RGB for text-shadow for pink */
+}
+
+/* Blue Theme Variables */
+body.blue-theme {
+    --primary: #4A90E2; /* Blue */
+    --primary-light: #7AC4F7;
+    --primary-dark: #006BB3;
+    --secondary: #A4C8E1; /* Light Blue */
+    --background: #E5F3FE; /* Light Blue Background */
+    --background-light: #C1E0F5; /* Lighter Blue Background */
+    --text: #333;
+    --text-on-primary: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.15); /* Slightly stronger shadow for blue */
+    --border-color: #e0e0e0;
+    --primary-rgb: 74, 144, 226; /* RGB for text-shadow for blue */
+}
+
 /* Navbar layout */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem; /* More generous padding */
+    background-color: var(--background); /* Use theme background from your variables */
+    box-shadow: 0 6px 20px var(--shadow-color); /* Uses theme shadow color */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    backdrop-filter: blur(8px); /* Enhanced blur for a glass-like effect */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Subtle bottom border */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth theme transition */
 }
 
 .navbar-container {
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
-  align-items: center;
-  width: 95%;
-  max-width: 1400px;
-  padding: 0 1rem;
+    display: grid;
+    /* Adjusted grid to center the middle section */
+    grid-template-columns: auto 1fr auto; /* Logo | Nav Menu + Empty Space | Buttons */
+    align-items: center;
+    width: 95%;
+    max-width: 1400px; /* Adjusted max-width */
+    margin: 0 auto; /* Center the container */
+    padding: 0 1rem;
 }
 
 .navbar-logo {
-  grid-column: 1 / 2;
-  font-size: 1.8rem;
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: transform 0.3s ease;
+    grid-column: 1 / 2;
+    font-size: 2rem; /* Larger for more impact */
+    color: var(--primary); /* Uses theme primary color */
+    text-decoration: none;
+    font-weight: 700; /* Bolder font for the logo */
+    display: flex;
+    align-items: center;
+    gap: 0.6rem; /* More space for visual balance */
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Playful spring effect */
 }
 
 .navbar-logo:hover {
-  transform: scale(1.05);
+    transform: scale(1.1) rotate(-3deg); /* More dynamic hover effect */
+    text-shadow: 0 0 8px rgba(var(--primary-rgb, 0, 0, 0), 0.3); /* Subtle glow on hover, fallback for --primary-rgb */
 }
 
-.navbar-logo i {
-  color: var(--secondary);
+.navbar-logo svg { /* Use svg for react-icons instead of i */
+    color: var(--secondary); /* Uses theme secondary color */
+    font-size: 2.2rem; /* Larger icon */
+    animation: bounce 2s infinite ease-in-out; /* Continuous gentle bounce */
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
 }
 
 .menu-icon {
-  display: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: var(--primary);
+    display: none; /* Hidden by default for desktop */
+    font-size: 2.2rem; /* Larger and more prominent */
+    cursor: pointer;
+    color: var(--primary); /* Uses theme primary color */
+    transition: transform 0.4s ease, color 0.3s ease;
+    background: none; /* Reset button default style */
+    border: none; /* Reset button default style */
+    padding: 0; /* Reset button default style */
+}
+
+.menu-icon:hover {
+    transform: rotate(180deg); /* Full rotation for a dramatic effect */
+    color: var(--secondary); /* Change color on hover */
 }
 
 .nav-menu {
-  display: flex;
-  list-style: none;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
-  grid-column: 3 / 4;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: center; /* Aligned to the center */
+    gap: 2.5rem; /* Increased spacing between items */
+    margin: 0 auto; /* Added auto margins to center within its grid area */
+    padding: 0;
+    /* Position the nav-menu in the middle grid column */
+    grid-column: 2 / 3;
 }
 
 .nav-item {
-  position: relative;
+    position: relative;
 }
 
 .nav-link {
-  text-decoration: none;
-  color: var(--text);
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 8px;
+    text-decoration: none;
+    color: var(--text); /* Uses theme text color */
+    padding: 0.85rem 1.4rem; /* More generous padding */
+    font-size: 1.05rem; /* Slightly larger font */
+    font-weight: 600; /* Bolder for prominence */
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother, bouncier transition */
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: 12px; /* More rounded, softer corners */
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px; /* Slightly increased letter spacing for elegance */
+    white-space: nowrap; /* Prevent wrapping for theme link */
 }
 
-.nav-link i {
-  font-size: 1.1rem;
-  transition: transform 0.3s ease;
+.nav-link:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px; /* Thicker underline */
+    background-color: var(--primary); /* Uses theme primary color */
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Springy underline effect */
+    transform-origin: bottom right;
+}
+
+.nav-link:hover:before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.nav-link svg { /* Use svg for react-icons */
+    font-size: 1.2rem; /* Larger icons */
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s ease;
 }
 
 .nav-link:hover {
-  color: var(--primary);
-  background-color: var(--background);
+    color: var(--primary); /* Uses theme primary color */
+    background-color: var(--background-light); /* Uses theme background-light for hover */
+    transform: translateY(-5px); /* More significant lift */
+    box-shadow: 0 8px 16px var(--shadow-color); /* Uses theme shadow color */
 }
 
-.nav-link:hover i {
-  transform: translateY(-2px);
+.nav-link:hover svg { /* Use svg for react-icons */
+    transform: translateY(-5px) rotate(10deg); /* Stronger icon animation */
+    color: var(--secondary); /* Change icon color on hover */
 }
 
-/* Add spacing after the last navigation item */
-.nav-menu .nav-item:last-child {
-  padding-right: 1.5rem; /* Adjust this value as needed */
-}
-
-/* Specific styling for Courses nav link to match button style */
-.nav-link.courses {
-  background-color: var(--background);
-  color: var(--primary);
-  border: 1px solid var(--primary-light);
-  padding: 0.5rem 1rem; /* Match button padding */
-}
-
-.nav-link.courses:hover {
-  background-color: var(--primary-light);
-  color: var(--primary);
-  transform: translateY(-2px); /* Keep button hover effect */
-}
-
-/* Dropdown menu */
+/* Dropdown menu for Themes */
 .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  border-radius: 12px;
-  padding: 0.75rem;
-  list-style: none;
-  min-width: 180px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-  pointer-events: none;
+    position: absolute;
+    top: 120%; /* Further down for more breathing room and dramatic entrance */
+    right: 0; /* Aligns to the right of its parent nav-item */
+    background-color: var(--background); /* Use theme background */
+    border-radius: 15px; /* Even more rounded corners */
+    padding: 1rem; /* More internal padding */
+    list-style: none;
+    min-width: 160px; /* Adjusted width for theme options */
+    box-shadow: 0 12px 40px var(--shadow-color); /* Uses theme shadow color */
+    opacity: 0;
+    transform: translateY(30px) scale(0.9); /* Stronger initial transform */
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Slower, more pronounced spring */
+    pointer-events: none;
+    transform-origin: top right;
+    border: 1px solid var(--border-color); /* Subtle border */
+    z-index: 1001; /* Ensure dropdown is above other content */
 }
 
-.dropdown:hover .dropdown-menu {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: all;
+.nav-item.dropdown:hover .dropdown-menu { /* Only for desktop hover */
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
 }
+
+.dropdown-menu.active { /* For mobile click state */
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+
 
 .dropdown-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  color: var(--text);
-  text-decoration: none;
-  border-radius: 6px;
-  transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; /* More space */
+    padding: 0.9rem 1.4rem; /* More padding */
+    color: var(--text); /* Uses theme text color */
+    text-decoration: none;
+    border-radius: 10px; /* Consistent rounded corners */
+    transition: all 0.25s ease-in-out;
+    cursor: pointer; /* Indicate it's clickable */
 }
 
 .dropdown-link:hover {
-  background-color: var(--background);
-  color: var(--primary);
+    background-color: var(--primary-light); /* Use theme primary-light */
+    color: var(--primary); /* Use theme primary */
+    transform: translateX(8px); /* More pronounced slide effect */
+}
+
+.dropdown-arrow {
+    margin-left: auto; /* Push arrow to the right */
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-item.dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg); /* Rotate arrow when dropdown is open */
+}
+
+.theme-indicator {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.blue-dot {
+    background-color: #4A90E2; /* Hardcoded for visual representation */
+}
+
+.pink-dot {
+    background-color: #FF69B4; /* Hardcoded for visual representation */
 }
 
 /* Buttons */
 .nav-buttons {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  justify-content: flex-end;
-  margin-left: auto;
-  grid-column: 4 / 5;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem; /* Increased spacing between buttons */
+    justify-content: flex-end;
+    margin-left: auto;
+    grid-column: 4 / 5;
 }
 
 .nav-button {
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  white-space: nowrap;
-  height: 38px;
+    padding: 0.75rem 1.4rem; /* More substantial padding */
+    border-radius: 12px; /* Consistent rounded corners */
+    text-decoration: none;
+    font-size: 1.05rem; /* Larger font */
+    font-weight: 600; /* Bolder font */
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth, springy transition */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    white-space: nowrap;
+    height: 46px; /* Taller buttons for a more robust feel */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* General button shadow */
 }
 
-.nav-button.contact {
-  background-color: var(--background);
-  color: var(--primary);
-  border: 1px solid var(--primary-light);
-}
-
-.nav-button.contact:hover {
-  background-color: var(--primary-light);
-  transform: translateY(-2px);
-}
-
+.nav-button.contact,
 .nav-button.login {
-  background-color: var(--background);
-  color: var(--primary);
-  border: 1px solid var(--primary-light);
+    background-color: var(--background-light); /* Uses lighter background for these */
+    color: var(--primary); /* Uses primary color */
+    border: 1px solid var(--primary-light); /* Uses primary-light for border */
 }
 
+.nav-button.contact:hover,
 .nav-button.login:hover {
-  background-color: var(--primary-light);
-  transform: translateY(-2px);
+    background-color: var(--primary-light); /* Uses primary-light on hover */
+    transform: translateY(-5px); /* Consistent, more dramatic lift */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
 .nav-button.signup {
-  background-color: var(--background);
-  color: var(--primary);
-  border: 1px solid var(--primary-light);
+    background-color: var(--primary); /* Uses primary color */
+    color: var(--text-on-primary); /* Text color for primary background */
+    border: 1px solid var(--primary); /* Uses primary color for border */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow for emphasis */
+    position: relative; /* For button glow effect */
+    overflow: hidden;
+}
+
+.nav-button.signup:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15); /* Light shimmery effect */
+    border-radius: 50%;
+    transition: all 0.5s ease-out;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 1;
+}
+
+.nav-button.signup:hover:before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
 }
 
 .nav-button.signup:hover {
-  background-color: var(--primary-light);
-  transform: translateY(-2px);
+    background-color: var(--primary-dark); /* Uses primary-dark on hover */
+    transform: translateY(-5px); /* Consistent lift */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4); /* Even stronger, more captivating shadow */
 }
 
 /* Responsive styles */
 @media screen and (max-width: 1024px) {
-  .navbar-container {
-    grid-template-columns: auto 1fr auto;
-    padding: 0 1rem;
-  }
-  
-  .navbar-logo {
-    grid-column: auto;
-  }
-  
-  .menu-icon {
-    display: block;
-    grid-column: 3 / 4;
-  }
-  
-  .nav-menu {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    opacity: 0;
-    transition: all 0.3s ease;
-    background-color: #fff;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    padding: 1rem 0;
-    grid-column: auto;
-  }
-  
-  .nav-menu.active {
-    display: flex;
-    opacity: 1;
-  }
-  
-  .nav-item {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .nav-link {
-    padding: 1rem;
-  }
-  
-  .nav-link:hover {
-    background-color: var(--background);
-    border-radius: 0;
-  }
-  
-  .dropdown-menu {
-    position: static;
-    width: 100%;
-    padding: 0;
-    box-shadow: none;
-    border-radius: 0;
-    background-color: transparent;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: all;
-  }
-  
-  .dropdown:hover .dropdown-menu {
-    display: block;
-  }
-  
-  .dropdown-link {
-    padding: 0.75rem 2rem;
-  }
-  
-  .nav-buttons {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    margin-top: 1rem;
-    grid-column: auto;
-  }
-  
-  .nav-menu.active .nav-buttons {
-    display: flex;
-  }
-  
-  .nav-button {
-    width: calc(100% - 2rem);
-    margin-bottom: 0.5rem;
-  }
-  
-  .nav-button:last-child {
-    margin-bottom: 0;
-  }
+    .navbar-container {
+        grid-template-columns: auto 1fr auto;
+        padding: 0 1rem;
+    }
+
+    .navbar-logo {
+        grid-column: auto;
+        font-size: 1.8rem;
+    }
+
+    .navbar-logo svg { /* Use svg for react-icons */
+        font-size: 2rem;
+    }
+
+    .menu-icon {
+        display: block;
+        grid-column: 3 / 4;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 75px; /* Adjusted for slightly larger elements */
+        left: 0;
+        opacity: 0;
+        transition: all 0.4s ease-out; /* Smoother slide-in */
+        background-color: var(--background); /* Uses theme background */
+        box-shadow: 0 15px 30px var(--shadow-color); /* Stronger mobile menu shadow */
+        padding: 1.5rem 0; /* More padding */
+        grid-column: auto;
+        align-items: flex-start;
+        border-bottom-left-radius: 15px; /* Rounded corners for mobile menu */
+        border-bottom-right-radius: 15px;
+        border-top: 1px solid var(--border-color); /* Add border top for mobile menu */
+    }
+
+    .nav-menu.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-item {
+        width: 100%;
+        text-align: left;
+        padding: 0 1rem; /* Padding for mobile items */
+    }
+
+    .nav-link {
+        padding: 1rem 1.5rem;
+        border-radius: 10px; /* Maintain some rounding in mobile */
+    }
+
+    .nav-link:hover {
+        background-color: var(--background-light); /* Uses theme background-light */
+        transform: translateY(-2px); /* Slightly less lift for mobile */
+        box-shadow: none; /* No shadow for mobile hover */
+    }
+
+    /* Mobile Dropdown Specifics */
+    .nav-item.dropdown .dropdown-menu {
+        position: static; /* Stack dropdown items in mobile */
+        width: auto; /* Adjust width dynamically */
+        padding: 0.5rem 0; /* Reduced padding for mobile dropdown */
+        box-shadow: none;
+        border-radius: 0;
+        background-color: transparent;
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: all;
+        border: none; /* No border for mobile dropdown */
+        margin-left: 1.5rem; /* Indent mobile dropdown items */
+        margin-top: 0.5rem;
+    }
+    .nav-item.dropdown .dropdown-arrow {
+        display: inline-block; /* Keep arrow for mobile */
+        transform: rotate(0deg); /* Reset rotation for closed state */
+    }
+    .nav-item.dropdown .dropdown-menu.active .dropdown-arrow {
+        transform: rotate(180deg); /* Rotate arrow when theme dropdown is open in mobile */
+    }
+
+    .dropdown-link {
+        padding: 0.8rem 1rem; /* Adjusted padding for mobile dropdown links */
+        justify-content: flex-start; /* Align dropdown links to left */
+    }
+
+    .nav-buttons {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+        margin-top: 1.5rem; /* More space */
+        grid-column: auto;
+        padding: 0 1rem;
+    }
+
+    .nav-menu.active .nav-buttons {
+        display: flex;
+    }
+
+    .nav-button {
+        width: 100%;
+        margin-bottom: 0.8rem;
+        height: 48px; /* Taller mobile buttons */
+    }
+
+    .nav-button:last-child {
+        margin-bottom: 0;
+    }
 }
 
 @media screen and (max-width: 768px) {
-  .navbar-container {
-    padding: 0 0.5rem;
-  }
+    .navbar-container {
+        padding: 0 0.8rem;
+    }
 
-  .navbar-logo {
-    font-size: 1.5rem;
-  }
+    .navbar-logo {
+        font-size: 1.6rem;
+    }
 
-  .menu-icon {
-    font-size: 1.5rem;
-  }
+    .navbar-logo svg { /* Use svg for react-icons */
+        font-size: 1.8rem;
+    }
+
+    .menu-icon {
+        font-size: 2rem;
+    }
 }

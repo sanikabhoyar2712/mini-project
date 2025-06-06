@@ -30,35 +30,35 @@ body {
 }
 
 .selfcare-intro {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); /* Adjusted gradient for more contrast */
-  padding: 3rem 2rem; /* Increased padding */
-  border-radius: var(--border-radius); /* Apply border radius */
-  box-shadow: var(--box-shadow); /* Add box shadow */
+  background: linear-gradient(135deg, var(--background-color) 0%, var(--accent-light) 100%); /* Lighter gradient */
+  padding: 3rem 2rem; /* Keep current padding */
+  border-radius: 20px; /* Increased border radius */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Adjusted box shadow */
   text-align: center;
-  color: white; /* White text for contrast on pink background */
+  color: var(--text-color); /* Changed text color for contrast */
 }
 
 .selfcare-intro h2 {
-  font-size: 2.5rem; /* Larger heading */
+  font-size: 2.5rem; /* Keep current font size */
   margin-bottom: 1rem;
-  color: white; /* White heading color */
+  color: white; /* Changed heading color to white */
   font-weight: 700;
 }
 
 .selfcare-intro p {
-  font-size: 1.2rem; /* Slightly larger paragraph text */
+  font-size: 1.2rem; /* Keep current font size */
   opacity: 0.9;
   max-width: 800px;
-  margin: 0 auto 2rem auto; /* Center paragraph and add bottom margin */
-  color: white; /* White paragraph color */
+  margin: 0 auto 2rem auto;
+  color: var(--text-color); /* Use text color for paragraph */
 }
 
 .intro-icons {
   display: flex;
   justify-content: center;
-  gap: 2rem; /* Space between icons */
-  font-size: 2.5rem; /* Larger icon size */
-  color: white; /* White icons */
+  gap: 2rem; /* Keep current gap */
+  font-size: 2.5rem; /* Keep current icon size */
+  color: var(--primary-color); /* Changed icon color */
 }
 
 .intro-icons i {
