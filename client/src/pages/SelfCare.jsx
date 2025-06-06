@@ -33,6 +33,22 @@ const SelfCare = () => {
       description: "Perfect for those just starting their fitness journey",
       thumbnail: "https://img.youtube.com/vi/2pLT-olgUJs/maxresdefault.jpg"
     },
+    beginnerFatBurn: {
+      title: "20 min Fat Burning Workout for TOTAL BEGINNERS",
+      duration: "20 minutes",
+      level: "Beginner",
+      url: "https://www.youtube.com/watch?v=IT94xC35u6k",
+      description: "A 20-minute workout to burn fat, designed for total beginners.",
+      thumbnail: "https://img.youtube.com/vi/IT94xC35u6k/maxresdefault.jpg"
+    },
+    beginnerLowImpact: {
+      title: "Fun, low impact workout for TOTAL beginners",
+      duration: "~20 minutes", // Approximating duration
+      level: "Beginner",
+      url: "https://www.youtube.com/watch?v=H0c-4nZjIWQ",
+      description: "A fun and gentle workout suitable for those new to exercise.",
+      thumbnail: "https://img.youtube.com/vi/H0c-4nZjIWQ/maxresdefault.jpg"
+    },
     weightLoss: {
       title: "WEIGHT LOSS in 7 DAYS - 40MIN Full Body Fat Burn",
       duration: "40 minutes",
@@ -56,6 +72,22 @@ const SelfCare = () => {
       url: "https://www.youtube.com/watch?v=emtmqKFGhw4",
       description: "An effective at-home workout routine for weight loss.",
       thumbnail: "https://img.youtube.com/vi/emtmqKFGhw4/maxresdefault.jpg"
+    },
+    weightLossBellyFat: {
+      title: "7 DAY CHALLENGE 7 MINUTE WORKOUT TO LOSE BELLY FAT",
+      duration: "7 minutes",
+      level: "Beginner", // Assuming Beginner based on title
+      url: "https://www.youtube.com/watch?v=yL_dE81O_mw",
+      description: "A quick 7-minute workout focusing on losing belly fat.",
+      thumbnail: "https://img.youtube.com/vi/yL_dE81O_mw/maxresdefault.jpg"
+    },
+    weightLossExercises: {
+      title: "14 BEST EXERCISES TO LOSE WEIGHT AT HOME",
+      duration: "~10 minutes", // Approximating duration based on typical exercise lists
+      level: "All Levels", // Exercises can often be modified
+      url: "https://www.youtube.com/watch?v=TM4WOHTnnFU",
+      description: "Learn 14 effective exercises you can do at home for weight loss.",
+      thumbnail: "https://img.youtube.com/vi/TM4WOHTnnFU/maxresdefault.jpg"
     },
     weightGain: {
       title: "Strength Training for Muscle Gain",
@@ -136,7 +168,31 @@ const SelfCare = () => {
       url: "https://www.youtube.com/watch?v=uqJ-jANozcE",
       description: "A full body yoga flow for strength.",
       thumbnail: "https://img.youtube.com/vi/uqJ-jANozcE/maxresdefault.jpg"
-    }
+    },
+    weightLossBeginnerFatBurn: {
+      title: "20 min Fat Burning Workout for TOTAL BEGINNERS",
+      duration: "20 minutes",
+      level: "Beginner",
+      url: "https://www.youtube.com/watch?v=IT94xC35u6k",
+      description: "A 20-minute workout to burn fat, designed for total beginners.",
+      thumbnail: "https://img.youtube.com/vi/IT94xC35u6k/maxresdefault.jpg"
+    },
+    weightLossBellyFat: {
+      title: "7 DAY CHALLENGE 7 MINUTE WORKOUT TO LOSE BELLY FAT",
+      duration: "7 minutes",
+      level: "Beginner", // Assuming Beginner based on title
+      url: "https://www.youtube.com/watch?v=yL_dE81O_mw",
+      description: "A quick 7-minute workout focusing on losing belly fat.",
+      thumbnail: "https://img.youtube.com/vi/yL_dE81O_mw/maxresdefault.jpg"
+    },
+    weightLossExercises: {
+      title: "14 BEST EXERCISES TO LOSE WEIGHT AT HOME",
+      duration: "~10 minutes", // Approximating duration based on typical exercise lists
+      level: "All Levels", // Exercises can often be modified
+      url: "https://www.youtube.com/watch?v=TM4WOHTnnFU",
+      description: "Learn 14 effective exercises you can do at home for weight loss.",
+      thumbnail: "https://img.youtube.com/vi/TM4WOHTnnFU/maxresdefault.jpg"
+    },
   };
 
   // Add workout tips
@@ -218,6 +274,15 @@ const SelfCare = () => {
   const [personalMotivation, setPersonalMotivation] = useState('');
   const [skincareGoals, setSkincareGoals] = useState([]);
   const [newSkincareGoal, setNewSkincareGoal] = useState('');
+
+  // Add state for editing personal motivation
+  const [isEditingMotivation, setIsEditingMotivation] = useState(false);
+  const [editedMotivation, setEditedMotivation] = useState('');
+  const [motivationDate, setMotivationDate] = useState(null); // Add state for motivation date
+
+  // Add state for editing important dates
+  const [editingDateId, setEditingDateId] = useState(null);
+  const [editedDate, setEditedDate] = useState({ title: '', date: '', description: '' });
 
   const skinTypes = [
     { type: 'dry', description: 'Feels tight and rough, may have flaky patches' },
@@ -392,7 +457,7 @@ const SelfCare = () => {
     const savedLearningThoughts = localStorage.getItem('learningThoughts');
     const savedPersonalGoals = localStorage.getItem('personalGoals');
     const savedSkincareGoals = localStorage.getItem('skincareGoals');
-    const savedMotivation = localStorage.getItem('personalMotivation');
+    const savedMotivation = localStorage.getItem('personalMotivation'); // This will now be a stringified object
     const savedAchievements = localStorage.getItem('achievements');
     
     if (savedDiaryEntries) {
@@ -414,7 +479,22 @@ const SelfCare = () => {
       setSkincareGoals(JSON.parse(savedSkincareGoals));
     }
     if (savedMotivation) {
-      setPersonalMotivation(savedMotivation);
+      try {
+        const motivationObject = JSON.parse(savedMotivation);
+        // Check if the parsed object has a 'content' property before setting state
+        if (motivationObject && motivationObject.content !== undefined) {
+          setPersonalMotivation(motivationObject.content);
+          setMotivationDate(motivationObject.date || null); // Load saved date, default to null if not present
+        } else {
+          // Handle case where savedMotivation is an empty object or missing content
+          setPersonalMotivation('');
+          setMotivationDate(null);
+        }
+      } catch (e) {
+        // Handle case where savedMotivation is not a valid JSON object (e.g., from before the update)
+        setPersonalMotivation(savedMotivation);
+        setMotivationDate(null); // Set date to null if old format
+      }
     }
     if (savedAchievements) {
       setAchievements(JSON.parse(savedAchievements));
@@ -438,6 +518,27 @@ const SelfCare = () => {
     const updatedDates = importantDates.filter(date => date.id !== dateId);
     setImportantDates(updatedDates);
     localStorage.setItem('importantDates', JSON.stringify(updatedDates));
+  };
+
+  // Add handlers for editing important dates
+  const handleEditDate = (date) => {
+    setEditingDateId(date.id);
+    setEditedDate({ title: date.title, date: date.date, description: date.description });
+  };
+
+  const handleCancelEditDate = () => {
+    setEditingDateId(null);
+    setEditedDate({ title: '', date: '', description: '' });
+  };
+
+  const handleSaveEditedDate = (dateId) => {
+    const updatedDates = importantDates.map(date =>
+      date.id === dateId ? { ...date, ...editedDate } : date
+    );
+    setImportantDates(updatedDates);
+    localStorage.setItem('importantDates', JSON.stringify(updatedDates));
+    setEditingDateId(null);
+    setEditedDate({ title: '', date: '', description: '' });
   };
 
   const handleAddThought = () => {
@@ -478,9 +579,35 @@ const SelfCare = () => {
     localStorage.setItem('personalGoals', JSON.stringify(updatedGoals));
   };
 
+  // Update handlers for personal motivation
   const handleSaveMotivation = () => {
     if (personalMotivation.trim()) {
-      localStorage.setItem('personalMotivation', personalMotivation);
+      const saveObject = { content: personalMotivation, date: new Date().toLocaleDateString() }; // Save content and date
+      localStorage.setItem('personalMotivation', JSON.stringify(saveObject));
+      setMotivationDate(saveObject.date); // Update date state
+    }
+  };
+
+  // Add handler to start editing motivation
+  const handleEditMotivation = () => {
+    setEditedMotivation(personalMotivation);
+    setIsEditingMotivation(true);
+  };
+
+  // Add handler to cancel editing motivation
+  const handleCancelEditMotivation = () => {
+    setIsEditingMotivation(false);
+    setEditedMotivation('');
+  };
+
+  // Add handler to save edited motivation
+  const handleSaveEditedMotivation = () => {
+    if (editedMotivation.trim()) {
+      const saveObject = { content: editedMotivation, date: new Date().toLocaleDateString() }; // Save edited content and new date
+      setPersonalMotivation(saveObject.content);
+      setMotivationDate(saveObject.date); // Update date state
+      localStorage.setItem('personalMotivation', JSON.stringify(saveObject));
+      setIsEditingMotivation(false);
     }
   };
 
@@ -532,16 +659,12 @@ const SelfCare = () => {
 
   return (
     <div className="selfcare-container">
+      {/* Personal Motivation Section - Moved back inside skincare tab */}
       <div className="selfcare-header">
         <div className="selfcare-intro">
-          <h2>Nurture Your Well-being</h2>
-          <p>Your dedicated space for mental, physical, and emotional self-care.</p>
-          <div className="intro-icons">
-            <i className="fas fa-book-open"></i>
-            <i className="fas fa-dumbbell"></i>
-            <i className="fas fa-spa"></i>
-            <i className="fas fa-smile"></i>
-          </div>
+          <p className="selfcare-quote">"Caring for your body, mind, and spirit is your greatest and grandest responsibility. It's about listening to the needs of your soul."
+            <br /><span className="quote-author">- Kristen Butler</span>
+          </p>
         </div>
       </div>
 
@@ -649,6 +772,14 @@ const SelfCare = () => {
                     <p>{workoutVideos.core.duration} • {workoutVideos.core.level}</p>
                     <p className="workout-description">{workoutVideos.core.description}</p>
                   </a>
+                   <a href={workoutVideos.legs.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.legs.thumbnail} alt={workoutVideos.legs.title} />
+                    </div>
+                    <h3>{workoutVideos.legs.title}</h3>
+                    <p>{workoutVideos.legs.duration} • {workoutVideos.legs.level}</p>
+                    <p className="workout-description">{workoutVideos.legs.description}</p>
+                  </a>
                   <a href={workoutVideos.fullBodySmallSpace.url} target="_blank" rel="noopener noreferrer" className="workout-card">
                     <div className="workout-video">
                       <img src={workoutVideos.fullBodySmallSpace.thumbnail} alt={workoutVideos.fullBodySmallSpace.title} />
@@ -657,13 +788,21 @@ const SelfCare = () => {
                     <p>{workoutVideos.fullBodySmallSpace.duration} • {workoutVideos.fullBodySmallSpace.level}</p>
                     <p className="workout-description">{workoutVideos.fullBodySmallSpace.description}</p>
                   </a>
-                  <a href={workoutVideos.beginnerNoEquipment.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                  <a href={workoutVideos.beginnerFatBurn.url} target="_blank" rel="noopener noreferrer" className="workout-card">
                     <div className="workout-video">
-                      <img src={workoutVideos.beginnerNoEquipment.thumbnail} alt={workoutVideos.beginnerNoEquipment.title} />
+                      <img src={workoutVideos.beginnerFatBurn.thumbnail} alt={workoutVideos.beginnerFatBurn.title} />
                     </div>
-                    <h3>{workoutVideos.beginnerNoEquipment.title}</h3>
-                    <p>{workoutVideos.beginnerNoEquipment.duration} • {workoutVideos.beginnerNoEquipment.level}</p>
-                    <p className="workout-description">{workoutVideos.beginnerNoEquipment.description}</p>
+                    <h3>{workoutVideos.beginnerFatBurn.title}</h3>
+                    <p>{workoutVideos.beginnerFatBurn.duration} • {workoutVideos.beginnerFatBurn.level}</p>
+                    <p className="workout-description">{workoutVideos.beginnerFatBurn.description}</p>
+                  </a>
+                   <a href={workoutVideos.beginnerLowImpact.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.beginnerLowImpact.thumbnail} alt={workoutVideos.beginnerLowImpact.title} />
+                    </div>
+                    <h3>{workoutVideos.beginnerLowImpact.title}</h3>
+                    <p>{workoutVideos.beginnerLowImpact.duration} • {workoutVideos.beginnerLowImpact.level}</p>
+                    <p className="workout-description">{workoutVideos.beginnerLowImpact.description}</p>
                   </a>
                 </div>
               </div>
@@ -678,14 +817,6 @@ const SelfCare = () => {
                     <h3>{workoutVideos.weightLoss.title}</h3>
                     <p>{workoutVideos.weightLoss.duration} • {workoutVideos.weightLoss.level}</p>
                     <p className="workout-description">{workoutVideos.weightLoss.description}</p>
-                  </a>
-                  <a href={workoutVideos.legs.url} target="_blank" rel="noopener noreferrer" className="workout-card">
-                    <div className="workout-video">
-                      <img src={workoutVideos.legs.thumbnail} alt={workoutVideos.legs.title} />
-                    </div>
-                    <h3>{workoutVideos.legs.title}</h3>
-                    <p>{workoutVideos.legs.duration} • {workoutVideos.legs.level}</p>
-                    <p className="workout-description">{workoutVideos.legs.description}</p>
                   </a>
                   <a href={workoutVideos.weightLossStanding.url} target="_blank" rel="noopener noreferrer" className="workout-card">
                     <div className="workout-video">
@@ -702,6 +833,30 @@ const SelfCare = () => {
                     <h3>{workoutVideos.weightLoss10Days.title}</h3>
                     <p>{workoutVideos.weightLoss10Days.duration} • {workoutVideos.weightLoss10Days.level}</p>
                     <p className="workout-description">{workoutVideos.weightLoss10Days.description}</p>
+                  </a>
+                  <a href={workoutVideos.weightLossBeginnerFatBurn.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.weightLossBeginnerFatBurn.thumbnail} alt={workoutVideos.weightLossBeginnerFatBurn.title} />
+                    </div>
+                    <h3>{workoutVideos.weightLossBeginnerFatBurn.title}</h3>
+                    <p>{workoutVideos.weightLossBeginnerFatBurn.duration} • {workoutVideos.weightLossBeginnerFatBurn.level}</p>
+                    <p className="workout-description">{workoutVideos.weightLossBeginnerFatBurn.description}</p>
+                  </a>
+                  <a href={workoutVideos.weightLossBellyFat.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.weightLossBellyFat.thumbnail} alt={workoutVideos.weightLossBellyFat.title} />
+                    </div>
+                    <h3>{workoutVideos.weightLossBellyFat.title}</h3>
+                    <p>{workoutVideos.weightLossBellyFat.duration} • {workoutVideos.weightLossBellyFat.level}</p>
+                    <p className="workout-description">{workoutVideos.weightLossBellyFat.description}</p>
+                  </a>
+                  <a href={workoutVideos.weightLossExercises.url} target="_blank" rel="noopener noreferrer" className="workout-card">
+                    <div className="workout-video">
+                      <img src={workoutVideos.weightLossExercises.thumbnail} alt={workoutVideos.weightLossExercises.title} />
+                    </div>
+                    <h3>{workoutVideos.weightLossExercises.title}</h3>
+                    <p>{workoutVideos.weightLossExercises.duration} • {workoutVideos.weightLossExercises.level}</p>
+                    <p className="workout-description">{workoutVideos.weightLossExercises.description}</p>
                   </a>
                 </div>
               </div>
@@ -803,44 +958,84 @@ const SelfCare = () => {
 
         {activeTab === 'skincare' && (
           <div className="skincare-section">
-            <div className="skincare-header">
-              <h2>Your Skincare Journey</h2>
-              <p>Nurture your skin, nurture your soul</p>
+            {/* Personal Motivation Section */}
+            <div className="motivation-section">
+              <h3>Personal Motivation</h3>
+              {isEditingMotivation ? (
+                <div className="edit-motivation">
+                  <textarea
+                    value={editedMotivation}
+                    onChange={(e) => setEditedMotivation(e.target.value)}
+                    placeholder="Write your personal motivation..."
+                  />
+                  <button onClick={handleSaveMotivation}>Save</button>
+                </div>
+              ) : (
+                <div className="motivation-content">
+                  <p>{personalMotivation || "Add your personal motivation to stay committed to your skincare journey."}</p>
+                  <button onClick={() => setIsEditingMotivation(true)}>Edit</button>
+                </div>
+              )}
             </div>
 
-            <div className="personal-motivation">
-              <h3>Your Personal Motivation</h3>
-              <div className="motivation-input">
-                <textarea
-                  placeholder="Why is skincare important to you? What are your personal goals?"
-                  value={personalMotivation}
-                  onChange={(e) => setPersonalMotivation(e.target.value)}
-                  onBlur={handleSaveMotivation}
-                />
+            {/* Skincare Streak Section */}
+            <div className="streak-section">
+              <h3>Skincare Streak</h3>
+              <div className="streak-content">
+                <div className="streak-counter">
+                  <span className="streak-number">{skincareStreak}</span>
+                  <span className="streak-label">Days</span>
+                </div>
+                <p className="streak-message">Keep up the great work! Your skin is thanking you.</p>
               </div>
             </div>
 
-            <div className="skincare-goals">
-              <h3>Your Skincare Goals</h3>
-              <div className="add-goal-form">
-                <input
-                  type="text"
-                  placeholder="Add a new skincare goal..."
-                  value={newSkincareGoal}
-                  onChange={(e) => setNewSkincareGoal(e.target.value)}
-                />
-                <button onClick={handleAddSkincareGoal}>Add Goal</button>
-              </div>
-              <div className="goals-list">
-                {skincareGoals.map((goal) => (
-                  <div key={goal.id} className="goal-item">
-                    <p className="goal-content">{goal.content}</p>
-                    <span className="goal-date">{goal.date}</span>
-                  </div>
-                ))}
+            {/* Skincare Goals Section */}
+            <div className="goals-section">
+              <h3>Skincare Goals</h3>
+              <div className="goals-content">
+                <div className="add-goal">
+                  <input
+                    type="text"
+                    value={newGoal}
+                    onChange={(e) => setNewGoal(e.target.value)}
+                    placeholder="Add a new goal..."
+                  />
+                  <button onClick={handleAddGoal}>Add</button>
+                </div>
+                {skincareGoals
+                  .sort((a, b) => {
+                    // Move blackheads goal to the bottom
+                    if (a.content.toLowerCase().includes('blackheads')) return 1;
+                    if (b.content.toLowerCase().includes('blackheads')) return -1;
+                    return 0;
+                  })
+                  .map((goal, index) => (
+                    <div key={index} className="goal-item">
+                      <input
+                        type="checkbox"
+                        checked={goal.completed}
+                        onChange={() => handleToggleGoal(index)}
+                      />
+                      <span className={goal.completed ? 'completed' : ''}>
+                        {goal.content}
+                      </span>
+                      <button 
+                        className="delete-goal"
+                        onClick={() => {
+                          const newGoals = [...skincareGoals];
+                          newGoals.splice(index, 1);
+                          setSkincareGoals(newGoals);
+                        }}
+                      >
+                        <i className="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  ))}
               </div>
             </div>
 
+            {/* Routine Steps and Skincare Tips remain below */}
             <div className="routine-steps">
               {skincareCategories.map((category, index) => (
                 <div key={index} className="routine-category">
@@ -855,15 +1050,6 @@ const SelfCare = () => {
                   </ul>
                 </div>
               ))}
-            </div>
-
-            <div className="skincare-streak">
-              <h3>Your Skincare Streak</h3>
-              <div className="streak-counter">
-                <i className="fas fa-fire"></i>
-                <span>{skincareStreak} Days</span>
-              </div>
-              <p>Keep up the great work! Every day of care counts.</p>
             </div>
 
             <div className="skincare-tips">
@@ -888,6 +1074,16 @@ const SelfCare = () => {
                   <i className="fas fa-wind"></i>
                   <h4>Stress Management</h4>
                   <p>Practice stress-reducing activities to prevent breakouts</p>
+                </div>
+                <div className="tip-card">
+                  <i className="fas fa-sun"></i>
+                  <h4>Sun Protection</h4>
+                  <p>Always wear SPF 30+ sunscreen, even on cloudy days</p>
+                </div>
+                <div className="tip-card">
+                  <i className="fas fa-magic"></i>
+                  <h4>Gentle Exfoliation</h4>
+                  <p>Exfoliate 1-2 times weekly to remove dead skin cells</p>
                 </div>
               </div>
             </div>
@@ -1104,16 +1300,50 @@ const SelfCare = () => {
                 <div className="dates-list">
                   {importantDates.map((date) => (
                     <div key={date.id} className="date-card">
-                      <button 
-                         className="delete-item"
-                         onClick={() => handleDeleteDate(date.id)}
-                         title="Delete date"
-                      >
-                         <i className="fas fa-trash"></i>
-                      </button>
-                      <h4>{date.title}</h4>
-                      <p className="date">{new Date(date.date).toLocaleDateString()}</p>
-                      <p className="description">{date.description}</p>
+                      
+                      {editingDateId === date.id ? (
+                        // Edit mode
+                        <>
+                          <input
+                            type="text"
+                            value={editedDate.title}
+                            onChange={(e) => setEditedDate({ ...editedDate, title: e.target.value })}
+                          />
+                          <input
+                            type="date"
+                            value={editedDate.date}
+                            onChange={(e) => setEditedDate({ ...editedDate, date: e.target.value })}
+                          />
+                          <textarea
+                            placeholder="Description"
+                            value={editedDate.description}
+                            onChange={(e) => setEditedDate({ ...editedDate, description: e.target.value })}
+                          ></textarea>
+                          <button onClick={() => handleSaveEditedDate(date.id)}>Save</button>
+                          <button onClick={handleCancelEditDate}>Cancel</button>
+                        </>
+                      ) : (
+                        // View mode
+                        <>
+                           <button 
+                              className="delete-item"
+                              onClick={() => handleDeleteDate(date.id)}
+                              title="Delete date"
+                           >
+                              <i className="fas fa-trash"></i>
+                           </button>
+                          <h4>{date.title}</h4>
+                          <p className="date">{new Date(date.date).toLocaleDateString()}</p>
+                          <p className="description">{date.description}</p>
+                          <button 
+                             className="edit-item"
+                             onClick={() => handleEditDate(date)}
+                             title="Edit date"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </button>
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>
