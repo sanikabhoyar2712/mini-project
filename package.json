@@ -16,12 +16,9 @@
         "dotenv": "^16.5.0",
         "express": "^5.1.0",
         "mongoose": "^8.13.2",
-<<<<<<< HEAD
-        "react-icons": "^5.5.0"
-=======
+        "react-icons": "^5.5.0",
         "react-dom": "^19.1.0",
         "react-router-dom": "^7.6.1",
         "react-scripts": "^5.0.1"
->>>>>>> 917f7aaf16d644b0d2da85bdd4923ee32f33ac34
     }
 }

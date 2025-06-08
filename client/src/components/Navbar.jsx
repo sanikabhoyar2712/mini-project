@@ -1,39 +1,51 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
+import React, { useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../App';
 import './Navbar.css';
 
 const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+    const logoutHandler = () => {
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+        navigate('/');
     };
 
     return (
         <nav className="navbar">
             <div className="navbar-container">
-                <Link to="/" className="navbar-logo">
+                <NavLink to="/" className="navbar-logo">
                     <i className="fas fa-graduation-cap"></i> Serena
-                </Link>
+                </NavLink>
 
-                <button className="menu-icon" onClick={toggleMenu}>
-                    <FaBars />
-                </button>
+                <ul className="nav-menu">
+                    <li><NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink></li>
 
-                <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-                    <Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link>
-                    <Link to="/selfcare" className="nav-link" onClick={() => setIsMenuOpen(false)}>Self Care</Link>
-                    <Link to="/todo" className="nav-link" onClick={() => setIsMenuOpen(false)}>To Do</Link>
-                    <Link to="/courses" className="nav-link" onClick={() => setIsMenuOpen(false)}>Courses</Link>
-                    <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</Link>
-                </div>
+                    {isLoggedIn ? (
+                        <>
+                            <li><NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>About Us</NavLink></li>
+                            <li><NavLink to="/selfcare" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Self Care</NavLink></li>
+                            <li><NavLink to="/todo" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>To Do</NavLink></li>
+                            <li><NavLink to="/courses" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Courses</NavLink></li>
+                            <li><button onClick={logoutHandler} className="logout-btn">Logout</button></li>
+                        </>
+                    ) : (
+                        <>
+                            <li><NavLink to="/login" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Login</NavLink></li>
+                            <li><NavLink to="/signup" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Sign Up</NavLink></li>
+                        </>
+                    )}
+                </ul>
 
-                <div className="nav-buttons">
-                    <Link to="/contact" className="nav-button contact" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
-                    <Link to="/login" className="nav-button login" onClick={() => setIsMenuOpen(false)}>Login</Link>
-                    <Link to="/signup" className="nav-button signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
-                </div>
+                {isLoggedIn && (
+                    <div className="nav-buttons">
+                        <NavLink to="/contact" className="nav-button contact">
+                            Contact Us
+                        </NavLink>
+                    </div>
+                )}
             </div>
         </nav>
     );

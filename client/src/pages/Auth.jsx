@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { useNavigate, useLocation, NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../App';
 import './Auth.css';
 
 const Auth = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const isLogin = location.pathname === '/login';
+  const location = useLocation();
+  const { setIsLoggedIn } = useContext(AuthContext);
+  const isSignup = location.pathname === '/signup';
 
   const [formData, setFormData] = useState({
     name: '',
@@ -15,6 +18,7 @@ const Auth = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [successMsg, setSuccessMsg] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,8 +36,8 @@ const Auth = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
-    if (!isLogin && !formData.name.trim()) {
+
+    if (isSignup && !formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
 
@@ -49,7 +53,7 @@ const Auth = () => {
       newErrors.password = 'Password must be at least 6 characters';
     }
 
-    if (!isLogin && formData.password !== formData.confirmPassword) {
+    if (isSignup && formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
 
@@ -57,11 +61,51 @@ const Auth = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Form submitted:', formData);
-      navigate('/');
+      try {
+        const res = await axios.post('http://localhost:5000/api/auth/login', {
+          email: formData.email,
+          password: formData.password,
+        });
+        setSuccessMsg(res.data.message);
+        localStorage.setItem('token', res.data.token);
+        setIsLoggedIn(true);
+        navigate('/');
+      } catch (error) {
+        setErrors({ email: 'Invalid email or password' });
+      }
+    }
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      try {
+        const res = await axios.post('http://localhost:5000/api/auth/register', {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        });
+        setSuccessMsg(res.data.message);
+
+        // Auto-login after signup
+        const loginRes = await axios.post('http://localhost:5000/api/auth/login', {
+          email: formData.email,
+          password: formData.password
+        });
+
+        localStorage.setItem('token', loginRes.data.token);
+        setIsLoggedIn(true);
+        navigate('/');
+      } catch (error) {
+        if (error.response && error.response.data.message) {
+          setErrors({ email: error.response.data.message });
+        } else {
+          setErrors({ email: 'Registration failed' });
+        }
+      }
     }
   };
 
@@ -71,25 +115,27 @@ const Auth = () => {
         <div className="auth-content">
           <div className="auth-image-box">
             <img
-              src={isLogin ? require('../assets/love-your-life.jpg') : require('../assets/signup-image.jpg')}
-              alt={isLogin ? 'Love your life inspiration' : 'Sign up inspiration'}
+              src={isSignup ? require('../assets/signup-image.jpg') : require('../assets/love-your-life.jpg')}
+              alt={isSignup ? 'Sign up inspiration' : 'Love your life inspiration'}
               className="auth-inspire-img"
             />
           </div>
-          <h1>{isLogin ? 'Welcome Back!' : 'Join Our Community'}</h1>
-          <p>{isLogin ? 'Sign in to continue your journey' : 'Start your journey with us today'}</p>
+          <h1>{isSignup ? 'Join Our Community' : 'Welcome Back!'}</h1>
+          <p>{isSignup ? 'Start your journey with us today' : 'Sign in to continue your journey'}</p>
         </div>
       </div>
-      
+
       <div className="auth-right">
         <div className="auth-form-container">
           <div className="auth-header">
-            <h2>{isLogin ? 'Sign In' : 'Create Account'}</h2>
-            <p>{isLogin ? 'Enter your credentials to continue' : 'Fill in your details to get started'}</p>
+            <h2>{isSignup ? 'Create Account' : 'Sign In'}</h2>
+            <p>{isSignup ? 'Fill in your details to get started' : 'Enter your credentials to continue'}</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="auth-form">
-            {!isLogin && (
+          {successMsg && <div className="success-message">{successMsg}</div>}
+
+          <form onSubmit={isSignup ? handleSignup : handleLogin} className="auth-form">
+            {isSignup && (
               <div className="form-group">
                 <div className="input-icon">
                   <i className="fas fa-user"></i>
@@ -139,7 +185,7 @@ const Auth = () => {
               {errors.password && <span className="error-message">{errors.password}</span>}
             </div>
 
-            {!isLogin && (
+            {isSignup && (
               <div className="form-group">
                 <div className="input-icon">
                   <i className="fas fa-lock"></i>
@@ -160,7 +206,7 @@ const Auth = () => {
             )}
 
             <button type="submit" className="auth-button">
-              {isLogin ? 'Sign In' : 'Create Account'}
+              {isSignup ? 'Create Account' : 'Sign In'}
             </button>
           </form>
 
@@ -181,10 +227,10 @@ const Auth = () => {
 
           <div className="auth-footer">
             <p>
-              {isLogin ? "Don't have an account? " : "Already have an account? "}
-              <a href={isLogin ? '/signup' : '/login'}>
-                {isLogin ? 'Sign Up' : 'Sign In'}
-              </a>
+              {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
+              <NavLink to={isSignup ? "/login" : "/signup"} className="auth-switch-link">
+                {isSignup ? "Sign In" : "Sign Up"}
+              </NavLink>
             </p>
           </div>
         </div>
@@ -193,4 +239,4 @@ const Auth = () => {
   );
 };
 
-export default Auth; 
+export default Auth;
