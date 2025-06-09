@@ -9,7 +9,10 @@
         "@testing-library/user-event": "^13.5.0",
         "axios": "^1.9.0",
         "cors": "^2.8.5",
+<<<<<<< HEAD
         "dotenv": "^16.5.0",
+=======
+>>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
         "express": "^4.18.2",
         "mongoose": "^8.13.2",
         "react": "^18.2.0",

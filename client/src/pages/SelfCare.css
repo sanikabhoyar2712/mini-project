@@ -1,7 +1,7 @@
 /* Professional Wellness Platform CSS */
 /* Assuming these are globally defined, otherwise define them here or link to app.css */
 :root {
-  --primary-color: #E91E63; /* Deep Pink */
+  --primary-color: #C71585; /* MediumVioletRed */
   --secondary-color: #F06292; /* Light Pink */
   --accent-color: #FF80AB; /* Rosy Pink */
   --accent-light: #F48FB1; /* Pale Pink */
@@ -47,13 +47,15 @@ body {
   border-radius: 0;
   box-shadow: var(--box-shadow);
   text-align: center;
-  color: var(--content-background); /* Use content-background for white text */
+  color: var(--content-background);
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
 }
 
 .selfcare-intro h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: var(--content-background); /* Use content-background for white heading */
+  color: var(--content-background);
   font-weight: 700;
 }
 
@@ -62,24 +64,54 @@ body {
   opacity: 0.9;
   max-width: 800px;
   margin: 0 auto 2rem auto;
-  color: var(--content-background); /* Use content-background for white paragraph */
+  color: var(--content-background);
+}
+
+/* Styling for the quote */
+.selfcare-quote {
+  font-size: 1.4rem; /* Slightly larger font size for impact */
+  font-style: italic; /* Italicize the quote */
+  margin: 2.5rem auto 1.5rem auto; /* Adjust margin for better spacing */
+  max-width: 800px; /* Increase max-width slightly */
+  color: var(--content-background); /* Keep text white */
+  position: relative; /* Needed for potential pseudo-elements */
+  padding: 0; /* Remove horizontal padding as quote marks are removed */
+  opacity: 1; /* Ensure full opacity */
+  line-height: 1.6; /* Improve readability */
+}
+
+.quote-author {
+  display: block; /* Make author name a block element */
+  font-size: 1rem; /* Smaller font size for the author */
+  font-style: normal; /* Ensure author name is not italic */
+  font-weight: 400; /* Normal font weight */
+  color: rgba(255, 255, 255, 0.8); /* Slightly less opaque white */
+  margin-top: 1rem; /* Space above author name */
+  text-align: center; /* Center author name */
 }
 
 .intro-icons {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  font-size: 2.5rem;
-  color: var(--content-background); /* Use content-background for white icons */
+  gap: 2rem; /* Space between icons */
+  font-size: 2.5rem; /* Icon size */
+  color: var(--content-background); /* White icons */
+  margin-top: 2rem; /* Add space above icons */
 }
 
 .intro-icons i {
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease; /* Smooth transitions for all properties */
+  padding: 0.5rem; /* Add padding around icons */
+  border-radius: 50%; /* Make icons circular */
+  border: 2px solid transparent; /* Add a transparent border */
 }
 
 .intro-icons i:hover {
-  transform: scale(1.2);
-  color: var(--background-color); /* Highlight color on hover */
+  transform: scale(1.1); /* Slightly smaller scale on hover */
+  color: var(--primary-color); /* Change color to primary on hover */
+  background-color: var(--content-background); /* White background on hover */
+  border-color: var(--primary-color); /* Primary color border on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
 }
 
 .hero-image {
@@ -521,6 +553,7 @@ body {
 
 .important-dates,
 .learning-thoughts,
+<<<<<<< HEAD
 .personal-goals,
 .achievements {
   width: 100%;
@@ -530,17 +563,100 @@ body {
   background: var(--content-background);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+=======
+.personal-goals {
+  background: var(--content-background);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+>>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
   border: 1px solid var(--border-color-light);
 }
 
 .important-dates h3,
 .learning-thoughts h3,
+<<<<<<< HEAD
 .personal-goals h3,
 .achievements h3 {
   color: var(--primary-color); /* Reverted from white to primary-color (pink) */
+=======
+.personal-goals h3 {
+  color: var(--primary-color);
+>>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
   margin-bottom: 1.5rem;
   text-align: center;
   font-size: 1.5rem;
+}
+
+/* Delete button styles for personal space items */
+.date-card,
+.goal-card {
+  position: relative;
+  padding-right: 2.5rem; /* Make room for delete button */
+}
+
+.delete-date,
+.delete-goal {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--delete-color);
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  padding: 0.3rem;
+  font-size: 1rem;
+}
+
+.delete-date:hover,
+.delete-goal:hover {
+  color: var(--delete-hover-color);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Update existing card styles to accommodate delete buttons */
+.date-card {
+  background: var(--secondary-color);
+  padding: 1rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  color: var(--content-background);
+}
+
+.goal-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--content-background);
+  border: 1px solid var(--border-color-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.date-card:hover,
+.goal-card:hover {
+  transform: translateX(5px);
+}
+
+/* Responsive adjustments for delete buttons */
+@media (max-width: 768px) {
+  .delete-date,
+  .delete-goal {
+    top: 0.4rem;
+    right: 0.4rem;
+    font-size: 0.9rem;
+    padding: 0.2rem;
+  }
+  
+  .date-card,
+  .goal-card {
+    padding-right: 2rem;
+  }
 }
 
 /* Forms */
@@ -676,13 +792,18 @@ body {
 
 .thought-card {
   position: relative;
+<<<<<<< HEAD
   padding-left: 1.5rem; /* Adjusted padding-left for consistency */
+=======
+  padding-left: 1rem; /* Adjusted padding now that the ::before is gone */
+>>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
   background: var(--content-background); /* Ensure thought card background is white */
   color: var(--text-color); /* Ensure text is readable */
   border: 1px solid var(--border-color-light); /* Consistent border */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Consistent subtle shadow */
 }
 
+<<<<<<< HEAD
 .thought-card::before {
   content: '"';
   position: absolute;
@@ -693,19 +814,22 @@ body {
   opacity: 0.5;
 }
 
+=======
+>>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
 .thought-content {
   margin-bottom: 0.5rem;
   line-height: 1.5;
 }
 
 .thought-meta {
-  display: flex;
+  display: none; /* Hide the meta information below the thought text */
   justify-content: space-between;
   font-size: 0.9rem;
   color: var(--light-text-color); /* Consistent light text color */
 }
 
 .thought-card.inspiration {
+<<<<<<< HEAD
   border-left: 4px solid var(--info-color); /* Consistent info-color */
 }
 
@@ -715,6 +839,17 @@ body {
 
 .thought-card.lesson {
   border-left: 4px solid var(--danger-color); /* Consistent danger-color */
+=======
+  /* Removed border-left */
+}
+
+.thought-card.achievement {
+  /* Removed border-left */
+}
+
+.thought-card.lesson {
+  /* Removed border-left */
+>>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
 }
 
 .goal-card {
@@ -922,26 +1057,25 @@ body {
 /* Update styling for Personal Motivation */
 .personal-motivation {
   background: var(--glass-effect); /* Use glass-effect variable */
-  padding: 2.5rem;
-  border-radius: 18px;
-  box-shadow: var(--box-shadow);
-  margin-top: 2rem;
-  border: 1px solid var(--border-color-light);
-  backdrop-filter: blur(8px);
+  padding: 2.5rem; /* Consistent padding */
+  border-radius: var(--border-radius); /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Slightly more pronounced shadow */
+  border: 1px solid var(--border-color-medium); /* Use medium border */
+  backdrop-filter: blur(10px); /* Increase blur effect */
   text-align: center;
 }
 
 .personal-motivation h3 {
   color: var(--primary-color);
-  font-size: 1.8rem;
+  font-size: 2rem; /* Consistent heading size */
   margin-bottom: 1.5rem;
   font-weight: 700;
 }
 
 .motivation-input textarea {
   width: 100%;
-  min-height: 150px;
-  padding: 1.5rem;
+  min-height: 180px; /* Increase textarea height */
+  padding: 1.5rem; /* Consistent padding */
   border: 2px solid var(--border-color-medium);
   border-radius: var(--border-radius);
   font-family: inherit;
@@ -955,25 +1089,25 @@ body {
 .motivation-input textarea:focus {
   border-color: var(--accent-color);
   outline: none;
-  box-shadow: 0 0 0 4px rgba(57, 73, 171, 0.1); /* This shadow is hardcoded blue, consider a themed one */
+  box-shadow: 0 0 0 4px rgba(255, 128, 171, 0.2); /* Themed focus shadow */
 }
 
 /* Update styling for Skincare Streak */
 .skincare-streak {
   background: var(--glass-effect); /* Use glass-effect variable */
-  padding: 2.5rem;
-  border-radius: 18px;
-  box-shadow: var(--box-shadow);
-  margin-top: 2rem;
-  border: 1px solid var(--border-color-light);
-  backdrop-filter: blur(8px);
+  padding: 1.5rem; /* Reduced padding for smaller size */
+  border-radius: var(--border-radius); /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjusted shadow for smaller size */
+  border: 1px solid var(--border-color-medium); /* Use medium border */
+  backdrop-filter: blur(10px); /* Increase blur effect */
   text-align: center;
+  /* order: -1; /* Removed explicit order as placement is handled by JSX */
 }
 
 .skincare-streak h3 {
   color: var(--primary-color);
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.4rem; /* Further reduced heading size */
+  margin-bottom: 0.5rem; /* Adjusted margin */
   font-weight: 700;
 }
 
@@ -981,60 +1115,43 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: 0.6rem; /* Further reduced space between icon and number */
+  margin-bottom: 0.6rem; /* Adjusted margin */
   color: var(--accent-color);
-  font-size: 2.5rem;
+  font-size: 2.2rem; /* Further reduced number size */
   font-weight: 700;
 }
 
 .streak-counter i {
-  font-size: 3rem;
+  font-size: 2.5rem; /* Further reduced icon size */
   color: var(--accent-color);
 }
 
 .skincare-streak p {
   color: var(--text-color);
-  font-size: 1.1rem;
+  font-size: 0.9rem; /* Further reduced paragraph size */
+  opacity: 0.9;
 }
 
-@media (max-width: 768px) {
-  .personal-motivation,
-  .skincare-streak {
-    padding: 1.5rem;
-  }
-
-  .personal-motivation h3,
-  .skincare-streak h3 {
-    font-size: 1.5rem;
-  }
-
-  .motivation-input textarea {
-    padding: 1rem;
-    font-size: 1rem;
-  }
-
-  .streak-counter {
-    font-size: 2rem;
-  }
-
-  .streak-counter i {
-    font-size: 2.5rem;
-  }
-
-  .skincare-streak p {
-    font-size: 1rem;
-  }
-}
-
+/* Update styling for Skincare Goals */
 .skincare-goals {
+<<<<<<< HEAD
   /* Removed background, border-radius, box-shadow, margin-top, border, and backdrop-filter */
   /* These styles are now applied to the form itself to ensure consistency */
+=======
+  background: var(--glass-effect); /* Use glass-effect variable */
+  padding: 2.5rem; /* Consistent padding */
+  border-radius: var(--border-radius); /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Slightly more pronounced shadow */
+  border: 1px solid var(--border-color-medium); /* Use medium border */
+  backdrop-filter: blur(10px); /* Increase blur effect */
+  order: -2; /* Ensure it's at the very top */
+>>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
 }
 
 .skincare-goals h3 {
   color: var(--primary-color);
-  font-size: 1.8rem;
+  font-size: 2rem; /* Consistent heading size */
   margin-bottom: 1.5rem;
   font-weight: 700;
   text-align: center;
@@ -1042,13 +1159,14 @@ body {
 
 .skincare-goals .add-goal-form {
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem; /* Increase space between input and button */
   margin-bottom: 2rem;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .skincare-goals .add-goal-form input[type="text"] {
   flex-grow: 1;
-  padding: 1rem;
+  padding: 1rem; /* Consistent padding */
   border: 2px solid var(--border-color-medium);
   border-radius: var(--border-radius);
   font-family: inherit;
@@ -1061,14 +1179,14 @@ body {
 .skincare-goals .add-goal-form input[type="text"]:focus {
     border-color: var(--accent-color);
   outline: none;
-  box-shadow: 0 0 0 4px rgba(57, 73, 171, 0.1); /* This shadow is hardcoded blue, consider a themed one */
+  box-shadow: 0 0 0 4px rgba(255, 128, 171, 0.2); /* Themed focus shadow */
 }
 
 .skincare-goals .add-goal-form button {
   background: var(--accent-color);
   color: var(--content-background); /* Use content-background for white */
   border: none;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem; /* Consistent padding */
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: var(--transition);
@@ -1087,24 +1205,24 @@ body {
 
 .skincare-goals .goal-item {
   background: var(--content-background); /* Use content-background for white */
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08); /* Keep general black shadow or create a new themed shadow variable */
-  border: 1px solid var(--border-color-light);
+  padding: 1.5rem; /* Consistent padding */
+  border-radius: var(--border-radius); /* Rounded corners */
+  margin-bottom: 1.5rem; /* Space between items */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow for items */
+  border: 1px solid var(--border-color-light); /* Light border */
   transition: transform 0.3s ease;
 }
 
 .skincare-goals .goal-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.12); /* Keep general black shadow or create a new themed shadow variable */
+  transform: translateX(8px); /* More pronounced hover effect */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .skincare-goals .goal-item .goal-content {
   color: var(--text-color);
   font-size: 1.1rem;
   line-height: 1.6;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem; /* Space below content */
 }
 
 .skincare-goals .goal-item .goal-date {
@@ -1113,65 +1231,14 @@ body {
   font-weight: 500;
 }
 
-@media (max-width: 768px) {
-  .skincare-goals {
-    padding: 1.5rem;
-  }
-
-  .skincare-goals h3 {
-    font-size: 1.5rem;
-  }
-
-  .skincare-goals .add-goal-form {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .skincare-goals .add-goal-form input[type="text"],
-  .skincare-goals .add-goal-form button {
-    font-size: 1rem;
-    padding: 0.8rem;
-  }
-
-  .skincare-goals .goal-item {
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .skincare-goals .goal-item .goal-content {
-    font-size: 1rem;
-  }
-
-  .skincare-goals .goal-item .goal-date {
-    font-size: 0.85rem;
-  }
-}
-
-/* Achievements Section Styling */
-.achievements {
-  background: var(--glass-effect); /* Use glass-effect variable */
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Keep general black shadow or create a new themed shadow variable */
-  margin-top: 2rem;
-  border: 1px solid var(--border-color-light);
-  backdrop-filter: blur(8px);
-}
-
-.achievements h3 {
-  color: var(--primary-color); /* Changed from --primary to --primary-color */
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-.add-achievement-form {
+.routine-steps {
+  /* Add styling for routine steps container if needed */
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 2rem; /* Space between routine categories */
 }
 
+<<<<<<< HEAD
 .add-achievement-form input[type="text"] {
   padding: 0.8rem;
   border: 2px solid var(--secondary-color); /* Changed from --light-pink to --secondary-color */
@@ -1212,22 +1279,107 @@ body {
   background: var(--content-background); /* Changed from --light-pink to --content-background */
   padding: 1rem 2.5rem 1rem 1rem;
   border-radius: 10px;
+=======
+.routine-category {
+  background: var(--content-background); /* Use content-background for white */
+  padding: 2.5rem; /* Consistent padding */
+  border-radius: var(--border-radius); /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Slightly more pronounced shadow */
+>>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
   transition: transform 0.3s ease;
-  position: relative;
-  border: 1px solid var(--border-color-light); /* Added border for consistency */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
+  border: 1px solid var(--border-color-medium); /* Use medium border */
 }
 
-.achievement-card:hover {
-  transform: translateX(5px);
+.routine-category:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px var(--shadow-color); /* Enhanced themed shadow */
 }
 
-.achievement-card .achievement-content {
-  color: var(--text-color); /* Changed from --text to --text-color */
+.routine-category h4 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem; /* Space below heading */
+  font-weight: 600;
+  text-align: center;
+}
+
+.routine-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.routine-category li {
+  padding: 1.2rem 0; /* Consistent padding */
+  border-bottom: 1px solid var(--border-color-light); /* Light border */
+  color: var(--text-color);
+  font-size: 1.1rem; /* Slightly smaller list item text */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.routine-category li:last-child {
+  border-bottom: none;
+}
+
+.routine-category li i {
+  color: var(--accent-color);
+  font-size: 1.3rem; /* Slightly smaller icon */
+}
+
+.skincare-tips {
+  background: var(--glass-effect); /* Use glass-effect variable */
+  padding: 2.5rem; /* Consistent padding */
+  border-radius: var(--border-radius); /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Slightly more pronounced shadow */
+  border: 1px solid var(--border-color-medium); /* Use medium border */
+  backdrop-filter: blur(10px); /* Increase blur effect */
+}
+
+.skincare-tips h3 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem; /* Consistent heading size */
+  font-weight: 700;
+}
+
+.skincare-tips .tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.skincare-tips .tip-card {
+  background: var(--content-background); /* Use white background for cards */
+  padding: 2rem; /* Consistent padding */
+  border-radius: var(--border-radius); /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow for cards */
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color-light); /* Light border */
+  text-align: center;
+}
+
+.skincare-tips .tip-card:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.skincare-tips .tip-card i {
+  font-size: 2.5rem; /* Icon size */
+  color: var(--accent-color); /* Accent color for icons */
+  margin-bottom: 1rem;
+}
+
+.skincare-tips .tip-card h4 {
+  color: var(--primary-color);
+  font-size: 1.3rem; /* Heading size for tip cards */
   margin-bottom: 0.8rem;
-  line-height: 1.5;
+  font-weight: 600;
 }
 
+<<<<<<< HEAD
 .achievement-card .achievement-date {
   color: var(--light-text-color); /* Changed from #666 to --light-text-color */
   font-size: 0.9rem;
@@ -1256,38 +1408,410 @@ body {
   font-size: 0.9rem;
   color: var(--light-text-color);
   margin-top: 0;
+=======
+.skincare-tips .tip-card p {
+  color: var(--text-color);
+  font-size: 1rem;
+>>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
   line-height: 1.6;
 }
 
-.achievement-card .achievement-meta .category {
-  font-weight: 600;
-  margin-right: 1rem;
+/* Skincare Section Styling */
+.skincare-section {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  animation: fadeInUp 0.8s ease-out;
 }
 
-.delete-item {
+/* Personal Motivation Section */
+.motivation-section {
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  box-shadow: var(--box-shadow);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.motivation-section::before {
+  content: '';
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.motivation-section:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px var(--shadow-color);
+}
+
+.motivation-section h3 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.motivation-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+}
+
+.edit-motivation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.edit-motivation textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 1rem;
+  border: 2px solid var(--accent-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  background: var(--input-bg);
+  color: var(--text-color);
+}
+
+.motivation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.motivation-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.motivation-content button,
+.edit-motivation button {
+  align-self: flex-end;
+  padding: 0.5rem 1.5rem;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.motivation-content button:hover,
+.edit-motivation button:hover {
+  background: var(--accent-hover);
+}
+
+/* Skincare Streak Section - Enhanced */
+.streak-section {
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  box-shadow: var(--box-shadow);
+  text-align: center;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.streak-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.streak-section:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px var(--shadow-color);
+}
+
+.streak-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--glass-effect);
+  padding: 2rem;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  border: 2px solid var(--border-color-light);
+  animation: float 3s ease-in-out infinite;
+}
+
+.streak-number {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.streak-label {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.streak-message {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Delete button for goals */
+.goal-item .delete-goal {
+  position: absolute;
+  right: 1rem;
   background: none;
   border: none;
-  color: var(--delete-color); /* Use variable for red */
+  color: var(--delete-color);
   cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  padding: 0.3rem;
-  font-size: 1rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
 }
 
-.delete-item:hover {
-  color: var(--delete-hover-color); /* Use variable for darker red */
+.goal-item .delete-goal:hover {
   opacity: 1;
   transform: scale(1.1);
+  color: var(--delete-hover-color);
 }
 
+/* Skincare Goals Section */
+.goals-section {
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  box-shadow: var(--box-shadow);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.goals-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.goals-section:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px var(--shadow-color);
+}
+
+.goals-section h3 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.goals-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Add goal form enhancement */
+.add-goal {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: var(--input-background);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-color-medium);
+  transition: all 0.3s ease;
+}
+
+.add-goal:focus-within {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px rgba(255, 128, 171, 0.1);
+}
+
+.add-goal input {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid var(--border-color-medium);
+  border-radius: var(--border-radius);
+  font-size: 1.1rem;
+  background: var(--content-background);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.add-goal input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.add-goal button {
+  padding: 1rem 2rem;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.add-goal button:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.goal-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  background: var(--input-background);
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+  position: relative;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color-light);
+}
+
+.goal-item:hover {
+  transform: translateX(10px);
+  background: var(--content-background);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.goal-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--accent-color);
+}
+
+.goal-item span {
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.goal-item span.completed {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* Delete button for goals */
+.goal-item .delete-goal {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--delete-color);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+}
+
+.goal-item .delete-goal:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  color: var(--delete-hover-color);
+}
+
+/* Add new animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .achievements {
+  .skincare-section {
+    padding: 1.5rem;
+    gap: 2rem;
+  }
+
+  .motivation-section,
+  .streak-section,
+  .goals-section,
+  .skincare-tips {
+    padding: 2rem;
+  }
+
+  .streak-counter {
+    width: 150px;
+    height: 150px;
+  }
+
+  .streak-number {
+    font-size: 3.5rem;
+  }
+
+  .tip-card {
     padding: 1.5rem;
   }
+<<<<<<< HEAD
 
   .achievements h3 {
     font-size: 1.3rem;
@@ -1766,4 +2290,6 @@ body {
     justify-content: space-between;
     padding: 0.8rem 1rem;
   }
+=======
+>>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
 }
