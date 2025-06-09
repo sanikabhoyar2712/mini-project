@@ -7,9 +7,10 @@ const SelfCare = () => {
   const [diaryEntries, setDiaryEntries] = useState([]);
   const [selectedMood, setSelectedMood] = useState(null);
   const [moodHistory, setMoodHistory] = useState([]);
-  const [timer, setTimer] = useState(600); // 10 minutes in seconds
+  const [timer, setTimer] = useState(3600); // 1 hour in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [timerInterval, setTimerInterval] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const [pastMeditations, setPastMeditations] = useState([]); // New state to store past meditations
 
   // Add new state variables for personal space
   const [importantDates, setImportantDates] = useState([]);
@@ -212,20 +213,9 @@ const SelfCare = () => {
   };
 
   // Update skincare state
-  const [skincareStreak, setSkincareStreak] = useState(0);
-  const [lastSkincareDate, setLastSkincareDate] = useState(null);
-  const [selectedSkinType, setSelectedSkinType] = useState('');
   const [personalMotivation, setPersonalMotivation] = useState('');
   const [skincareGoals, setSkincareGoals] = useState([]);
   const [newSkincareGoal, setNewSkincareGoal] = useState('');
-
-  const skinTypes = [
-    { type: 'dry', description: 'Feels tight and rough, may have flaky patches' },
-    { type: 'oily', description: 'Shiny appearance, prone to breakouts' },
-    { type: 'combination', description: 'Mix of dry and oily areas' },
-    { type: 'normal', description: 'Balanced, not too dry or oily' },
-    { type: 'sensitive', description: 'Easily irritated, may have redness' }
-  ];
 
   const skincareTips = {
     morning: [
@@ -249,16 +239,6 @@ const SelfCare = () => {
       "Deep clean your makeup brushes",
       "Check your products' expiration dates"
     ]
-  };
-
-  // Update skincare images with professional images
-  const skincareImages = {
-    morning: null,
-    evening: null,
-    weekly: null,
-    masks: null,
-    serums: null,
-    tools: null
   };
 
   // Add new skincare categories
@@ -341,7 +321,22 @@ const SelfCare = () => {
         setIsTimerRunning(false);
         break;
       case 'reset':
-        setTimer(600);
+        // Save the completed meditation duration before resetting
+        const initialMeditationTime = 3600; // Define the initial time (1 hour)
+        if (timer < initialMeditationTime) { // Only save if some time has passed
+          const duration = initialMeditationTime - timer;
+          const newMeditation = {
+            id: Date.now(),
+            duration: formatTime(duration),
+            date: new Date().toLocaleDateString()
+          };
+          setPastMeditations(prevMeditations => {
+            const updatedMeditations = [...prevMeditations, newMeditation];
+            localStorage.setItem('pastMeditations', JSON.stringify(updatedMeditations));
+            return updatedMeditations;
+          });
+        }
+        setTimer(initialMeditationTime);
         setIsTimerRunning(false);
         break;
       default:
@@ -394,6 +389,7 @@ const SelfCare = () => {
     const savedSkincareGoals = localStorage.getItem('skincareGoals');
     const savedMotivation = localStorage.getItem('personalMotivation');
     const savedAchievements = localStorage.getItem('achievements');
+    const savedPastMeditations = localStorage.getItem('pastMeditations'); // Load past meditations
     
     if (savedDiaryEntries) {
       setDiaryEntries(JSON.parse(savedDiaryEntries));
@@ -418,6 +414,9 @@ const SelfCare = () => {
     }
     if (savedAchievements) {
       setAchievements(JSON.parse(savedAchievements));
+    }
+    if (savedPastMeditations) { // Set past meditations from localStorage
+      setPastMeditations(JSON.parse(savedPastMeditations));
     }
   }, []);
 
@@ -486,24 +485,10 @@ const SelfCare = () => {
 
   // Update handlers for personal motivation
   const handleAddSkincareGoal = () => {
-    if (newSkincareGoal.trim()) {
-      const goal = {
-        id: Date.now(),
-        content: newSkincareGoal,
-        completed: false
-      };
-      setSkincareGoals([...skincareGoals, goal]);
+    if (newSkincareGoal.trim() !== '') {
+      setSkincareGoals([...skincareGoals, { id: Date.now(), text: newSkincareGoal, completed: false }]);
       setNewSkincareGoal('');
-      localStorage.setItem('skincareGoals', JSON.stringify([...skincareGoals, goal]));
     }
-  };
-
-  const handleToggleGoal = (goalId) => {
-    const updatedGoals = personalGoals.map(goal => 
-      goal.id === goalId ? { ...goal, completed: !goal.completed } : goal
-    );
-    setPersonalGoals(updatedGoals);
-    localStorage.setItem('personalGoals', JSON.stringify(updatedGoals));
   };
 
   // Add handler for achievements
@@ -521,14 +506,8 @@ const SelfCare = () => {
   };
 
   const handleDeleteAchievement = (achievementId) => {
-    const updatedAchievements = achievements.filter(achievement => achievement.id !== achievementId);
-    setAchievements(updatedAchievements);
-    localStorage.setItem('achievements', JSON.stringify(updatedAchievements));
+    setAchievements(achievements.filter(achievement => achievement.id !== achievementId));
   };
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const singleHeroImageUrl = "https://images.pexels.com/photos/6005013/pexels-photo-6005013.jpeg?cs=srgb&dl=pexels-ds-stories-6005013.jpg&fm=jpg&_gl=1*zsfih9*_ga*NTI5NjI5NjY4LjE3NDgzMzIwNzg.*_ga_8JE65Q40S6*czE3NDgzMzcxNTQkbzIkZzEkdDE3NDgzMzgyMTIkajAkbDAkaDA.";
 
   return (
     <div className="selfcare-container">
@@ -834,7 +813,7 @@ const SelfCare = () => {
               <div className="goals-list">
                 {skincareGoals.map((goal) => (
                   <div key={goal.id} className="goal-item">
-                    <p className="goal-content">{goal.content}</p>
+                    <p className="goal-content">{goal.text}</p>
                     <span className="goal-date">{goal.date}</span>
                   </div>
                 ))}
@@ -855,15 +834,6 @@ const SelfCare = () => {
                   </ul>
                 </div>
               ))}
-            </div>
-
-            <div className="skincare-streak">
-              <h3>Your Skincare Streak</h3>
-              <div className="streak-counter">
-                <i className="fas fa-fire"></i>
-                <span>{skincareStreak} Days</span>
-              </div>
-              <p>Keep up the great work! Every day of care counts.</p>
             </div>
 
             <div className="skincare-tips">
@@ -951,6 +921,7 @@ const SelfCare = () => {
           <div className="meditation-section">
             <div className="meditation-cards">
               <div className="meditation-card">
+                <h3 className="meditation-card-title">{meditationVideos.breathing.title}</h3>
                 <div className="meditation-video">
                   <iframe 
                     src="https://www.youtube.com/embed/1Dv-ldGLnIY" 
@@ -960,13 +931,9 @@ const SelfCare = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-                <h3>{meditationVideos.breathing.title}</h3>
-                <p>{meditationVideos.breathing.duration} • {meditationVideos.breathing.type}</p>
-                <a href={meditationVideos.breathing.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                  Watch on YouTube
-                </a>
               </div>
               <div className="meditation-card">
+                <h3 className="meditation-card-title">{meditationVideos.sleep.title}</h3>
                 <div className="meditation-video">
                   <iframe 
                     src="https://www.youtube.com/embed/1ZYbU82GVz4" 
@@ -976,13 +943,9 @@ const SelfCare = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-                <h3>{meditationVideos.sleep.title}</h3>
-                <p>{meditationVideos.sleep.duration} • {meditationVideos.sleep.type}</p>
-                <a href={meditationVideos.sleep.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                  Watch on YouTube
-                </a>
               </div>
               <div className="meditation-card">
+                <h3 className="meditation-card-title">{meditationVideos.mindfulness.title}</h3>
                 <div className="meditation-video">
                   <iframe 
                     src="https://www.youtube.com/embed/O-6f5wQXSu8" 
@@ -992,13 +955,9 @@ const SelfCare = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-                <h3>{meditationVideos.mindfulness.title}</h3>
-                <p>{meditationVideos.mindfulness.duration} • {meditationVideos.mindfulness.type}</p>
-                <a href={meditationVideos.mindfulness.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                  Watch on YouTube
-                </a>
               </div>
               <div className="meditation-card">
+                <h3 className="meditation-card-title">{meditationVideos.mindfulness20Min.title}</h3>
                 <div className="meditation-video">
                   <iframe 
                     src="https://www.youtube.com/embed/64ZU2UCQdmQ" 
@@ -1008,13 +967,9 @@ const SelfCare = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-                <h3>{meditationVideos.mindfulness20Min.title}</h3>
-                <p>{meditationVideos.mindfulness20Min.duration} • {meditationVideos.mindfulness20Min.type}</p>
-                <a href={meditationVideos.mindfulness20Min.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                  Watch on YouTube
-                </a>
               </div>
               <div className="meditation-card">
+                <h3 className="meditation-card-title">{meditationVideos.fiveMinMeditation.title}</h3>
                 <div className="meditation-video">
                   <iframe 
                     src="https://www.youtube.com/embed/inpok4MKVLM" 
@@ -1024,13 +979,9 @@ const SelfCare = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-                <h3>{meditationVideos.fiveMinMeditation.title}</h3>
-                <p>{meditationVideos.fiveMinMeditation.duration} • {meditationVideos.fiveMinMeditation.type}</p>
-                <a href={meditationVideos.fiveMinMeditation.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                  Watch on YouTube
-                </a>
               </div>
               <div className="meditation-card">
+                <h3 className="meditation-card-title">{meditationVideos.blissfulRelaxation.title}</h3>
                 <div className="meditation-video">
                   <iframe 
                     src="https://www.youtube.com/embed/Jyy0ra2WcQQ" 
@@ -1040,11 +991,6 @@ const SelfCare = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-                <h3>{meditationVideos.blissfulRelaxation.title}</h3>
-                <p>{meditationVideos.blissfulRelaxation.duration} • {meditationVideos.blissfulRelaxation.type}</p>
-                <a href={meditationVideos.blissfulRelaxation.url} target="_blank" rel="noopener noreferrer" className="start-button">
-                  Watch on YouTube
-                </a>
               </div>
             </div>
             <div className="meditation-timer">

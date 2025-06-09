@@ -26,27 +26,25 @@
 }
 
 body {
-  background: linear-gradient(135deg, var(--background-color) 0%, var(--secondary-color) 100%); /* Using a variable for the second color */
+  background: var(--content-background); /* Changed background to white */
   color: var(--text-color);
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
 }
 
 .selfcare-container {
-  max-width: 90vw;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
 }
 
 /* Hero Section */
 .selfcare-header {
-  margin-bottom: 3rem;
+  margin-bottom: 0;
 }
 
 .selfcare-intro {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-  padding: 3rem 2rem;
-  border-radius: var(--border-radius);
+  padding: 3rem 0;
+  border-radius: 0;
   box-shadow: var(--box-shadow);
   text-align: center;
   color: var(--content-background); /* Use content-background for white text */
@@ -111,14 +109,11 @@ body {
   display: flex;
   gap: 1.5rem;
   margin: 2rem 0;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
 .tab-button {
   padding: 1.3rem 2.8rem;
-  border: 1px solid var(--border-color-medium); /* Use variable for border */
-  background: var(--content-background); /* Use content-background for white */
   color: var(--primary-color);
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -146,10 +141,7 @@ body {
 
 /* Content Sections */
 .selfcare-content {
-  background: var(--content-background); /* Use content-background for white */
-  border-radius: var(--border-radius);
-  padding: 2.5rem;
-  box-shadow: var(--box-shadow);
+  background: transparent; /* Ensure content background is transparent */
   margin-top: 2rem;
 }
 
@@ -162,11 +154,9 @@ body {
 .diary-prompt {
   text-align: center;
   margin-bottom: 2.5rem;
-  background: linear-gradient(135deg, #f5f7ff 0%, #e8eaf6 100%); /* This gradient is still hardcoded. If you want it themed, replace the colors with variables or create new ones */
+  /* Removed background, box-shadow, and border */
   padding: 2.5rem;
   border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color-light); /* Use variable for border */
 }
 
 .diary-prompt h3 {
@@ -516,29 +506,38 @@ body {
 
 /* Personal Space Section */
 .personal-space-section {
-  animation: slideUp 0.5s ease-out;
+  padding: 2rem 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 .personal-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 .important-dates,
 .learning-thoughts,
-.personal-goals {
-  background: var(--content-background); /* Use content-background for white */
+.personal-goals,
+.achievements {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Keep general black shadow or create a new themed shadow variable */
-  border: 1px solid var(--border-color-light); /* Added border for consistency */
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color-light);
 }
 
 .important-dates h3,
 .learning-thoughts h3,
-.personal-goals h3 {
-  color: var(--primary-color); /* Changed from --primary to --primary-color */
+.personal-goals h3,
+.achievements h3 {
+  color: var(--primary-color); /* Reverted from white to primary-color (pink) */
   margin-bottom: 1.5rem;
   text-align: center;
   font-size: 1.5rem;
@@ -547,7 +546,13 @@ body {
 /* Forms */
 .add-date-form,
 .add-thought-form,
-.add-goal-form {
+.add-goal-form,
+.add-achievement-form {
+  background: var(--content-background); /* Consistent background for all forms */
+  border-radius: var(--border-radius); /* Consistent border-radius */
+  padding: 1.5rem; /* Consistent padding for all forms */
+  box-shadow: var(--box-shadow); /* Consistent shadow for all forms */
+  border: 1px solid var(--border-color-light); /* Consistent border for all forms */
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -559,19 +564,16 @@ body {
 .add-goal-form input,
 .add-date-form select,
 .add-thought-form select,
-.add-goal-form select {
+.add-goal-form select,
+.add-achievement-form input[type="text"] {
   padding: 0.8rem;
-  border: 2px solid var(--secondary-color); /* Changed from --light-pink to --secondary-color */
-  border-radius: 8px;
+  border: 1px solid var(--border-color-light); /* Consistent border */
+  border-radius: var(--border-radius-small); /* Consistent border-radius */
   font-size: 1rem;
-  transition: border-color 0.3s ease;
-  background: var(--input-background); /* Use input-background for slightly transparent white */
-  color: var(--text-color); /* Ensure text color is dynamic */
-}
-
-.add-thought-form textarea {
-  min-height: 100px;
-  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: var(--input-background); /* Consistent background for all inputs */
+  color: var(--text-color); /* Consistent text color for all inputs */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Consistent inset shadow */
 }
 
 .add-date-form input:focus,
@@ -579,34 +581,44 @@ body {
 .add-goal-form input:focus,
 .add-date-form select:focus,
 .add-thought-form select:focus,
-.add-goal-form select:focus {
+.add-goal-form select:focus,
+.add-achievement-form input[type="text"]:focus {
   outline: none;
-  border-color: var(--primary-color); /* Changed from --primary to --primary-color */
+  border-color: var(--primary-color); /* Consistent primary color on focus */
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2); /* Consistent glowing effect on focus */
 }
 
 .add-date-form button,
 .add-thought-form button,
-.add-goal-form button {
-  background: var(--primary-color); /* Changed from --primary to --primary-color */
-  color: var(--content-background); /* Changed from --white to --content-background */
-  padding: 0.8rem;
+.add-goal-form button,
+.add-achievement-form button {
+  background: var(--accent-light); /* Changed to a lighter pink */
+  color: var(--button-text-color);
+  padding: 0.8rem 1.5rem;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--border-radius-small);
   cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .add-date-form button:hover,
 .add-thought-form button:hover,
-.add-goal-form button:hover {
-  background: var(--accent-light); /* Changed from --plum to --accent-light or create a new plum variable */
+.add-goal-form button:hover,
+.add-achievement-form button:hover {
+  background: var(--accent-color); /* Reverted from primary-color to accent-color on hover */
+  color: var(--button-text-color); /* Ensured text remains white on hover */
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Consistent subtle shadow on hover */
 }
 
 /* Lists */
 .dates-list,
 .thoughts-list,
-.goals-list {
+.goals-list,
+.achievements-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -614,43 +626,61 @@ body {
 
 .date-card,
 .thought-card,
-.goal-card {
-  background: var(--secondary-color); /* Changed from --light-pink to --secondary-color */
-  padding: 1rem;
-  border-radius: 10px;
+.goal-card,
+.achievement-card { /* Added .achievement-card here */
+  background: var(--content-background); /* Ensure consistent white background */
+  padding: 1.5rem; /* Adjusted padding for consistency */
+  border-radius: var(--border-radius); /* Consistent border-radius */
   transition: transform 0.3s ease;
-  color: var(--content-background); /* Added for better visibility on pink background */
+  color: var(--text-color); /* Ensure text is readable */
+  border: 1px solid var(--border-color-light); /* Consistent border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Consistent subtle shadow */
 }
 
 .date-card:hover,
 .thought-card:hover,
-.goal-card:hover {
+.goal-card:hover,
+.achievement-card:hover {
   transform: translateX(5px);
 }
 
-.date-card h4 {
-  color: var(--primary-color); /* Changed from --primary to --primary-color */
+.date-card h4,
+.thought-card h4,
+.goal-card h4,
+.achievement-card h4 {
+  color: var(--primary-color); /* Consistent primary color */
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.date-card .date,
+.thought-content,
+.goal-text,
+.achievement-content { /* Grouped content styles */
+  color: var(--text-color); /* Ensure text is readable */
+  font-size: 0.95rem;
+  line-height: 1.5;
   margin-bottom: 0.5rem;
 }
 
-.date-card .date {
-  color: var(--text-color); /* Changed from --text to --text-color */
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.date-card .description {
-  color: var(--text-color); /* Changed from --text to --text-color */
-  font-style: italic;
+.date-card .description,
+.thought-meta,
+.goal-meta,
+.achievement-card .achievement-meta { /* Grouped meta styles */
+  color: var(--light-text-color); /* Light text color for meta info */
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .thought-card {
   position: relative;
-  padding-left: 2rem;
+  padding-left: 1.5rem; /* Adjusted padding-left for consistency */
   background: var(--content-background); /* Ensure thought card background is white */
   color: var(--text-color); /* Ensure text is readable */
-  border: 1px solid var(--border-color-light); /* Added border */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
+  border: 1px solid var(--border-color-light); /* Consistent border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Consistent subtle shadow */
 }
 
 .thought-card::before {
@@ -659,7 +689,7 @@ body {
   left: 0.5rem;
   top: 0.5rem;
   font-size: 2rem;
-  color: var(--primary-color); /* Changed from --primary to --primary-color */
+  color: var(--primary-color); /* Consistent primary color */
   opacity: 0.5;
 }
 
@@ -672,19 +702,19 @@ body {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
-  color: var(--light-text-color); /* Changed from --text to --light-text-color */
+  color: var(--light-text-color); /* Consistent light text color */
 }
 
 .thought-card.inspiration {
-  border-left: 4px solid var(--info-color); /* Using info-color variable */
+  border-left: 4px solid var(--info-color); /* Consistent info-color */
 }
 
 .thought-card.achievement {
-  border-left: 4px solid var(--success-color); /* Using success-color variable */
+  border-left: 4px solid var(--success-color); /* Consistent success-color */
 }
 
 .thought-card.lesson {
-  border-left: 4px solid var(--danger-color); /* Using danger-color variable */
+  border-left: 4px solid var(--danger-color); /* Consistent danger-color */
 }
 
 .goal-card {
@@ -692,8 +722,8 @@ body {
   align-items: flex-start;
   gap: 1rem;
   background: var(--content-background); /* Ensure goal card background is white */
-  border: 1px solid var(--border-color-light); /* Added border */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
+  border: 1px solid var(--border-color-light); /* Consistent border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Consistent subtle shadow */
 }
 
 .goal-card input[type="checkbox"] {
@@ -716,7 +746,7 @@ body {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
-  color: var(--light-text-color); /* Changed from --text to --light-text-color */
+  color: var(--light-text-color); /* Consistent light text color */
 }
 
 .goal-card.completed .goal-text {
@@ -725,21 +755,67 @@ body {
 }
 
 .goal-card.high {
-  border-left: 4px solid var(--danger-color); /* Using danger-color variable */
+  border-left: 4px solid var(--danger-color); /* Consistent danger-color */
 }
 
 .goal-card.medium {
-  border-left: 4px solid var(--warning-color); /* Using warning-color variable */
+  border-left: 4px solid var(--warning-color); /* Consistent warning-color */
 }
 
 .goal-card.low {
-  border-left: 4px solid var(--success-color); /* Using success-color variable */
+  border-left: 4px solid var(--success-color); /* Consistent success-color */
+}
+
+/* Achievements Section Specific Styles */
+.achievement-card.personal {
+  border-left: 4px solid var(--primary-color); /* Unique color for personal achievements */
+}
+
+.achievement-card.professional {
+  border-left: 4px solid var(--info-color); /* Unique color for professional achievements */
+}
+
+.achievement-card.fitness {
+  border-left: 4px solid var(--success-color); /* Unique color for fitness achievements */
+}
+
+.achievement-card.creative {
+  border-left: 4px solid var(--accent-color); /* Unique color for creative achievements */
+}
+
+.achievement-card .achievement-meta .category {
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+/* Ensure delete button is consistent */
+.delete-item {
+  background: transparent;
+  border: none;
+  color: var(--danger-color);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.delete-item:hover {
+  color: var(--dark-danger-color); /* Darker on hover */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .personal-grid {
-    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
+  }
+  
+  .important-dates,
+  .learning-thoughts,
+  .personal-goals,
+  .achievements {
+    padding: 1.5rem;
   }
 
   .add-date-form,
@@ -952,13 +1028,8 @@ body {
 }
 
 .skincare-goals {
-  background: var(--glass-effect); /* Use glass-effect variable */
-  padding: 2.5rem;
-  border-radius: 18px;
-  box-shadow: var(--box-shadow);
-  margin-top: 2rem;
-  border: 1px solid var(--border-color-light);
-  backdrop-filter: blur(8px);
+  /* Removed background, border-radius, box-shadow, margin-top, border, and backdrop-filter */
+  /* These styles are now applied to the form itself to ensure consistency */
 }
 
 .skincare-goals h3 {
@@ -1117,7 +1188,7 @@ body {
 }
 
 .add-achievement-form button {
-  background: var(--primary-color); /* Changed from --primary to --primary-color */
+  background: var(--accent-light); /* Changed to a lighter pink */
   color: var(--content-background); /* Changed from --white to --content-background */
   padding: 0.8rem;
   border: none;
@@ -1127,7 +1198,7 @@ body {
 }
 
 .add-achievement-form button:hover {
-  background: var(--accent-light); /* Changed from --plum to --accent-light or create a new plum variable */
+  background: var(--accent-color); /* Reverted from primary-color to accent-color on hover */
   transform: translateY(-2px);
 }
 
@@ -1165,25 +1236,25 @@ body {
 
 /* Styling for achievement categories */
 .achievement-card.personal {
-  border-left: 4px solid var(--accent-color);
-}
-
-.achievement-card.professional {
   border-left: 4px solid var(--primary-color);
 }
 
+.achievement-card.professional {
+  border-left: 4px solid var(--info-color);
+}
+
 .achievement-card.fitness {
-  border-left: 4px solid var(--success-color); /* Using success-color variable */
+  border-left: 4px solid var(--success-color);
 }
 
 .achievement-card.creative {
-  border-left: 4px solid var(--warning-color); /* Using warning-color variable */
+  border-left: 4px solid var(--accent-color);
 }
 
 .achievement-card .achievement-meta {
   display: block;
   font-size: 0.9rem;
-  color: var(--light-text-color); /* Changed from #666 to --light-text-color */
+  color: var(--light-text-color);
   margin-top: 0;
   line-height: 1.6;
 }
@@ -1255,5 +1326,444 @@ body {
     right: 0.4rem;
     font-size: 0.9rem;
     padding: 0.2rem;
+  }
+}
+
+/* Meditation Section Styles */
+.meditation-section {
+  background: linear-gradient(135deg, #f5f7ff 0%, #e8eaf6 100%);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 2rem;
+}
+
+.meditation-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.meditation-header h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.meditation-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+}
+
+.meditation-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.meditation-card {
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.meditation-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.meditation-video {
+  position: relative;
+  padding-top: 35%; /* Adjusted for even smaller height */
+  overflow: hidden;
+}
+
+.meditation-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.meditation-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border: 2px dashed red; /* Temporary: for debugging visibility */
+}
+
+.meditation-info h3 {
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.meditation-card-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.start-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: var(--primary-color);
+  color: var(--content-background);
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--transition);
+  border: 2px solid blue; /* Temporary: for debugging visibility */
+  box-sizing: border-box; /* Ensure padding/border are included in width/height */
+}
+
+.start-button:hover {
+  background: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.start-button i {
+  font-size: 1.2rem;
+  color: var(--content-background); /* White icon */
+}
+
+.meditation-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: var(--light-text-color);
+  font-size: 0.9rem;
+}
+
+.meditation-meta i {
+  color: var(--primary-color);
+}
+
+.meditation-description {
+  color: var(--light-text-color);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.meditation-timer {
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  text-align: center;
+  margin-top: 3rem;
+  box-shadow: 0 12px 24px var(--shadow-color); /* Enhanced shadow */
+  border: 1px solid var(--border-color-light); /* Added subtle border */
+}
+
+.timer-display {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 1.5rem 0;
+  font-family: 'Courier New', monospace;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.timer-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  background: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timer-button:hover {
+  background: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.timer-button i {
+  font-size: 1.2rem;
+}
+
+.timer-presets {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.timer-preset {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.timer-preset:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.timer-preset.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .meditation-videos {
+    grid-template-columns: 1fr;
+  }
+
+  .meditation-header h2 {
+    font-size: 2rem;
+  }
+
+  .timer-display {
+    font-size: 2.5rem;
+  }
+
+  .timer-controls {
+    flex-wrap: wrap;
+  }
+
+  .timer-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .timer-presets {
+    gap: 0.5rem;
+  }
+
+  .timer-preset {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+.past-meditations-list {
+  margin-top: 2rem;
+  background: yellow; /* TEMP: Make background obvious */
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border: 2px solid purple; /* TEMP: Add a strong border */
+}
+
+.past-meditations-list h4 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.past-meditations-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.past-meditations-list li {
+  background: var(--content-background);
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+/* Mood Section */
+.mood-section {
+  padding: 2rem;
+  text-align: center;
+}
+
+.mood-section h2 {
+  font-size: 2.2rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.mood-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.mood-button {
+  background: var(--content-background);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius);
+  padding: 1.2rem 2.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.mood-button i {
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.mood-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-color);
+}
+
+.mood-button.selected {
+  background: var(--primary-color);
+  color: var(--content-background);
+  border-color: var(--primary-color);
+  box-shadow: 0 8px 20px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.mood-button.selected i {
+  color: var(--content-background); /* White icon on selected */
+}
+
+.mood-history {
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color-light);
+  margin-top: 2rem;
+}
+
+.mood-history h3 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.mood-history-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  justify-content: center;
+}
+
+.mood-history-item {
+  background: var(--background-color); /* Light pink background */
+  border-radius: var(--border-radius-small);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.mood-date {
+  font-size: 0.9rem;
+  color: var(--light-text-color);
+}
+
+.mood-icon {
+  font-size: 2rem;
+}
+
+.mood-icon.great i {
+  color: #2ecc71; /* Emerald Green */
+}
+
+.mood-icon.good i {
+  color: #3498db; /* Peter River Blue */
+}
+
+.mood-icon.okay i {
+  color: #f1c40f; /* Sunflower Yellow */
+}
+
+.mood-icon.down i {
+  color: #e74c3c; /* Alizarin Red */
+}
+
+/* Responsive adjustments for Mood Section */
+@media (max-width: 768px) {
+  .mood-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .mood-buttons {
+    gap: 1rem;
+  }
+
+  .mood-button {
+    padding: 1rem 1.8rem;
+    font-size: 1rem;
+  }
+
+  .mood-button i {
+    font-size: 2rem;
+  }
+
+  .mood-history h3 {
+    font-size: 1.5rem;
+  }
+
+  .mood-history-list {
+    grid-template-columns: 1fr;
+  }
+
+  .mood-history-item {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
   }
 }
