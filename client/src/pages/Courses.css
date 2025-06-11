@@ -3,51 +3,65 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .courses-container h1 {
   text-align: center;
-  color: #333;
+  color: #e91e63;
   margin-bottom: 2rem;
-  font-size: 2.5rem;
+  font-size: 3rem;
+  font-weight: bold;
 }
 
 .branch-section {
-  background: #fff;
-  border-radius: 10px;
+  background: #fff0f6;
+  border-radius: 20px;
   padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.5rem;
+  box-shadow: 0 8px 20px rgba(233, 30, 99, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.branch-section:hover {
+  transform: scale(1.01);
 }
 
 .branch-section h2 {
-  color: #2c3e50;
+  color: #880e4f;
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #3498db;
+  border-bottom: 3px solid #f06292;
+  font-size: 2rem;
 }
 
 .levels-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .level {
-  background: #f8f9fa;
+  background: #ffffff;
   padding: 1.5rem;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
 }
 
 .level:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  border-color: #f48fb1;
 }
 
 .level h3 {
-  color: #3498db;
+  color: #d81b60;
   margin-bottom: 1rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .level ul {
@@ -56,9 +70,11 @@
 }
 
 .level ul li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
-  color: #555;
+  padding: 0.5rem;
+  border-bottom: 1px solid #fce4ec;
+  color: #444;
+  font-size: 1rem;
+  text-align: center;
 }
 
 .level ul li:last-child {
@@ -80,65 +96,4 @@
   }
 }
 
-/* Add styling for the enrollment form */
-.enrollment-form-container {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.enrollment-form-container h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #555;
-  font-weight: bold;
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="tel"],
-.form-group select {
-  width: 100%;
-  padding: 0.8rem 0.8rem 0.8rem 2.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-}
-
-.submit-button {
-  display: block;
-  width: 100%;
-  padding: 1rem;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: #2980b9;
-} 
+/* Removed enrollment-form-container CSS since form is no longer used */
