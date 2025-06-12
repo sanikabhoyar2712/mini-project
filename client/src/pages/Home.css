@@ -154,23 +154,24 @@
 .about-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center; /* Center content horizontally */
   gap: 0.75rem;
   padding: 1rem 2.5rem;
   font-size: 1.1rem;
   font-weight: 600;
-  color: white;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  border: none;
+  color: var(--primary-color); /* Changed text color to primary pink */
+  background: var(--content-background); /* Changed background to white */
+  border: 1px solid rgba(var(--primary-color-rgb), 0.3); /* Subtle pink border */
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.2); /* Soft pink glow */
 }
 .get-started-btn:hover,
 .about-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
-  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  box-shadow: 0 6px 20px rgba(var(--primary-color-rgb), 0.3); /* Enhanced glow on hover */
+  background: rgba(var(--primary-color-rgb), 0.05); /* Slightly pink tint on hover */
 }
 .get-started-btn:active,
 .about-btn:active {

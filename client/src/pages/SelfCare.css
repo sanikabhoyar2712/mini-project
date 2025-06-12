@@ -33,23 +33,24 @@ body {
 }
 
 .selfcare-container {
-  margin: 0;
+  /* Ensure full width for containers within SelfCare page */
+  width: 100%;
+  max-width: 100%;
+  margin: 0; /* Remove any default margins */
+  padding: 0; /* Remove any default padding */
 }
 
-/* Hero Section */
 .selfcare-header {
-  margin-bottom: 0;
+  margin-bottom: 0; /* Remove margin below header to avoid gaps */
 }
 
 .selfcare-intro {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-  padding: 3rem 0;
-  border-radius: 0;
-  box-shadow: var(--box-shadow);
+  padding: 3rem 0; /* Keeps vertical padding, ensures no horizontal padding */
+  border-radius: 0; /* No rounded corners */
+  box-shadow: none; /* No box-shadow for full edge adherence */
   text-align: center;
   color: var(--content-background);
-  max-width: 800px;
-  margin: 0 auto 3rem auto;
 }
 
 .selfcare-intro h2 {
@@ -69,15 +70,15 @@ body {
 
 /* Styling for the quote */
 .selfcare-quote {
-  font-size: 1.4rem; /* Slightly larger font size for impact */
-  font-style: italic; /* Italicize the quote */
-  margin: 2.5rem auto 1.5rem auto; /* Adjust margin for better spacing */
-  max-width: 800px; /* Increase max-width slightly */
-  color: var(--content-background); /* Keep text white */
-  position: relative; /* Needed for potential pseudo-elements */
-  padding: 0; /* Remove horizontal padding as quote marks are removed */
-  opacity: 1; /* Ensure full opacity */
-  line-height: 1.6; /* Improve readability */
+  font-size: 1rem; /* Changed to normal font size */
+  font-style: normal; /* Removed italic style */
+  margin: 2.5rem auto 1.5rem auto;
+  max-width: 800px;
+  color: var(--content-background);
+  position: relative;
+  padding: 0;
+  opacity: 1;
+  line-height: 1.6;
 }
 
 .quote-author {
@@ -175,6 +176,31 @@ body {
 .selfcare-content {
   background: transparent; /* Ensure content background is transparent */
   margin-top: 2rem;
+  position: relative; /* Establish positioning context for the absolute video */
+  overflow: hidden; /* Hide any overflow from the video */
+}
+
+.background-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* Make video non-interactive */
+  z-index: -1; /* Place it behind other content */
+}
+
+.background-video {
+  width: 100vw; /* Cover full viewport width */
+  height: 100vh; /* Cover full viewport height */
+  object-fit: cover; /* Ensure video covers the area */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the video */
+  min-width: 100%;
+  min-height: 100%;
 }
 
 /* Diary Section */
@@ -248,1627 +274,71 @@ body {
 .diary-history h3 {
   font-size: 1.8rem;
   color: var(--primary-color);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   text-align: center;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .diary-entry {
-  background: var(--content-background); /* Use content-background for white */
-  padding: 2.5rem;
+  background: var(--content-background); /* Ensure white background for diary entries */
+  padding: 1.5rem;
   border-radius: var(--border-radius);
-  margin-bottom: 2rem;
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color-light); /* Use variable for border */
-  position: relative;
-  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Consistent subtle shadow */
+  border: 1px solid var(--border-color-light); /* Consistent light border */
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* For positioning delete button */
 }
 
 .diary-entry:hover {
-  transform: translateX(8px);
-  box-shadow: var(--box-shadow);
+  transform: translateY(-3px); /* Consistent hover effect */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Slightly more pronounced shadow on hover */
 }
 
 .entry-date {
-  color: var(--light-text-color); /* Use light-text-color for grey */
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--light-text-color);
+  margin-bottom: 0.5rem;
 }
 
 .entry-content {
+  font-size: 1rem;
   color: var(--text-color);
-  line-height: 1.8;
-  font-size: 1.1rem;
+  line-height: 1.6;
 }
 
 .delete-entry {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: none;
-  border: none;
-  color: var(--delete-color); /* Use variable for red */
-  cursor: pointer;
-  opacity: 1;
-  transition: var(--transition);
-  padding: 0.8rem;
-  font-size: 1.2rem;
-}
-
-.delete-entry:hover {
-  color: var(--delete-hover-color); /* Use variable for darker red */
-  transform: scale(1.2);
-}
-
-/* Workout Section */
-.workout-section {
-  padding: 2rem;
-}
-
-.workout-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.workout-header h2 {
-  color: var(--primary-color);
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  position: relative;
-  padding-bottom: 1rem;
-}
-
-.workout-header h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-  border-radius: 2px;
-}
-
-.workout-header p {
-  color: var(--light-text-color); /* Use light-text-color for grey */
-  font-size: 1.1rem;
-}
-
-.workout-categories {
-  display: grid;
-  gap: 2.5rem;
-}
-
-/* Styling for Workout Categories */
-.workout-category-section {
-  background: var(--content-background); /* Use content-background for white */
-  padding: 2.5rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  transition: transform 0.3s ease;
-  border: 1px solid var(--border-color-light); /* Use variable for border */
-}
-
-.workout-category-section:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12); /* Keep general black shadow or create a new themed shadow variable */
-}
-
-.workout-category-section h3 {
-  color: var(--primary-color);
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  font-weight: 700;
-  text-align: center;
-  position: relative;
-  padding-bottom: 1rem;
-}
-
-.workout-category-section h3::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
-  border-radius: 2px;
-}
-
-.workout-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  margin-top: 1.5rem;
-}
-
-.workout-card {
-  background: var(--content-background); /* Use content-background for white */
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Keep general black shadow or create a new themed shadow variable */
-  transition: all 0.4s ease;
-  border: 1px solid var(--border-color-light); /* Use variable for border */
-  position: relative;
-}
-
-.workout-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Keep general black shadow or create a new themed shadow variable */
-}
-
-.workout-video {
-  position: relative;
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
-}
-
-.workout-video img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.workout-card:hover .workout-video img {
-  transform: scale(1.1);
-}
-
-.workout-card h3 {
-  color: var(--primary-color);
-  font-size: 1.4rem;
-  margin: 1.5rem 1.5rem 0.8rem;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.workout-card p {
-  color: var(--light-text-color); /* Use light-text-color for grey */
-  font-size: 1rem;
-  margin: 0 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.workout-card p i {
-  color: var(--accent-color);
-  font-size: 1.1rem;
-}
-
-.workout-description {
-  color: var(--text-color);
-  font-size: 1rem;
-  line-height: 1.6;
-  margin: 1rem 1.5rem 1.5rem;
-  opacity: 0.9;
-}
-
-/* Styling for Workout Level */
-.workout-level {
-  display: inline-block;
-  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
-  color: var(--content-background); /* Use content-background for white */
-  padding: 0.4rem 0.8rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-left: 0.5rem;
-}
-
-/* Workout Tips */
-.workout-tips {
-  background: var(--glass-effect); /* Use glass-effect variable */
-  padding: 2.5rem;
-  border-radius: 18px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Keep general black shadow or create a new themed shadow variable */
-  margin-top: 2rem;
-  border: 1px solid var(--border-color-light); /* Use variable for border */
-  backdrop-filter: blur(8px);
-}
-
-.workout-tips h3 {
-  color: var(--accent-color);
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-  font-weight: 700;
-}
-
-.tips-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.tips-category {
-  background: var(--content-background); /* Use content-background for white */
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.08); /* Keep general black shadow or create a new themed shadow variable */
-  transition: all 0.3s ease;
-  border: 1px solid var(--border-color-light); /* Use variable for border */
-}
-
-.tips-category:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(44, 62, 80, 0.12); /* Keep general black shadow or create a new themed shadow variable */
-}
-
-.tips-category h4 {
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  font-size: 1.4rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-.tips-category ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.tips-category li {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border-color-light); /* Use variable for border */
-  color: var(--text-color);
-  font-size: 1.1rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.8rem;
-}
-
-.tips-category li:last-child {
-  border-bottom: none;
-}
-
-.tips-category li:before {
-  content: "\2022"; /* Unicode bullet point */
-  color: var(--accent-color);
-  font-weight: bold;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-/* Personal Space Section */
-.personal-space-section {
-  padding: 2rem 0;
-  width: 100%;
-  max-width: 100%;
-}
-
-.personal-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-  padding: 0 1rem;
-}
-
-.important-dates,
-.learning-thoughts,
-<<<<<<< HEAD
-.personal-goals,
-.achievements {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 2rem;
-  background: var(--content-background);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-=======
-.personal-goals {
-  background: var(--content-background);
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
->>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
-  border: 1px solid var(--border-color-light);
-}
-
-.important-dates h3,
-.learning-thoughts h3,
-<<<<<<< HEAD
-.personal-goals h3,
-.achievements h3 {
-  color: var(--primary-color); /* Reverted from white to primary-color (pink) */
-=======
-.personal-goals h3 {
-  color: var(--primary-color);
->>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-/* Delete button styles for personal space items */
-.date-card,
-.goal-card {
-  position: relative;
-  padding-right: 2.5rem; /* Make room for delete button */
-}
-
-.delete-date,
-.delete-goal {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.8rem;
+  right: 0.8rem;
   background: none;
   border: none;
   color: var(--delete-color);
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  padding: 0.3rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
-.delete-date:hover,
-.delete-goal:hover {
+.delete-entry:hover {
   color: var(--delete-hover-color);
   opacity: 1;
   transform: scale(1.1);
 }
 
-/* Update existing card styles to accommodate delete buttons */
-.date-card {
-  background: var(--secondary-color);
-  padding: 1rem;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-  color: var(--content-background);
+/* Workout Section */
+.workout-section {
+  max-width: 1000px;
+  margin: 3rem auto;
 }
 
-.goal-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  background: var(--content-background);
-  border: 1px solid var(--border-color-light);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-}
-
-.date-card:hover,
-.goal-card:hover {
-  transform: translateX(5px);
-}
-
-/* Responsive adjustments for delete buttons */
-@media (max-width: 768px) {
-  .delete-date,
-  .delete-goal {
-    top: 0.4rem;
-    right: 0.4rem;
-    font-size: 0.9rem;
-    padding: 0.2rem;
-  }
-  
-  .date-card,
-  .goal-card {
-    padding-right: 2rem;
-  }
-}
-
-/* Forms */
-.add-date-form,
-.add-thought-form,
-.add-goal-form,
-.add-achievement-form {
-  background: var(--content-background); /* Consistent background for all forms */
-  border-radius: var(--border-radius); /* Consistent border-radius */
-  padding: 1.5rem; /* Consistent padding for all forms */
-  box-shadow: var(--box-shadow); /* Consistent shadow for all forms */
-  border: 1px solid var(--border-color-light); /* Consistent border for all forms */
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.add-date-form input,
-.add-thought-form textarea,
-.add-goal-form input,
-.add-date-form select,
-.add-thought-form select,
-.add-goal-form select,
-.add-achievement-form input[type="text"] {
-  padding: 0.8rem;
-  border: 1px solid var(--border-color-light); /* Consistent border */
-  border-radius: var(--border-radius-small); /* Consistent border-radius */
-  font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  background: var(--input-background); /* Consistent background for all inputs */
-  color: var(--text-color); /* Consistent text color for all inputs */
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Consistent inset shadow */
-}
-
-.add-date-form input:focus,
-.add-thought-form textarea:focus,
-.add-goal-form input:focus,
-.add-date-form select:focus,
-.add-thought-form select:focus,
-.add-goal-form select:focus,
-.add-achievement-form input[type="text"]:focus {
-  outline: none;
-  border-color: var(--primary-color); /* Consistent primary color on focus */
-  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2); /* Consistent glowing effect on focus */
-}
-
-.add-date-form button,
-.add-thought-form button,
-.add-goal-form button,
-.add-achievement-form button {
-  background: var(--accent-light); /* Changed to a lighter pink */
-  color: var(--button-text-color);
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: var(--border-radius-small);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.add-date-form button:hover,
-.add-thought-form button:hover,
-.add-goal-form button:hover,
-.add-achievement-form button:hover {
-  background: var(--accent-color); /* Reverted from primary-color to accent-color on hover */
-  color: var(--button-text-color); /* Ensured text remains white on hover */
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Consistent subtle shadow on hover */
-}
-
-/* Lists */
-.dates-list,
-.thoughts-list,
-.goals-list,
-.achievements-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.date-card,
-.thought-card,
-.goal-card,
-.achievement-card { /* Added .achievement-card here */
-  background: var(--content-background); /* Ensure consistent white background */
-  padding: 1.5rem; /* Adjusted padding for consistency */
-  border-radius: var(--border-radius); /* Consistent border-radius */
-  transition: transform 0.3s ease;
-  color: var(--text-color); /* Ensure text is readable */
-  border: 1px solid var(--border-color-light); /* Consistent border */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Consistent subtle shadow */
-}
-
-.date-card:hover,
-.thought-card:hover,
-.goal-card:hover,
-.achievement-card:hover {
-  transform: translateX(5px);
-}
-
-.date-card h4,
-.thought-card h4,
-.goal-card h4,
-.achievement-card h4 {
-  color: var(--primary-color); /* Consistent primary color */
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-.date-card .date,
-.thought-content,
-.goal-text,
-.achievement-content { /* Grouped content styles */
-  color: var(--text-color); /* Ensure text is readable */
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
-}
-
-.date-card .description,
-.thought-meta,
-.goal-meta,
-.achievement-card .achievement-meta { /* Grouped meta styles */
-  color: var(--light-text-color); /* Light text color for meta info */
-  font-size: 0.85rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.thought-card {
-  position: relative;
-<<<<<<< HEAD
-  padding-left: 1.5rem; /* Adjusted padding-left for consistency */
-=======
-  padding-left: 1rem; /* Adjusted padding now that the ::before is gone */
->>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
-  background: var(--content-background); /* Ensure thought card background is white */
-  color: var(--text-color); /* Ensure text is readable */
-  border: 1px solid var(--border-color-light); /* Consistent border */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Consistent subtle shadow */
-}
-
-<<<<<<< HEAD
-.thought-card::before {
-  content: '"';
-  position: absolute;
-  left: 0.5rem;
-  top: 0.5rem;
-  font-size: 2rem;
-  color: var(--primary-color); /* Consistent primary color */
-  opacity: 0.5;
-}
-
-=======
->>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
-.thought-content {
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-}
-
-.thought-meta {
-  display: none; /* Hide the meta information below the thought text */
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: var(--light-text-color); /* Consistent light text color */
-}
-
-.thought-card.inspiration {
-<<<<<<< HEAD
-  border-left: 4px solid var(--info-color); /* Consistent info-color */
-}
-
-.thought-card.achievement {
-  border-left: 4px solid var(--success-color); /* Consistent success-color */
-}
-
-.thought-card.lesson {
-  border-left: 4px solid var(--danger-color); /* Consistent danger-color */
-=======
-  /* Removed border-left */
-}
-
-.thought-card.achievement {
-  /* Removed border-left */
-}
-
-.thought-card.lesson {
-  /* Removed border-left */
->>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
-}
-
-.goal-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  background: var(--content-background); /* Ensure goal card background is white */
-  border: 1px solid var(--border-color-light); /* Consistent border */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Consistent subtle shadow */
-}
-
-.goal-card input[type="checkbox"] {
-  margin-top: 0.3rem;
-  width: 1.2rem;
-  height: 1.2rem;
-  cursor: pointer;
-}
-
-.goal-content {
-  flex: 1;
-}
-
-.goal-text {
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-}
-
-.goal-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: var(--light-text-color); /* Consistent light text color */
-}
-
-.goal-card.completed .goal-text {
-  text-decoration: line-through;
-  opacity: 0.7;
-}
-
-.goal-card.high {
-  border-left: 4px solid var(--danger-color); /* Consistent danger-color */
-}
-
-.goal-card.medium {
-  border-left: 4px solid var(--warning-color); /* Consistent warning-color */
-}
-
-.goal-card.low {
-  border-left: 4px solid var(--success-color); /* Consistent success-color */
-}
-
-/* Achievements Section Specific Styles */
-.achievement-card.personal {
-  border-left: 4px solid var(--primary-color); /* Unique color for personal achievements */
-}
-
-.achievement-card.professional {
-  border-left: 4px solid var(--info-color); /* Unique color for professional achievements */
-}
-
-.achievement-card.fitness {
-  border-left: 4px solid var(--success-color); /* Unique color for fitness achievements */
-}
-
-.achievement-card.creative {
-  border-left: 4px solid var(--accent-color); /* Unique color for creative achievements */
-}
-
-.achievement-card .achievement-meta .category {
-  font-weight: 600;
-  padding: 0.2rem 0.6rem;
-  border-radius: 5px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-}
-
-/* Ensure delete button is consistent */
-.delete-item {
-  background: transparent;
-  border: none;
-  color: var(--danger-color);
-  cursor: pointer;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-.delete-item:hover {
-  color: var(--dark-danger-color); /* Darker on hover */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .personal-grid {
-    padding: 0 0.5rem;
-  }
-  
-  .important-dates,
-  .learning-thoughts,
-  .personal-goals,
-  .achievements {
-    padding: 1.5rem;
-  }
-
-  .add-date-form,
-  .add-thought-form,
-  .add-goal-form {
-    gap: 0.8rem;
-  }
-
-  .thought-meta,
-  .goal-meta {
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-}
-
-/* Skincare Routine Images */
-.routine-image {
-  width: 100%;
-  height: 500px;
-  overflow: hidden;
-  border-radius: var(--border-radius);
-  margin-bottom: 2rem;
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color-light);
-}
-
-.routine-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.routine-category:hover .routine-image img {
-  transform: scale(1.05);
-}
-
-.routine-category {
-  background: var(--content-background); /* Use content-background for white */
-  padding: 2.5rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  transition: transform 0.3s ease;
-  margin-bottom: 2rem;
-  border: 1px solid var(--border-color-light);
-}
-
-.routine-category:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px var(--shadow-color); /* Use themed shadow for consistency */
-}
-
-.routine-category h4 {
-  font-size: 1.8rem;
-  color: var(--primary-color);
-  margin: 1.5rem 0;
-  font-weight: 600;
+.workout-header {
   text-align: center;
+  margin-bottom: 2.5rem;
 }
 
-.routine-category ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.routine-category li {
-  padding: 1.2rem 0;
-  border-bottom: 1px solid var(--border-color-light);
-  color: var(--text-color);
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.routine-category li:last-child {
-  border-bottom: none;
-}
-
-.routine-category li i {
-  color: var(--accent-color);
-  font-size: 1.4rem;
-}
-
-@media (max-width: 768px) {
-  .routine-image {
-    height: 350px;
-  }
-
-  .routine-category {
-    padding: 2rem;
-  }
-
-  .routine-category h4 {
-    font-size: 1.6rem;
-  }
-
-  .routine-category li {
-    font-size: 1.1rem;
-  }
-}
-
-/* Update styling for Personal Motivation */
-.personal-motivation {
-  background: var(--glass-effect); /* Use glass-effect variable */
-  padding: 2.5rem; /* Consistent padding */
-  border-radius: var(--border-radius); /* Rounded corners */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Slightly more pronounced shadow */
-  border: 1px solid var(--border-color-medium); /* Use medium border */
-  backdrop-filter: blur(10px); /* Increase blur effect */
-  text-align: center;
-}
-
-.personal-motivation h3 {
-  color: var(--primary-color);
-  font-size: 2rem; /* Consistent heading size */
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-}
-
-.motivation-input textarea {
-  width: 100%;
-  min-height: 180px; /* Increase textarea height */
-  padding: 1.5rem; /* Consistent padding */
-  border: 2px solid var(--border-color-medium);
-  border-radius: var(--border-radius);
-  font-family: inherit;
-  font-size: 1.1rem;
-  resize: vertical;
-  transition: var(--transition);
-  background: var(--input-background); /* Slightly transparent white background */
-  color: var(--text-color);
-}
-
-.motivation-input textarea:focus {
-  border-color: var(--accent-color);
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(255, 128, 171, 0.2); /* Themed focus shadow */
-}
-
-/* Update styling for Skincare Streak */
-.skincare-streak {
-  background: var(--glass-effect); /* Use glass-effect variable */
-  padding: 1.5rem; /* Reduced padding for smaller size */
-  border-radius: var(--border-radius); /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjusted shadow for smaller size */
-  border: 1px solid var(--border-color-medium); /* Use medium border */
-  backdrop-filter: blur(10px); /* Increase blur effect */
-  text-align: center;
-  /* order: -1; /* Removed explicit order as placement is handled by JSX */
-}
-
-.skincare-streak h3 {
-  color: var(--primary-color);
-  font-size: 1.4rem; /* Further reduced heading size */
-  margin-bottom: 0.5rem; /* Adjusted margin */
-  font-weight: 700;
-}
-
-.streak-counter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem; /* Further reduced space between icon and number */
-  margin-bottom: 0.6rem; /* Adjusted margin */
-  color: var(--accent-color);
-  font-size: 2.2rem; /* Further reduced number size */
-  font-weight: 700;
-}
-
-.streak-counter i {
-  font-size: 2.5rem; /* Further reduced icon size */
-  color: var(--accent-color);
-}
-
-.skincare-streak p {
-  color: var(--text-color);
-  font-size: 0.9rem; /* Further reduced paragraph size */
-  opacity: 0.9;
-}
-
-/* Update styling for Skincare Goals */
-.skincare-goals {
-<<<<<<< HEAD
-  /* Removed background, border-radius, box-shadow, margin-top, border, and backdrop-filter */
-  /* These styles are now applied to the form itself to ensure consistency */
-=======
-  background: var(--glass-effect); /* Use glass-effect variable */
-  padding: 2.5rem; /* Consistent padding */
-  border-radius: var(--border-radius); /* Rounded corners */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Slightly more pronounced shadow */
-  border: 1px solid var(--border-color-medium); /* Use medium border */
-  backdrop-filter: blur(10px); /* Increase blur effect */
-  order: -2; /* Ensure it's at the very top */
->>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
-}
-
-.skincare-goals h3 {
-  color: var(--primary-color);
-  font-size: 2rem; /* Consistent heading size */
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  text-align: center;
-}
-
-.skincare-goals .add-goal-form {
-  display: flex;
-  gap: 1.2rem; /* Increase space between input and button */
-  margin-bottom: 2rem;
-  flex-wrap: wrap; /* Allow wrapping on small screens */
-}
-
-.skincare-goals .add-goal-form input[type="text"] {
-  flex-grow: 1;
-  padding: 1rem; /* Consistent padding */
-  border: 2px solid var(--border-color-medium);
-  border-radius: var(--border-radius);
-  font-family: inherit;
-  font-size: 1rem;
-  transition: var(--transition);
-  background: var(--input-background); /* Slightly transparent white background */
-  color: var(--text-color);
-}
-
-.skincare-goals .add-goal-form input[type="text"]:focus {
-    border-color: var(--accent-color);
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(255, 128, 171, 0.2); /* Themed focus shadow */
-}
-
-.skincare-goals .add-goal-form button {
-  background: var(--accent-color);
-  color: var(--content-background); /* Use content-background for white */
-  border: none;
-  padding: 1rem 2rem; /* Consistent padding */
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: var(--transition);
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.skincare-goals .add-goal-form button:hover {
-  background: var(--accent-light);
-  transform: translateY(-2px);
-}
-
-.skincare-goals .goals-list {
-  margin-top: 2rem;
-}
-
-.skincare-goals .goal-item {
-  background: var(--content-background); /* Use content-background for white */
-  padding: 1.5rem; /* Consistent padding */
-  border-radius: var(--border-radius); /* Rounded corners */
-  margin-bottom: 1.5rem; /* Space between items */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow for items */
-  border: 1px solid var(--border-color-light); /* Light border */
-  transition: transform 0.3s ease;
-}
-
-.skincare-goals .goal-item:hover {
-  transform: translateX(8px); /* More pronounced hover effect */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
-
-.skincare-goals .goal-item .goal-content {
-  color: var(--text-color);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 0.8rem; /* Space below content */
-}
-
-.skincare-goals .goal-item .goal-date {
-  color: var(--light-text-color);
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.routine-steps {
-  /* Add styling for routine steps container if needed */
-  display: flex;
-  flex-direction: column;
-  gap: 2rem; /* Space between routine categories */
-}
-
-<<<<<<< HEAD
-.add-achievement-form input[type="text"] {
-  padding: 0.8rem;
-  border: 2px solid var(--secondary-color); /* Changed from --light-pink to --secondary-color */
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-  background: var(--input-background); /* Use input-background for slightly transparent white */
-  color: var(--text-color);
-}
-
-.add-achievement-form input[type="text"]:focus {
-  outline: none;
-  border-color: var(--primary-color); /* Changed from --primary to --primary-color */
-}
-
-.add-achievement-form button {
-  background: var(--accent-light); /* Changed to a lighter pink */
-  color: var(--content-background); /* Changed from --white to --content-background */
-  padding: 0.8rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.add-achievement-form button:hover {
-  background: var(--accent-color); /* Reverted from primary-color to accent-color on hover */
-  transform: translateY(-2px);
-}
-
-.achievements-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.achievement-card {
-  background: var(--content-background); /* Changed from --light-pink to --content-background */
-  padding: 1rem 2.5rem 1rem 1rem;
-  border-radius: 10px;
-=======
-.routine-category {
-  background: var(--content-background); /* Use content-background for white */
-  padding: 2.5rem; /* Consistent padding */
-  border-radius: var(--border-radius); /* Rounded corners */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Slightly more pronounced shadow */
->>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
-  transition: transform 0.3s ease;
-  border: 1px solid var(--border-color-medium); /* Use medium border */
-}
-
-.routine-category:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 24px var(--shadow-color); /* Enhanced themed shadow */
-}
-
-.routine-category h4 {
-  font-size: 1.8rem;
-  color: var(--primary-color);
-  margin-bottom: 1.5rem; /* Space below heading */
-  font-weight: 600;
-  text-align: center;
-}
-
-.routine-category ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.routine-category li {
-  padding: 1.2rem 0; /* Consistent padding */
-  border-bottom: 1px solid var(--border-color-light); /* Light border */
-  color: var(--text-color);
-  font-size: 1.1rem; /* Slightly smaller list item text */
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.routine-category li:last-child {
-  border-bottom: none;
-}
-
-.routine-category li i {
-  color: var(--accent-color);
-  font-size: 1.3rem; /* Slightly smaller icon */
-}
-
-.skincare-tips {
-  background: var(--glass-effect); /* Use glass-effect variable */
-  padding: 2.5rem; /* Consistent padding */
-  border-radius: var(--border-radius); /* Rounded corners */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Slightly more pronounced shadow */
-  border: 1px solid var(--border-color-medium); /* Use medium border */
-  backdrop-filter: blur(10px); /* Increase blur effect */
-}
-
-.skincare-tips h3 {
-  color: var(--primary-color);
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2rem; /* Consistent heading size */
-  font-weight: 700;
-}
-
-.skincare-tips .tips-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.skincare-tips .tip-card {
-  background: var(--content-background); /* Use white background for cards */
-  padding: 2rem; /* Consistent padding */
-  border-radius: var(--border-radius); /* Rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow for cards */
-  transition: all 0.3s ease;
-  border: 1px solid var(--border-color-light); /* Light border */
-  text-align: center;
-}
-
-.skincare-tips .tip-card:hover {
-  transform: translateY(-5px); /* Slight lift on hover */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
-
-.skincare-tips .tip-card i {
-  font-size: 2.5rem; /* Icon size */
-  color: var(--accent-color); /* Accent color for icons */
-  margin-bottom: 1rem;
-}
-
-.skincare-tips .tip-card h4 {
-  color: var(--primary-color);
-  font-size: 1.3rem; /* Heading size for tip cards */
-  margin-bottom: 0.8rem;
-  font-weight: 600;
-}
-
-<<<<<<< HEAD
-.achievement-card .achievement-date {
-  color: var(--light-text-color); /* Changed from #666 to --light-text-color */
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-/* Styling for achievement categories */
-.achievement-card.personal {
-  border-left: 4px solid var(--primary-color);
-}
-
-.achievement-card.professional {
-  border-left: 4px solid var(--info-color);
-}
-
-.achievement-card.fitness {
-  border-left: 4px solid var(--success-color);
-}
-
-.achievement-card.creative {
-  border-left: 4px solid var(--accent-color);
-}
-
-.achievement-card .achievement-meta {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--light-text-color);
-  margin-top: 0;
-=======
-.skincare-tips .tip-card p {
-  color: var(--text-color);
-  font-size: 1rem;
->>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
-  line-height: 1.6;
-}
-
-/* Skincare Section Styling */
-.skincare-section {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  animation: fadeInUp 0.8s ease-out;
-}
-
-/* Personal Motivation Section */
-.motivation-section {
-  background: var(--content-background);
-  border-radius: var(--border-radius);
-  padding: 2.5rem;
-  box-shadow: var(--box-shadow);
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.motivation-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-}
-
-.motivation-section:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 30px var(--shadow-color);
-}
-
-.motivation-section h3 {
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-  text-align: center;
-  position: relative;
-  padding-bottom: 1rem;
-}
-
-.motivation-section h3::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-  border-radius: 2px;
-}
-
-.edit-motivation {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.edit-motivation textarea {
-  width: 100%;
-  min-height: 100px;
-  padding: 1rem;
-  border: 2px solid var(--accent-color);
-  border-radius: 8px;
-  font-size: 1rem;
-  resize: vertical;
-  background: var(--input-bg);
-  color: var(--text-color);
-}
-
-.motivation-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.motivation-content p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--text-color);
-}
-
-.motivation-content button,
-.edit-motivation button {
-  align-self: flex-end;
-  padding: 0.5rem 1.5rem;
-  background: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.motivation-content button:hover,
-.edit-motivation button:hover {
-  background: var(--accent-hover);
-}
-
-/* Skincare Streak Section - Enhanced */
-.streak-section {
-  background: var(--content-background);
-  border-radius: var(--border-radius);
-  padding: 2.5rem;
-  box-shadow: var(--box-shadow);
-  text-align: center;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.streak-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-}
-
-.streak-section:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 30px var(--shadow-color);
-}
-
-.streak-counter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--glass-effect);
-  padding: 2rem;
-  border-radius: 50%;
-  width: 180px;
-  height: 180px;
-  margin: 0 auto;
-  justify-content: center;
-  backdrop-filter: blur(5px);
-  border: 2px solid var(--border-color-light);
-  animation: float 3s ease-in-out infinite;
-}
-
-.streak-number {
-  font-size: 4rem;
-  font-weight: bold;
-  color: var(--primary-color);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.streak-label {
-  font-size: 1.2rem;
-  color: var(--text-color);
-  opacity: 0.9;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.streak-message {
-  font-size: 1.2rem;
-  color: var(--text-color);
-  margin-top: 1rem;
-  font-style: italic;
-}
-
-/* Delete button for goals */
-.goal-item .delete-goal {
-  position: absolute;
-  right: 1rem;
-  background: none;
-  border: none;
-  color: var(--delete-color);
-  cursor: pointer;
-  opacity: 0.7;
-  transition: all 0.3s ease;
-  padding: 0.5rem;
-}
-
-.goal-item .delete-goal:hover {
-  opacity: 1;
-  transform: scale(1.1);
-  color: var(--delete-hover-color);
-}
-
-/* Skincare Goals Section */
-.goals-section {
-  background: var(--content-background);
-  border-radius: var(--border-radius);
-  padding: 2.5rem;
-  box-shadow: var(--box-shadow);
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.goals-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-}
-
-.goals-section:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 30px var(--shadow-color);
-}
-
-.goals-section h3 {
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-.goals-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* Add goal form enhancement */
-.add-goal {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  background: var(--input-background);
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  border: 2px solid var(--border-color-medium);
-  transition: all 0.3s ease;
-}
-
-.add-goal:focus-within {
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 4px rgba(255, 128, 171, 0.1);
-}
-
-.add-goal input {
-  flex: 1;
-  padding: 1rem;
-  border: 2px solid var(--border-color-medium);
-  border-radius: var(--border-radius);
-  font-size: 1.1rem;
-  background: var(--content-background);
-  color: var(--text-color);
-  transition: all 0.3s ease;
-}
-
-.add-goal input:focus {
-  outline: none;
-  border-color: var(--accent-color);
-}
-
-.add-goal button {
-  padding: 1rem 2rem;
-  background: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.add-goal button:hover {
-  background: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--shadow-color);
-}
-
-.goal-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.2rem;
-  background: var(--input-background);
-  border-radius: var(--border-radius);
-  transition: all 0.3s ease;
-  position: relative;
-  margin-bottom: 1rem;
-  border: 1px solid var(--border-color-light);
-}
-
-.goal-item:hover {
-  transform: translateX(10px);
-  background: var(--content-background);
-  box-shadow: 0 5px 15px var(--shadow-color);
-}
-
-.goal-item input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  accent-color: var(--accent-color);
-}
-
-.goal-item span {
-  font-size: 1.1rem;
-  color: var(--text-color);
-}
-
-.goal-item span.completed {
-  text-decoration: line-through;
-  opacity: 0.7;
-}
-
-/* Delete button for goals */
-.goal-item .delete-goal {
-  position: absolute;
-  right: 1rem;
-  background: none;
-  border: none;
-  color: var(--delete-color);
-  cursor: pointer;
-  opacity: 0.7;
-  transition: all 0.3s ease;
-  padding: 0.5rem;
-}
-
-.goal-item .delete-goal:hover {
-  opacity: 1;
-  transform: scale(1.1);
-  color: var(--delete-hover-color);
-}
-
-/* Add new animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .skincare-section {
-    padding: 1.5rem;
-    gap: 2rem;
-  }
-
-  .motivation-section,
-  .streak-section,
-  .goals-section,
-  .skincare-tips {
-    padding: 2rem;
-  }
-
-  .streak-counter {
-    width: 150px;
-    height: 150px;
-  }
-
-  .streak-number {
-    font-size: 3.5rem;
-  }
-
-  .tip-card {
-    padding: 1.5rem;
-  }
-<<<<<<< HEAD
-
-  .achievements h3 {
-    font-size: 1.3rem;
-  }
-
-  .add-achievement-form {
-    gap: 0.8rem;
-  }
-
-  .add-achievement-form input[type="text"],
-  .add-achievement-form button {
-    font-size: 0.9rem;
-    padding: 0.6rem;
-  }
-
-  .achievement-card {
-    padding: 0.8rem 2rem 0.8rem 0.8rem;
-  }
-
-  .achievement-card .achievement-content {
-    font-size: 0.95rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .achievement-card .achievement-date {
-    font-size: 0.8rem;
-  }
-
-  .achievement-card .achievement-meta {
-    margin-top: 0;
-    line-height: 1.5;
-  }
-
-  .delete-item {
-    top: 0.4rem;
-    right: 0.4rem;
-    font-size: 0.9rem;
-    padding: 0.2rem;
-  }
-}
-
-/* Meditation Section Styles */
-.meditation-section {
-  background: linear-gradient(135deg, #f5f7ff 0%, #e8eaf6 100%);
-  padding: 2.5rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  margin-top: 2rem;
-}
-
-.meditation-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.meditation-header h2 {
-  font-size: 2.5rem;
+.workout-header h2 {
+  font-size: 2.2rem;
   color: var(--primary-color);
   margin-bottom: 1rem;
   font-weight: 700;
@@ -1876,7 +346,7 @@ body {
   display: inline-block;
 }
 
-.meditation-header h2::after {
+.workout-header h2::after {
   content: '';
   position: absolute;
   bottom: -10px;
@@ -1888,63 +358,524 @@ body {
   border-radius: 2px;
 }
 
-.meditation-videos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+.workout-header p {
+  font-size: 1.1rem;
+  color: var(--light-text-color);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.meditation-card {
+.workout-categories {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.workout-category-section {
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  flex: 1;
+  max-width: 30%;
+  cursor: pointer;
+}
+
+.workout-category-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.workout-category-section h3 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.workout-category-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  border-radius: 1.5px;
+}
+
+.workout-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.workout-card {
   background: var(--content-background);
   border-radius: var(--border-radius);
   overflow: hidden;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
 }
 
-.meditation-card:hover {
+.workout-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
-.meditation-video {
+.workout-video {
   position: relative;
-  padding-top: 35%; /* Adjusted for even smaller height */
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
   overflow: hidden;
 }
 
-.meditation-video iframe {
+.workout-video img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border: none;
+  object-fit: cover;
 }
 
-.meditation-info {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  border: 2px dashed red; /* Temporary: for debugging visibility */
+.workout-card:hover .workout-video img {
+  transform: scale(1.05);
 }
 
-.meditation-info h3 {
+.workout-card h3 {
   font-size: 1.4rem;
   color: var(--text-color);
-  margin-bottom: 0.8rem;
+  margin: 1.5rem 1.5rem 0.5rem 1.5rem;
   font-weight: 600;
 }
 
-.meditation-card-title {
-  font-size: 1.8rem;
+.workout-card p {
+  font-size: 0.95rem;
+  color: var(--light-text-color);
+  margin: 0 1.5rem 1.5rem 1.5rem;
+  line-height: 1.6;
+}
+
+.workout-card p i {
+  color: var(--primary-color);
+  margin-right: 0.5rem;
+}
+
+.workout-description {
+  padding: 1.5rem;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.workout-level {
+  display: inline-block;
+  background: var(--accent-light);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Workout Tips Section */
+.workout-tips {
+  margin-top: 3rem;
+  background: var(--background-color); /* Light pink background */
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color-light);
+}
+
+.workout-tips h3 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
   font-weight: 700;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.tips-category {
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  border: 1px solid var(--border-color-light);
+}
+
+.tips-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.tips-category h4 {
+  font-size: 1.5rem;
   color: var(--primary-color);
   margin-bottom: 1rem;
+  text-align: center;
+}
+
+.tips-category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tips-category li {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.tips-category li:last-child {
+  margin-bottom: 0;
+}
+
+.tips-category li:before {
+  content: '\f00c'; /* FontAwesome check icon */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  color: var(--success-color);
+  margin-top: 0.2rem;
+}
+
+/* Personal Space Section */
+.personal-space-section {
+  padding: 2rem;
+}
+
+.personal-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.important-dates,
+.learning-thoughts,
+.personal-goals,
+.achievements-section {
+  background: var(--content-background);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color-light);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 280px;
+  max-width: 100%;
+  min-height: 400px; /* Ensures consistent height for all boxes */
+}
+
+.important-dates h3,
+.learning-thoughts h3,
+.personal-goals h3,
+.achievements-section h3 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.date-list,
+.thought-list,
+.goal-list,
+.achievement-list {
+  flex-grow: 1;
+  overflow-y: auto; /* Enable scrolling if content overflows */
+  margin-bottom: 1rem; /* Add some space before the button */
+}
+
+.add-date-form,
+.add-thought-form,
+.add-goal-form,
+.add-achievement-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding-bottom: 1rem; /* Add padding to the bottom of the form */
+}
+
+.add-date-form input,
+.add-thought-form textarea,
+.add-goal-form input,
+.add-date-form select,
+.add-thought-form select,
+.add-goal-form select {
+  padding: 0.8rem;
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-small);
+  font-size: 1rem;
+  transition: var(--transition);
+  background: var(--input-background);
+  color: var(--text-color);
+}
+
+.add-date-form input:focus,
+.add-thought-form textarea:focus,
+.add-goal-form input:focus,
+.add-date-form select:focus,
+.add-thought-form select:focus,
+.add-goal-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+}
+
+.add-date-form button,
+.add-thought-form button,
+.add-goal-form button,
+.add-achievement-form button {
+  background: var(--accent-color);
+  color: var(--content-background);
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.add-date-form button:hover,
+.add-thought-form button:hover,
+.add-goal-form button:hover,
+.add-achievement-form button:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.date-card,
+.thought-card,
+.goal-card {
+  background: var(--content-background);
+  padding: 1rem;
+  border-radius: var(--border-radius-small);
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color-light);
+  position: relative;
+}
+
+.date-card h4 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.date-card .date {
+  color: var(--light-text-color);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.date-card .description {
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.thought-card {
+  border-left: 4px solid var(--primary-color);
+}
+
+.thought-card.inspiration {
+  border-left-color: var(--info-color);
+}
+
+.thought-card.lesson {
+  border-left-color: var(--warning-color);
+}
+
+.thought-card.achievement {
+  border-left-color: var(--success-color);
+}
+
+.thought-content {
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.thought-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.thought-meta .category {
+  color: var(--light-text-color);
+}
+
+.goal-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.goal-card input[type="checkbox"] {
+  margin-top: 0.2rem;
+}
+
+.goal-content {
+  flex-grow: 1;
+}
+
+.goal-text {
+  color: var(--text-color);
+  margin-bottom: 0.3rem;
+}
+
+.goal-card.completed .goal-text {
+  text-decoration: line-through;
+  color: var(--light-text-color);
+}
+
+.goal-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--light-text-color);
+}
+
+.goal-card.high {
+  border-left: 4px solid var(--danger-color);
+}
+
+.goal-card.medium {
+  border-left: 4px solid var(--warning-color);
+}
+
+.goal-card.low {
+  border-left: 4px solid var(--success-color);
+}
+
+.delete-date,
+.delete-thought,
+.delete-goal {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--delete-color);
+  cursor: pointer;
+  opacity: 0.8;
+  transition: var(--transition);
+}
+
+.delete-date:hover,
+.delete-thought:hover,
+.delete-goal:hover {
+  opacity: 1;
+  color: var(--delete-hover-color);
+}
+
+@media (max-width: 768px) {
+  .meditation-grid,
+  .mood-buttons,
+  .personal-grid {
+    flex-direction: column; /* Ensure vertical stacking on small screens */
+  }
+
+  .meditation-card,
+  .mood-button,
+  .date-card,
+  .thought-card,
+  .goal-card,
+  .achievements {
+    width: 100%; /* Ensure full width on small screens */
+    padding: 1rem;
+  }
+
+  .meditation-card-title {
+    font-size: 1.2rem;
+  }
+
+  .mood-button i {
+    font-size: 1.5rem;
+  }
+
+  .mood-history-item {
+    padding: 0.8rem;
+  }
+
+  .mood-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+}
+
+/* Meditation Section */
+.meditation-section {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.meditation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.meditation-card {
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color-light);
+  transition: transform 0.3s ease;
+}
+
+.meditation-card:hover {
+  transform: translateY(-5px);
+}
+
+.meditation-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.meditation-card-title {
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.meditation-meta {
+  display: flex;
+  gap: 1rem;
+  color: var(--light-text-color);
+  font-size: 0.9rem;
+}
+
+.meditation-meta i {
+  color: var(--primary-color);
+}
+
+.meditation-description {
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .start-button {
@@ -1958,10 +889,7 @@ body {
   border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
   transition: var(--transition);
-  border: 2px solid blue; /* Temporary: for debugging visibility */
-  box-sizing: border-box; /* Ensure padding/border are included in width/height */
 }
 
 .start-button:hover {
@@ -1969,39 +897,152 @@ body {
   transform: translateY(-2px);
 }
 
-.start-button i {
-  font-size: 1.2rem;
-  color: var(--content-background); /* White icon */
+/* Mood Section */
+.mood-section {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.meditation-meta {
+.mood-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.mood-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background: var(--content-background);
+  border: 2px solid var(--border-color-light);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.mood-button:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary-color);
+}
+
+.mood-button.selected {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--content-background);
+}
+
+.mood-button i {
+  font-size: 2rem;
+}
+
+.mood-history {
+  margin-top: 3rem;
+}
+
+.mood-history h3 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.mood-history-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.mood-history-item {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--content-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color-light);
+}
+
+.mood-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  color: var(--content-background);
+  border-radius: 50%;
+  font-size: 1.2rem;
+}
+
+.mood-details {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mood-text {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.mood-date {
   color: var(--light-text-color);
   font-size: 0.9rem;
 }
 
-.meditation-meta i {
-  color: var(--primary-color);
-}
+@media (max-width: 768px) {
+  .meditation-grid,
+  .mood-buttons,
+  .personal-grid {
+    flex-direction: column; /* Ensure vertical stacking on small screens */
+  }
 
-.meditation-description {
-  color: var(--light-text-color);
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  .meditation-card,
+  .mood-button,
+  .date-card,
+  .thought-card,
+  .goal-card,
+  .achievements {
+    width: 100%; /* Ensure full width on small screens */
+    padding: 1rem;
+  }
+
+  .meditation-card-title {
+    font-size: 1.2rem;
+  }
+
+  .mood-button i {
+    font-size: 1.5rem;
+  }
+
+  .mood-history-item {
+    padding: 0.8rem;
+  }
+
+  .mood-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
 }
 
 .meditation-timer {
   background: var(--content-background);
   border-radius: var(--border-radius);
-  padding: 2rem;
+  padding: 2.5rem;
   text-align: center;
   margin-top: 3rem;
   box-shadow: 0 12px 24px var(--shadow-color); /* Enhanced shadow */
   border: 1px solid var(--border-color-light); /* Added subtle border */
+}
+
+.meditation-timer h3 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
 }
 
 .timer-display {
@@ -2014,282 +1055,412 @@ body {
 
 .timer-controls {
   display: flex;
-  justify-content: center;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  justify-content: center;
 }
 
 .timer-button {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 50px;
-  background: var(--primary-color);
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
+  background: var(--button-background);
+  color: var(--text-color-dark);
+  padding: 0.8rem 1.8rem;
+  border: 1px solid var(--border-color-medium);
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .timer-button:hover {
-  background: var(--accent-color);
+  background: var(--button-hover-background);
   transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
 }
 
-.timer-button i {
-  font-size: 1.2rem;
-}
-
-.timer-presets {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.timer-preset {
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--primary-color);
-  border-radius: 50px;
-  background: transparent;
-  color: var(--primary-color);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.timer-preset:hover {
-  background: var(--primary-color);
-  color: white;
-}
-
-.timer-preset.active {
-  background: var(--primary-color);
-  color: white;
+.timer-button:disabled {
+  background: var(--disabled-background);
+  color: var(--disabled-text-color);
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+  box-shadow: none;
 }
 
 @media (max-width: 768px) {
-  .meditation-videos {
-    grid-template-columns: 1fr;
+  .meditation-timer {
+    padding: 1.5rem;
   }
 
-  .meditation-header h2 {
-    font-size: 2rem;
+  .meditation-timer h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
   }
 
   .timer-display {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
   }
 
   .timer-controls {
     flex-wrap: wrap;
+    gap: 0.8rem;
   }
 
   .timer-button {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .timer-presets {
-    gap: 0.5rem;
-  }
-
-  .timer-preset {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
   }
 }
 
-.past-meditations-list {
-  margin-top: 2rem;
-  background: yellow; /* TEMP: Make background obvious */
-  padding: 1.5rem;
+/* Skincare Section */
+.skincare-section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  background: var(--content-background);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  border: 2px solid purple; /* TEMP: Add a strong border */
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.past-meditations-list h4 {
-  font-size: 1.2rem;
+.goals-section {
+  background: linear-gradient(45deg, var(--background-color), var(--accent-light));
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color-medium);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.goals-section h3,
+.routine-steps h3,
+.skincare-tips h3 {
+  font-size: 2.2rem;
   color: var(--primary-color);
-  margin-bottom: 1rem;
+  margin-bottom: 1.8rem;
+  font-weight: 800;
+  position: relative;
+  padding-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.past-meditations-list ul {
+.goals-section h3::after,
+.routine-steps h3::after,
+.skincare-tips h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+  border-radius: 2px;
+}
+
+.goals-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.add-goal {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+}
+
+.add-goal input[type="text"] {
+  flex-grow: 1;
+  padding: 1rem;
+  border: 2px solid var(--border-color-medium);
+  border-radius: 12px;
+  font-size: 1.1rem;
+  background: var(--input-background);
+  color: var(--text-color);
+  transition: all 0.4s ease;
+}
+
+.add-goal input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.add-goal button {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.4s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.add-goal button:hover {
+  background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.goal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--content-background);
+  padding: 1.2rem 1.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color-light);
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.goal-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.goal-item span {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.goal-item span.completed {
+  text-decoration: line-through;
+  color: var(--light-text-color);
+  opacity: 0.7;
+}
+
+.delete-goal {
+  background: var(--delete-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.delete-goal:hover {
+  background: var(--delete-hover-color);
+  transform: scale(1.15);
+}
+
+.routine-steps {
+  background: linear-gradient(135deg, var(--background-color), var(--accent-light));
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color-medium);
+}
+
+.routine-category {
+  margin-bottom: 2.5rem;
+  background: var(--content-background);
+  padding: 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color-light);
+}
+
+.routine-category:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.routine-category h4 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.routine-category h4 i {
+  color: var(--accent-color);
+  font-size: 2.2rem;
+}
+
+.routine-category ul {
   list-style: none;
   padding: 0;
 }
 
-.past-meditations-list li {
-  background: var(--content-background);
-  padding: 0.8rem 1.2rem;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.routine-category li {
+  font-size: 1.15rem;
   color: var(--text-color);
-  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
 }
 
-/* Mood Section */
-.mood-section {
-  padding: 2rem;
+.routine-category li:last-child {
+  margin-bottom: 0;
+}
+
+.routine-category li i {
+  color: var(--success-color);
+  margin-top: 0.2rem;
+  font-size: 1.1rem;
+}
+
+.skincare-tips {
+  background: linear-gradient(135deg, var(--background-color), var(--accent-light));
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color-medium);
+}
+
+.skincare-tips .tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+.skincare-tips .tip-card {
+  background: var(--content-background);
+  padding: 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
+  border: 1px solid var(--border-color-light);
 }
 
-.mood-section h2 {
-  font-size: 2.2rem;
+.skincare-tips .tip-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.skincare-tips .tip-card i {
+  font-size: 3rem;
+  color: var(--accent-color);
+  margin-bottom: 1.2rem;
+}
+
+.skincare-tips .tip-card h4 {
+  font-size: 1.6rem;
   color: var(--primary-color);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: 700;
 }
 
-.mood-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-}
-
-.mood-button {
-  background: var(--content-background);
-  border: 1px solid var(--border-color-light);
-  border-radius: var(--border-radius);
-  padding: 1.2rem 2.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1.1rem;
-  font-weight: 600;
+.skincare-tips .tip-card p {
+  font-size: 1.05rem;
   color: var(--text-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  line-height: 1.7;
 }
 
-.mood-button i {
-  font-size: 2.5rem;
-  color: var(--accent-color);
-  margin-bottom: 0.5rem;
-}
-
-.mood-button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  border-color: var(--primary-color);
-}
-
-.mood-button.selected {
-  background: var(--primary-color);
-  color: var(--content-background);
-  border-color: var(--primary-color);
-  box-shadow: 0 8px 20px rgba(var(--primary-color-rgb), 0.3);
-}
-
-.mood-button.selected i {
-  color: var(--content-background); /* White icon on selected */
-}
-
-.mood-history {
-  background: var(--content-background);
-  border-radius: var(--border-radius);
-  padding: 2rem;
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color-light);
-  margin-top: 2rem;
-}
-
-.mood-history h3 {
-  font-size: 1.8rem;
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 600;
-}
-
-.mood-history-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  justify-content: center;
-}
-
-.mood-history-item {
-  background: var(--background-color); /* Light pink background */
-  border-radius: var(--border-radius-small);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.mood-date {
-  font-size: 0.9rem;
-  color: var(--light-text-color);
-}
-
-.mood-icon {
-  font-size: 2rem;
-}
-
-.mood-icon.great i {
-  color: #2ecc71; /* Emerald Green */
-}
-
-.mood-icon.good i {
-  color: #3498db; /* Peter River Blue */
-}
-
-.mood-icon.okay i {
-  color: #f1c40f; /* Sunflower Yellow */
-}
-
-.mood-icon.down i {
-  color: #e74c3c; /* Alizarin Red */
-}
-
-/* Responsive adjustments for Mood Section */
 @media (max-width: 768px) {
-  .mood-section h2 {
+  .skincare-section {
+    padding: 2rem 1rem;
+    gap: 2.5rem;
+  }
+
+  .goals-section,
+  .routine-steps,
+  .skincare-tips {
+    padding: 2rem;
+  }
+
+  .goals-section h3,
+  .routine-steps h3,
+  .skincare-tips h3 {
+    font-size: 1.9rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .add-goal {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .add-goal button {
+    width: 100%;
+  }
+
+  .goal-item {
+    padding: 1rem;
+  }
+
+  .goal-item span {
+    font-size: 0.95rem;
+  }
+
+  .delete-goal {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+
+  .routine-category {
+    padding: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .routine-category h4 {
+    font-size: 1.5rem;
+    gap: 0.6rem;
+  }
+
+  .routine-category h4 i {
     font-size: 1.8rem;
   }
 
-  .mood-buttons {
-    gap: 1rem;
-  }
-
-  .mood-button {
-    padding: 1rem 1.8rem;
+  .routine-category li {
     font-size: 1rem;
+    margin-bottom: 0.6rem;
   }
 
-  .mood-button i {
-    font-size: 2rem;
-  }
-
-  .mood-history h3 {
-    font-size: 1.5rem;
-  }
-
-  .mood-history-list {
+  .skincare-tips .tips-grid {
     grid-template-columns: 1fr;
+    gap: 1.8rem;
   }
 
-  .mood-history-item {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0.8rem 1rem;
+  .skincare-tips .tip-card {
+    padding: 2rem;
   }
-=======
->>>>>>> a6318d1f0cba9b8f9d35e986a9b0f00c76c374e4
-}
+
+  .skincare-tips .tip-card i {
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .skincare-tips .tip-card h4 {
+    font-size: 1.3rem;
+  }
+
+  .skincare-tips .tip-card p {
+    font-size: 0.95rem;
+  }
+} 
