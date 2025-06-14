@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { submitContactForm } = require("../controllers/contactController");
 
-// ✅ Correct route path that matches frontend: /api/contact
-router.post("/contact", submitContactForm);
+// ✅ FIXED: match the route prefix from server.js
+router.post("/", submitContactForm);
 
 module.exports = router;

@@ -3,9 +3,12 @@ import './Contact.css';
 import axios from 'axios';
 import contactHeroImg from '../assets/contact-hero.jpg';
 
+const API_URL = 'http://localhost:5000/api/contact';
+
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -13,13 +16,18 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setFormStatus('');
+
     try {
-      await axios.post('/api/contact', formData);  // ✅ Relative URL
-      setFormStatus('Thank you for contacting us!');
+      const response = await axios.post(API_URL, formData);
+      setFormStatus('Thank you for contacting us! We will get back to you soon.');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       console.error('Error submitting form:', error);
-      setFormStatus('Something went wrong. Please try again.');
+      setFormStatus(error.response?.data?.error || 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -48,6 +56,7 @@ const Contact = () => {
             onChange={handleChange}
             required
             placeholder="Enter your name"
+            disabled={isSubmitting}
           />
 
           <label htmlFor="email">Email</label>
@@ -59,6 +68,7 @@ const Contact = () => {
             onChange={handleChange}
             required
             placeholder="Enter your email"
+            disabled={isSubmitting}
           />
 
           <label htmlFor="message">Message</label>
@@ -70,13 +80,23 @@ const Contact = () => {
             onChange={handleChange}
             required
             placeholder="Write your message here"
+            disabled={isSubmitting}
           ></textarea>
 
-          <button type="submit">
-            <i className="fas fa-paper-plane"></i> Send Message
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <i className="fas fa-spinner fa-spin"></i>
+            ) : (
+              <i className="fas fa-paper-plane"></i>
+            )}
+            {isSubmitting ? ' Sending...' : ' Send Message'}
           </button>
 
-          {formStatus && <div className="form-status">{formStatus}</div>}
+          {formStatus && (
+            <div className={`form-status ${formStatus.includes('Thank you') ? 'success' : 'error'}`}>
+              {formStatus}
+            </div>
+          )}
         </form>
       </div>
     </div>

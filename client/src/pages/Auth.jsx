@@ -26,10 +26,11 @@ const Auth = () => {
       ...prev,
       [name]: value
     }));
-    if (errors[name]) {
+    if (errors[name] || errors.general) {
       setErrors(prev => ({
         ...prev,
-        [name]: ''
+        [name]: '',
+        general: ''
       }));
     }
   };
@@ -74,7 +75,7 @@ const Auth = () => {
         setIsLoggedIn(true);
         navigate('/');
       } catch (error) {
-        setErrors({ email: 'Invalid email or password' });
+        setErrors({ general: 'Invalid email or password' });
       }
     }
   };
@@ -101,9 +102,15 @@ const Auth = () => {
         navigate('/');
       } catch (error) {
         if (error.response && error.response.data.message) {
-          setErrors({ email: error.response.data.message });
+          const msg = error.response.data.message;
+
+          if (msg.includes("already exists")) {
+            setErrors({ email: msg });
+          } else {
+            setErrors({ general: msg });
+          }
         } else {
-          setErrors({ email: 'Registration failed' });
+          setErrors({ general: 'Something went wrong. Try again.' });
         }
       }
     }
@@ -133,6 +140,7 @@ const Auth = () => {
           </div>
 
           {successMsg && <div className="success-message">{successMsg}</div>}
+          {errors.general && <div className="error-message general-error">{errors.general}</div>}
 
           <form onSubmit={isSignup ? handleSignup : handleLogin} className="auth-form">
             {isSignup && (
