@@ -21,7 +21,7 @@ const Workout = () => {
   const workoutCategories = [
     {
       title: 'Warm-up',
-      icon: '��',
+      icon: '  ',
       points: [
         'Start with 5-10 minutes of light cardio (e.g., jogging in place, jumping jacks).',
         'Include dynamic stretches like arm circles, leg swings, and torso twists.',

@@ -1,505 +1,505 @@
 .workout-section {
-  padding: 2rem 1.5rem;
-  max-width: 1200px;
-  margin: 2rem auto;
-  background: var(--content-background);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.workout-section h2 {
-  font-size: 2.8rem;
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
-  text-align: center;
-  font-weight: 800;
-}
-
-.workout-section p {
-  font-size: 1.2rem;
-  color: var(--text-color);
-  text-align: center;
-  margin-bottom: 2rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.workout-categories {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.workout-category-card {
-  background: linear-gradient(135deg, var(--background-color), var(--accent-light));
-  padding: 2rem;
-  border-radius: 18px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  border: 1px solid var(--border-color-medium);
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.workout-category-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-}
-
-.workout-category-card .icon {
-  font-size: 3.5rem;
-  margin-bottom: 1.5rem;
-  color: var(--secondary-color);
-}
-
-.workout-category-card h3 {
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-bottom: 1.2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.workout-category-card ul {
-  list-style: none;
-  padding: 0;
-  text-align: left;
-  width: 100%;
-}
-
-.workout-category-card li {
-  font-size: 1rem;
-  color: var(--text-color);
-  margin-bottom: 0.4rem;
-  line-height: 1.4;
-  position: relative;
-  padding-left: 1.4rem;
-}
-
-.workout-category-card li::before {
-  content: '\2705'; /* Checkmark emoji */
-  position: absolute;
-  left: 0;
-  color: var(--success-color);
-  font-size: 1em;
-  top: 0.1rem;
-}
-
-.workout-category-card li:last-child {
-  margin-bottom: 0;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .workout-section {
-    padding: 2rem 1rem;
-    gap: 2rem;
+    padding: 2rem 1.5rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    background: var(--content-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    position: relative;
+    overflow: hidden;
   }
-
+  
   .workout-section h2 {
-    font-size: 2.2rem;
-    margin-bottom: 0.8rem;
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-weight: 800;
   }
-
+  
   .workout-section p {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
   }
-
+  
   .workout-categories {
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
   }
-
+  
   .workout-category-card {
+    background: linear-gradient(135deg, var(--background-color), var(--accent-light));
     padding: 2rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color-medium);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
-
+  
+  .workout-category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  }
+  
   .workout-category-card .icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
   }
-
+  
   .workout-category-card h3 {
-    font-size: 1.7rem;
-    margin-bottom: 1rem;
-  }
-
-  .workout-category-card li {
-    font-size: 0.9rem;
-    padding-left: 1.2rem;
-  }
-}
-
-/* Watch Video Button */
-.watch-video-btn {
-  background: var(--accent-color);
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1rem;
-  margin-top: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.watch-video-btn:hover {
-  background: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Video Modal Styles */
-.video-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(5px);
-}
-
-.video-modal-content {
-  background: var(--content-background);
-  padding: 2rem;
-  border-radius: 12px;
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.close-video-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 2rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.close-video-btn:hover {
-  color: var(--delete-color);
-}
-
-.video-responsive {
-  overflow: hidden;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-  position: relative;
-  height: 0;
-  width: 100%;
-  max-width: 800px; /* Max width for the video */
-  margin-top: 1rem;
-}
-
-.video-responsive iframe {
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-}
-
-/* Responsive adjustments for modal */
-@media (max-width: 768px) {
-  .video-modal-content {
-    padding: 1rem;
-  }
-
-  .close-video-btn {
-    font-size: 1.5rem;
-    top: 5px;
-    right: 5px;
-  }
-}
-
-/* Video Container within card */
-.workout-video-container {
-  width: 100%;
-  max-width: 560px; /* Standard YouTube embed width */
-  margin-top: 1.5rem;
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-  height: 0;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.workout-video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* Responsive adjustments for video container */
-@media (max-width: 768px) {
-  .workout-video-container {
-    max-width: 100%; /* Full width on small screens */
-  }
-}
-
-/* Multiple Videos Grid */
-.workout-videos-grid {
-  display: flex; /* Changed to flexbox */
-  flex-wrap: nowrap; /* Force videos to stay on one line */
-  gap: 1rem; /* Reduced spacing between videos */
-  width: 100%; /* Ensure it takes full width */
-  margin: 0 auto; /* Center the grid within the card */
-  margin-top: 2rem;
-  justify-content: space-around; /* Distribute items evenly */
-  align-items: flex-start;
-  box-sizing: border-box; /* Include padding and border in the element's total width */
-  overflow-x: auto; /* Enable horizontal scrolling if content overflows */
-}
-
-.workout-video-item {
-  position: relative;
-  /* Removed padding-bottom for aspect ratio, will control height with iframe */
-  height: auto; /* Let content dictate height */
-  overflow: hidden;
-  min-width: 250px; /* Minimum width for video item */
-  flex: 1; /* Allow video items to grow and shrink */
-  box-sizing: border-box; /* Include padding and border in the element's total width */
-}
-
-.workout-video-item iframe {
-  position: relative; /* Changed from absolute */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 200px; /* Fixed height for videos */
-  border: none;
-}
-
-@media (max-width: 768px) {
-  .workout-videos-grid {
-    grid-template-columns: 1fr; /* Stack videos on small screens */
-    gap: 1rem;
-  }
-
-  .workout-video-item {
-    padding-bottom: 75%;
-  }
-}
-
-/* Workout Log Section */
-.workout-log-section {
-  background: var(--content-background);
-  padding: 2.5rem;
-  border-radius: 18px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  border: 1px solid var(--border-color-medium);
-  margin-bottom: 3rem;
-  text-align: center;
-}
-
-.workout-log-section h2 {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-}
-
-.log-input-area {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.log-input-area input[type="text"] {
-  width: 70%; /* Give it a percentage width */
-  flex: none; /* Prevent it from growing/shrinking based on flex factor */
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 1rem;
-  color: var(--text-color);
-  background: var(--input-background);
-  height: 45px; /* Fixed height for consistency */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.log-input-area input[type="text"]:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2);
-  outline: none;
-}
-
-.log-input-area button {
-  background: var(--accent-color);
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1rem;
-  height: 45px; /* Fixed height for consistency */
-  transition: all 0.3s ease;
-  flex-shrink: 0; /* Prevent button from shrinking */
-  width: auto; /* Allow button to take its natural width based on padding */
-}
-
-.log-input-area button:hover {
-  background: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.workout-log-section h3 {
-  font-size: 1.8rem;
-  color: var(--secondary-color);
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.workout-log-list {
-  list-style: none;
-  padding: 0;
-  max-height: 250px; /* Limit height for scrolling */
-  overflow-y: auto;
-  background: var(--background-color-light);
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.workout-log-list li {
-  background: var(--content-background);
-  padding: 0.8rem 1.2rem;
-  margin-bottom: 0.8rem;
-  border-radius: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1rem;
-  color: var(--text-color);
-  border: 1px solid var(--border-color-light);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.workout-log-list li:last-child {
-  margin-bottom: 0;
-}
-
-.log-date {
-  font-weight: 600;
-  color: var(--primary-color);
-  margin-right: 1rem;
-  white-space: nowrap;
-}
-
-.log-workout {
-  flex-grow: 1;
-  text-align: left;
-}
-
-.no-entries {
-  font-size: 1.1rem;
-  color: var(--text-color-light);
-  text-align: center;
-  padding: 1.5rem;
-  background: var(--background-color-light);
-  border-radius: 8px;
-  border: 1px dashed var(--border-color);
-}
-
-/* Responsive adjustments for workout log */
-@media (max-width: 768px) {
-  .workout-log-section {
-    padding: 1.5rem;
-  }
-
-  .workout-log-section h2 {
     font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
-
-  .log-input-area {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .log-input-area input[type="text"] {
-    max-width: 100%;
-  }
-
-  .log-input-area button {
+  
+  .workout-category-card ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
     width: 100%;
-    padding: 0.8rem 1.5rem;
   }
-
-  .workout-log-section h3 {
-    font-size: 1.5rem;
-  }
-
-  .workout-log-list li {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .log-date {
-    margin-right: 0;
-  }
-
-  .no-entries {
+  
+  .workout-category-card li {
     font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+    position: relative;
+    padding-left: 1.4rem;
   }
-}
-
-.delete-log-entry {
-  background: none;
-  border: none;
-  color: var(--delete-color); /* Use a red color for delete actions */
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: color 0.3s ease, transform 0.2s ease;
-  margin-left: 0.8rem; /* Space from the workout text */
-}
-
-.delete-log-entry:hover {
-  color: var(--delete-color-dark); /* Darker red on hover */
-  transform: scale(1.1); /* Slightly enlarge on hover */
-}
-
-/* Adjustments for smaller screens */
-@media (max-width: 768px) {
-  .workout-log-list li {
+  
+  .workout-category-card li::before {
+    content: '\2705'; /* Checkmark emoji */
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-size: 1em;
+    top: 0.1rem;
+  }
+  
+  .workout-category-card li:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .workout-section {
+      padding: 2rem 1rem;
+      gap: 2rem;
+    }
+  
+    .workout-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+    }
+  
+    .workout-section p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .workout-categories {
+      gap: 2rem;
+    }
+  
+    .workout-category-card {
+      padding: 2rem;
+    }
+  
+    .workout-category-card .icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+  
+    .workout-category-card h3 {
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+    }
+  
+    .workout-category-card li {
+      font-size: 0.9rem;
+      padding-left: 1.2rem;
+    }
+  }
+  
+  /* Watch Video Button */
+  .watch-video-btn {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .watch-video-btn:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Video Modal Styles */
+  .video-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+  }
+  
+  .video-modal-content {
+    background: var(--content-background);
+    padding: 2rem;
+    border-radius: 12px;
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .close-video-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .close-video-btn:hover {
+    color: var(--delete-color);
+  }
+  
+  .video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    position: relative;
+    height: 0;
+    width: 100%;
+    max-width: 800px; /* Max width for the video */
+    margin-top: 1rem;
+  }
+  
+  .video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+  
+  /* Responsive adjustments for modal */
+  @media (max-width: 768px) {
+    .video-modal-content {
+      padding: 1rem;
+    }
+  
+    .close-video-btn {
+      font-size: 1.5rem;
+      top: 5px;
+      right: 5px;
+    }
+  }
+  
+  /* Video Container within card */
+  .workout-video-container {
+    width: 100%;
+    max-width: 560px; /* Standard YouTube embed width */
+    margin-top: 1.5rem;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .workout-video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  /* Responsive adjustments for video container */
+  @media (max-width: 768px) {
+    .workout-video-container {
+      max-width: 100%; /* Full width on small screens */
+    }
+  }
+  
+  /* Multiple Videos Grid */
+  .workout-videos-grid {
+    display: flex; /* Changed to flexbox */
+    flex-wrap: nowrap; /* Force videos to stay on one line */
+    gap: 1rem; /* Reduced spacing between videos */
+    width: 100%; /* Ensure it takes full width */
+    margin: 0 auto; /* Center the grid within the card */
+    margin-top: 2rem;
+    justify-content: space-around; /* Distribute items evenly */
     align-items: flex-start;
-    flex-wrap: wrap; /* Allow content to wrap in smaller screens */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    overflow-x: auto; /* Enable horizontal scrolling if content overflows */
   }
-
+  
+  .workout-video-item {
+    position: relative;
+    /* Removed padding-bottom for aspect ratio, will control height with iframe */
+    height: auto; /* Let content dictate height */
+    overflow: hidden;
+    min-width: 250px; /* Minimum width for video item */
+    flex: 1; /* Allow video items to grow and shrink */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+  }
+  
+  .workout-video-item iframe {
+    position: relative; /* Changed from absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px; /* Fixed height for videos */
+    border: none;
+  }
+  
+  @media (max-width: 768px) {
+    .workout-videos-grid {
+      grid-template-columns: 1fr; /* Stack videos on small screens */
+      gap: 1rem;
+    }
+  
+    .workout-video-item {
+      padding-bottom: 75%;
+    }
+  }
+  
+  /* Workout Log Section */
+  .workout-log-section {
+    background: var(--content-background);
+    padding: 2.5rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color-medium);
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+  
+  .workout-log-section h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .log-input-area {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .log-input-area input[type="text"] {
+    width: 70%; /* Give it a percentage width */
+    flex: none; /* Prevent it from growing/shrinking based on flex factor */
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background: var(--input-background);
+    height: 45px; /* Fixed height for consistency */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .log-input-area input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2);
+    outline: none;
+  }
+  
+  .log-input-area button {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    height: 45px; /* Fixed height for consistency */
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+    width: auto; /* Allow button to take its natural width based on padding */
+  }
+  
+  .log-input-area button:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .workout-log-section h3 {
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .workout-log-list {
+    list-style: none;
+    padding: 0;
+    max-height: 250px; /* Limit height for scrolling */
+    overflow-y: auto;
+    background: var(--background-color-light);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .workout-log-list li {
+    background: var(--content-background);
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 0.8rem;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--text-color);
+    border: 1px solid var(--border-color-light);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .workout-log-list li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .log-date {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-right: 1rem;
+    white-space: nowrap;
+  }
+  
+  .log-workout {
+    flex-grow: 1;
+    text-align: left;
+  }
+  
+  .no-entries {
+    font-size: 1.1rem;
+    color: var(--text-color-light);
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--background-color-light);
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+  }
+  
+  /* Responsive adjustments for workout log */
+  @media (max-width: 768px) {
+    .workout-log-section {
+      padding: 1.5rem;
+    }
+  
+    .workout-log-section h2 {
+      font-size: 2rem;
+    }
+  
+    .log-input-area {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+  
+    .log-input-area input[type="text"] {
+      max-width: 100%;
+    }
+  
+    .log-input-area button {
+      width: 100%;
+      padding: 0.8rem 1.5rem;
+    }
+  
+    .workout-log-section h3 {
+      font-size: 1.5rem;
+    }
+  
+    .workout-log-list li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  
+    .log-date {
+      margin-right: 0;
+    }
+  
+    .no-entries {
+      font-size: 1rem;
+    }
+  }
+  
   .delete-log-entry {
-    align-self: flex-end; /* Align to the end of the line when wrapped */
-    margin-top: 0.5rem;
-    margin-left: 0; /* Remove left margin when stacked */
+    background: none;
+    border: none;
+    color: var(--delete-color); /* Use a red color for delete actions */
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    margin-left: 0.8rem; /* Space from the workout text */
   }
-} 
+  
+  .delete-log-entry:hover {
+    color: var(--delete-color-dark); /* Darker red on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .workout-log-list li {
+      align-items: flex-start;
+      flex-wrap: wrap; /* Allow content to wrap in smaller screens */
+    }
+  
+    .delete-log-entry {
+      align-self: flex-end; /* Align to the end of the line when wrapped */
+      margin-top: 0.5rem;
+      margin-left: 0; /* Remove left margin when stacked */
+    }
+  } 
