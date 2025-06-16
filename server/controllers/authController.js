@@ -33,9 +33,9 @@ exports.registerUser = async (req, res) => {
     await newUser.save();
     console.log('New user created successfully:', { id: newUser._id, email: newUser.email });
 
-    // Generate token
+    // Generate token with 100 years expiration
     const token = jwt.sign({ id: newUser._id }, JWT_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '100y',
     });
     console.log('JWT token generated successfully');
 
@@ -86,9 +86,9 @@ exports.loginUser = async (req, res) => {
     }
     console.log('Password verified successfully');
 
-    // Generate token
+    // Generate token with 100 years expiration
     const token = jwt.sign({ id: user._id }, JWT_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '100y',
     });
     console.log('JWT token generated successfully');
 

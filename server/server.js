@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const todoRoutes = require('./routes/todoRoutes');
 const selfCareRoutes = require('./routes/selfCareRoute');
+const gratitudeRoutes = require('./routes/gratitudeRoutes');
 
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
@@ -30,6 +31,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/todos', todoRoutes);
 app.use('/api/selfcare', selfCareRoutes);
+app.use('/api/gratitude', gratitudeRoutes);
 
 // ✅ Default Route
 app.get("/", (req, res) => {
