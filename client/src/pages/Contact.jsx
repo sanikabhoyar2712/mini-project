@@ -20,7 +20,7 @@ const Contact = () => {
     setFormStatus('');
 
     try {
-      const response = await axios.post(API_URL, formData);
+      await axios.post(API_URL, formData);
       setFormStatus('Thank you for contacting us! We will get back to you soon.');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
@@ -33,6 +33,8 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
+      <div className="overlay"></div>
+
       <div className="contact-hero">
         <div className="contact-hero-bg"></div>
         <img src={contactHeroImg} alt="Contact Us" className="contact-hero-img" />
@@ -41,7 +43,7 @@ const Contact = () => {
       </div>
 
       <div className="contact-cards-grid">
-        {/* contact cards here (same as before) */}
+        {/* Add any contact cards here if needed */}
       </div>
 
       <div className="contact-form-section" id="contact-form">

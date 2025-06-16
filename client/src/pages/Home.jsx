@@ -28,6 +28,11 @@ const quotes = [
     text: "Success doesn't just find you. You have to go out and get it.",
     author: "Unknown",
     emoji: "🚀"
+  },
+  {
+    text: "I am enough.",
+    author: "Marisa Peer",
+    emoji: "❤️"
   }
 ];
 
@@ -38,14 +43,14 @@ const testimonials = [
     avatar: "https://randomuser.me/api/portraits/men/32.jpg"
   },
   {
-    name: "Priya Singh",
+    name: "Aarav Patel",
     text: "An all-in-one platform that truly understands a student's learning journey. Highly recommended!",
     avatar: "https://randomuser.me/api/portraits/women/44.jpg"
   },
   
   {
     name: "Sneha Patel",
-    text: "StudySphere made learning so much more organized and fun. The personalized tools are just perfect!",
+    text: "Serena made learning so much more organized and fun. The personalized tools are just perfect!",
     avatar: "https://randomuser.me/api/portraits/women/65.jpg"
   }
 ];

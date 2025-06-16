@@ -157,18 +157,19 @@ body {
   align-items: center;
   gap: 0.8rem;
   font-size: 1.2rem;
+  background-color: var(--content-background); /* White background for inactive tabs */
 }
 
 .tab-button:hover {
   background: var(--accent-color);
   color: var(--content-background); /* Use content-background for white */
-  transform: translateY(-5px);
+  transform: translateY(-3px);
   box-shadow: var(--box-shadow);
 }
 
 .tab-button.active {
   background: var(--accent-color);
-  color: var(--content-background); /* Use content-background for white */
+  color: var(--content-background);
   border-color: var(--accent-color);
 }
 
@@ -205,23 +206,138 @@ body {
 
 /* Diary Section */
 .diary-section {
-  max-width: 1000px;
-  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem;
+  position: relative;
+}
+
+.error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  color: #28a745;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.save-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.save-button i.fa-spinner {
+  margin-right: 0.5rem;
+}
+
+.delete-entry:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .diary-prompt {
   text-align: center;
-  margin-bottom: 2.5rem;
-  /* Removed background, box-shadow, and border */
-  padding: 2.5rem;
-  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+  padding: 1rem;
 }
 
 .diary-prompt h3 {
-  font-size: 2.2rem;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
   font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ff69b4; /* Changed from white to pink */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+               0 0 20px rgba(255, 255, 255, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+                 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  to {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+                 0 0 30px rgba(255, 255, 255, 0.8),
+                 0 0 40px rgba(255, 255, 255, 0.6);
+  }
+}
+
+.diary-prompt h3::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #ff69b4;
+  margin: 0.5rem auto;
+  border-radius: 2px;
+}
+
+.diary-prompt p {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0;
+  color: #ff1493;
+  position: relative;
+  display: inline-block;
+  animation: colorPulse 2s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+}
+
+@keyframes colorPulse {
+  0% {
+    color: #ff1493;
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+  }
+  50% {
+    color: #ff69b4;
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+  }
+  100% {
+    color: #ff1493;
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+  }
+}
+
+.diary-prompt p::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, 
+    transparent,
+    rgba(255, 20, 147, 0.2),
+    transparent);
+  animation: highlight 2s linear infinite;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+@keyframes highlight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .diary-textarea {
@@ -272,11 +388,37 @@ body {
 }
 
 .diary-history h3 {
-  font-size: 1.8rem;
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 600;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ff69b4; /* Changed from white to pink */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+               0 0 20px rgba(255, 255, 255, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+                 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  to {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+                 0 0 30px rgba(255, 255, 255, 0.8),
+                 0 0 40px rgba(255, 255, 255, 0.6);
+  }
+}
+
+.diary-history h3::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #ff69b4;
+  margin: 0.5rem auto;
+  border-radius: 2px;
 }
 
 .diary-entry {
@@ -291,8 +433,8 @@ body {
 }
 
 .diary-entry:hover {
-  transform: translateY(-3px); /* Consistent hover effect */
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Slightly more pronounced shadow on hover */
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 .entry-date {
@@ -302,28 +444,9 @@ body {
 }
 
 .entry-content {
-  font-size: 1rem;
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-.delete-entry {
-  position: absolute;
-  top: 0.8rem;
-  right: 0.8rem;
-  background: none;
-  border: none;
-  color: var(--delete-color);
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.3s ease, transform 0.3s ease;
   font-size: 1.1rem;
-}
-
-.delete-entry:hover {
-  color: var(--delete-hover-color);
-  opacity: 1;
-  transform: scale(1.1);
+  line-height: 1.8;
+  color: var(--text-color);
 }
 
 /* Workout Section */
@@ -561,6 +684,81 @@ body {
   padding: 2rem;
 }
 
+.personal-space-section h2 {
+  color: white;
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+               0 0 20px rgba(255, 255, 255, 0.3),
+               0 0 30px rgba(255, 255, 255, 0.2);
+  position: relative;
+  padding-bottom: 1rem;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.personal-space-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  border-radius: 3px;
+}
+
+.personal-space-section h2::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  border-radius: 3px;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                 0 0 20px rgba(255, 255, 255, 0.3),
+                 0 0 30px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                 0 0 30px rgba(255, 255, 255, 0.5),
+                 0 0 40px rgba(255, 255, 255, 0.3),
+                 0 0 50px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@media (max-width: 768px) {
+  .personal-space-section h2 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .personal-space-section h2::after,
+  .personal-space-section h2::before {
+    width: 100px;
+  }
+}
+
 .personal-grid {
   display: flex;
   flex-wrap: wrap;
@@ -663,15 +861,23 @@ body {
   transform: translateY(-2px);
 }
 
-.date-card,
-.thought-card,
-.goal-card {
+.date-card {
   background: var(--content-background);
-  padding: 1rem;
-  border-radius: var(--border-radius-small);
-  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   border: 1px solid var(--border-color-light);
-  position: relative;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 0.5rem;
 }
 
 .date-card h4 {
@@ -691,11 +897,31 @@ body {
 }
 
 .thought-card {
-  border-left: 4px solid var(--primary-color);
+  background: var(--content-background);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color-light);
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.thought-meta {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--light-text-color);
+  font-size: 0.9rem;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  justify-content: space-between; /* Space out category, date, and button */
 }
 
 .thought-card.inspiration {
-  border-left-color: var(--info-color);
+  border-left-color: var(--background-color);
+  background-color: var(--background-color);
 }
 
 .thought-card.lesson {
@@ -711,21 +937,19 @@ body {
   color: var(--text-color);
 }
 
-.thought-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-}
-
 .thought-meta .category {
-  color: var(--light-text-color);
+  background: var(--content-background);
+  color: var(--primary-color);
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-weight: 500;
 }
 
 .goal-card {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
+  border-left: 5px solid var(--primary-color);
 }
 
 .goal-card input[type="checkbox"] {
@@ -734,16 +958,54 @@ body {
 
 .goal-content {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: space-between;
+  /* align-items: center; Remove this as we want vertical stacking */
+}
+
+.goal-main-info {
+  display: flex;
+  justify-content: space-between; /* To keep text and priority on same line, spaced out */
+  align-items: center;
+  width: 100%; /* Ensure it takes full width of its parent */
 }
 
 .goal-text {
   color: var(--text-color);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0;
+  display: inline;
+}
+
+.goal-deadline {
+  display: block;
+  font-size: 0.9em;
+  color: var(--light-text-color);
+  margin-top: 0.3rem; /* Add some space between content and deadline */
+}
+
+.goal-action-row {
+  display: flex;
+  justify-content: space-between; /* Aligns items to left and right */
+  align-items: center;
+  width: 100%;
+  margin-top: 0.5rem; /* Add some space above this row */
+}
+
+.goal-priority {
+  background: var(--content-background); /* Changed to white color */
+  color: var(--primary-color);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+  margin-right: 0.5rem; /* Space between priority and delete button */
 }
 
 .goal-card.completed .goal-text {
   text-decoration: line-through;
   color: var(--light-text-color);
+  opacity: 0.7;
 }
 
 .goal-meta {
@@ -765,25 +1027,22 @@ body {
   border-left: 4px solid var(--success-color);
 }
 
-.delete-date,
-.delete-thought,
-.delete-goal {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: none;
+.delete-button {
+  background-color: var(--delete-color); /* Red color for delete */
+  color: var(--content-background);
   border: none;
-  color: var(--delete-color);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  opacity: 0.8;
+  font-size: 0.9rem;
   transition: var(--transition);
+  /* Removed margin-top and margin-left as they will be handled by goal-action-row */
 }
 
-.delete-date:hover,
-.delete-thought:hover,
-.delete-goal:hover {
-  opacity: 1;
-  color: var(--delete-hover-color);
+.delete-button:hover {
+  background-color: var(--delete-hover-color);
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
 }
 
 @media (max-width: 768px) {
@@ -827,6 +1086,7 @@ body {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .meditation-grid {
@@ -837,22 +1097,149 @@ body {
 }
 
 .meditation-card {
-  background: var(--content-background);
-  border-radius: var(--border-radius);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin: 1rem;
   padding: 1.5rem;
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color-light);
-  transition: transform 0.3s ease;
 }
 
 .meditation-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .meditation-info {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.meditation-info h3 {
+  color: #333;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.meditation-info p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.meditation-info div {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.meditation-info div span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meditation-info div i {
+  color: #ff69b4;
+}
+
+.meditation-info button {
+  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.meditation-info button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.5);
+  background: linear-gradient(45deg, #ff1493, #ff69b4);
+  letter-spacing: 1px;
+}
+
+.meditation-info button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.meditation-info button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.6s;
+}
+
+.meditation-info button:hover::before {
+  left: 100%;
+}
+
+.meditation-info button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.meditation-info button:hover::after {
+  opacity: 1;
+}
+
+.meditation-info button i {
+  margin-right: 8px;
+  transition: transform 0.4s ease;
+}
+
+.meditation-info button:hover i {
+  transform: scale(1.2);
+}
+
+/* Add pulse animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(255, 105, 180, 0.5);
+  }
+  100% {
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  }
+}
+
+.meditation-info button {
+  animation: pulse 2s infinite;
+}
+
+.meditation-info button:hover {
+  animation: none;
 }
 
 .meditation-card-title {
@@ -938,13 +1325,23 @@ body {
   font-size: 2rem;
 }
 
-.mood-history {
-  margin-top: 3rem;
+.mood-section h2,
+.mood-history h3,
+.meditation-section h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+               0 0 20px rgba(255, 255, 255, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+  text-align: center;
 }
 
-.mood-history h3 {
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
+.mood-history {
+  margin-top: 3rem;
 }
 
 .mood-history-list {
@@ -955,12 +1352,11 @@ body {
 .mood-history-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: var(--content-background);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color-light);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
 }
 
 .mood-icon {
@@ -990,6 +1386,26 @@ body {
 .mood-date {
   color: var(--light-text-color);
   font-size: 0.9rem;
+}
+
+.delete-mood {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: auto;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.delete-mood:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.mood-history-item:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 @media (max-width: 768px) {
@@ -1028,88 +1444,236 @@ body {
   }
 }
 
-.meditation-timer {
-  background: var(--content-background);
-  border-radius: var(--border-radius);
-  padding: 2.5rem;
-  text-align: center;
-  margin-top: 3rem;
-  box-shadow: 0 12px 24px var(--shadow-color); /* Enhanced shadow */
-  border: 1px solid var(--border-color-light); /* Added subtle border */
+.timer-controls {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  width: 100%;
 }
 
-.meditation-timer h3 {
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  font-weight: 700;
+.timer-controls button {
+  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+  min-width: 120px;
+  text-transform: uppercase;
+}
+
+.timer-controls button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.5);
+  background: linear-gradient(45deg, #ff1493, #ff69b4);
+  letter-spacing: 1px;
+}
+
+.timer-controls button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.timer-controls button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.6s;
+}
+
+.timer-controls button:hover::before {
+  left: 100%;
+}
+
+.timer-controls button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.timer-controls button:hover::after {
+  opacity: 1;
+}
+
+.timer-controls button:disabled {
+  background: #ffb6c1;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+.timer-controls button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+  letter-spacing: 0.5px;
+}
+
+.timer-controls button:disabled::before,
+.timer-controls button:disabled::after {
+  display: none;
+}
+
+/* Add pulse animation for active timer */
+@keyframes timerPulse {
+  0% {
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(255, 105, 180, 0.5);
+  }
+  100% {
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  }
+}
+
+.timer-controls button:not(:disabled) {
+  animation: timerPulse 2s infinite;
+}
+
+.timer-controls button:not(:disabled):hover {
+  animation: none;
+}
+
+@media (max-width: 768px) {
+  .timer-controls {
+    gap: 1rem;
+  }
+  
+  .timer-controls button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+}
+
+.past-meditations {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 182, 193, 0.3);
+  width: 100%;
+}
+
+.past-meditations h4 {
+  color: #ff6b81;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.past-meditations ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+.past-meditations li {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #ff6b81;
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 182, 193, 0.3);
+  width: 100%;
+  max-width: 100%;
+}
+
+.past-meditations li:hover {
+  background: rgba(255, 182, 193, 0.1);
+  transform: translateX(5px);
+}
+
+.delete-meditation {
+  background: none;
+  border: none;
+  color: #ff6b81;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.delete-meditation:hover {
+  background: rgba(255, 107, 129, 0.1);
+  color: #ff4757;
+}
+
+.delete-meditation i {
+  font-size: 0.9rem;
+}
+
+.meditation-timer {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 100%;
 }
 
 .timer-display {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: var(--primary-color);
-  margin: 1.5rem 0;
-  font-family: 'Courier New', monospace;
-}
-
-.timer-controls {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-  justify-content: center;
-}
-
-.timer-button {
-  background: var(--button-background);
-  color: var(--text-color-dark);
-  padding: 0.8rem 1.8rem;
-  border: 1px solid var(--border-color-medium);
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-}
-
-.timer-button:hover {
-  background: var(--button-hover-background);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-}
-
-.timer-button:disabled {
-  background: var(--disabled-background);
-  color: var(--disabled-text-color);
-  cursor: not-allowed;
-  opacity: 0.7;
-  transform: none;
-  box-shadow: none;
+  color: #ff6b81;
+  margin: 1rem 0;
+  font-family: 'Digital', monospace;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
   .meditation-timer {
-    padding: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
   }
-
-  .meditation-timer h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-  }
-
+  
   .timer-display {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
+    padding: 0.8rem;
+    width: 100%;
   }
-
-  .timer-controls {
-    flex-wrap: wrap;
-    gap: 0.8rem;
-  }
-
+  
   .timer-button {
-    padding: 0.7rem 1.5rem;
-    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    min-width: 80px;
   }
 }
 
@@ -1140,17 +1704,17 @@ body {
   z-index: 1;
 }
 
-.goals-section h3,
-.routine-steps h3,
-.skincare-tips h3 {
-  font-size: 2.2rem;
-  color: var(--primary-color);
-  margin-bottom: 1.8rem;
-  font-weight: 800;
-  position: relative;
-  padding-bottom: 0.8rem;
+.goals-section h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+               0 0 20px rgba(255, 255, 255, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+  text-align: center;
 }
 
 .goals-section h3::after,
@@ -1220,54 +1784,60 @@ body {
 
 .goal-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: var(--content-background);
-  padding: 1.2rem 1.8rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-color-light);
-  margin-bottom: 1rem;
-  width: 100%;
-  max-width: 600px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .goal-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .goal-item span {
+  flex: 1;
+  margin-right: 1rem;
   font-size: 1.1rem;
-  color: var(--text-color);
-  font-weight: 500;
+  color: #333;
 }
 
 .goal-item span.completed {
   text-decoration: line-through;
-  color: var(--light-text-color);
-  opacity: 0.7;
+  color: #888;
 }
 
 .delete-goal {
-  background: var(--delete-color);
-  color: white;
+  background: none;
   border: none;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: #ff6b6b;
   cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.2rem;
   transition: all 0.3s ease;
-  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete-goal:hover {
-  background: var(--delete-hover-color);
-  transform: scale(1.15);
+  color: #ff4757;
+  transform: scale(1.1);
+}
+
+.delete-goal i {
+  font-size: 1.2rem;
+}
+
+.goals-list {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 1rem;
 }
 
 .routine-steps {
@@ -1465,104 +2035,39 @@ body {
   }
 }
 
-/* Add these styles at the end of the file */
-
-.loading-container {
+.achievement-meta {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: var(--background-color);
+  font-size: 0.9rem;
+  color: var(--light-text-color);
 }
 
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid var(--accent-light);
-  border-top: 5px solid var(--primary-color);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 1rem;
+.achievement-meta .category {
+  background: var(--content-background);
+  color: var(--primary-color);
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-weight: 500;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.error-message {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: var(--background-color);
-  padding: 2rem;
-  text-align: center;
-}
-
-.error-message h3 {
-  color: var(--danger-color);
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}
-
-.error-message p {
+.achievement-content {
+  margin-bottom: 0.5rem;
   color: var(--text-color);
-  margin-bottom: 2rem;
 }
 
-.error-message button {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  font-size: 1rem;
-  transition: var(--transition);
+.achievement-date {
+  display: block;
+  font-size: 0.9em;
+  color: var(--light-text-color);
+  margin-bottom: 0.5rem;
 }
 
-.error-message button:hover {
-  background: var(--accent-color);
-  transform: translateY(-2px);
-}
-
-.error-container {
+.achievement-meta {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: var(--background-color);
-  padding: 2rem;
-  text-align: center;
-}
-
-.error-container h2 {
-  color: var(--danger-color);
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.error-container p {
-  color: var(--text-color);
-  margin-bottom: 2rem;
-}
-
-.error-container button {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: var(--transition);
-}
-
-.error-container button:hover {
-  background: var(--accent-color);
-  transform: translateY(-2px);
+  font-size: 0.9rem;
+  color: var(--light-text-color);
+  margin-top: auto; /* Push meta to the bottom */
 } 
