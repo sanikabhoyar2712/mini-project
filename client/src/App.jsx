@@ -7,10 +7,8 @@ import Contact from './pages/Contact';
 import Auth from './pages/Auth';
 import SelfCare from './pages/SelfCare';
 import Todo from './pages/Todo';
-import Courses from './pages/Courses';
-import Enrollment from './pages/Enrollment';
 import WorkoutDetails from './pages/WorkoutDetails';
-import CourseDetails from './pages/CourseDetails';
+import GratitudeGarden from './pages/GratitudeGarden';
 import PrivateRoute from './components/PrivateRoute';
 
 import './App.css';
@@ -50,15 +48,13 @@ function App() {
               }
             />
             <Route
-              path="/courses"
+              path="/gratitude"
               element={
                 <PrivateRoute>
-                  <Courses />
+                  <GratitudeGarden />
                 </PrivateRoute>
               }
             />
-            <Route path="/courses/details/:branch/:level" element={<CourseDetails />} />
-            <Route path="/enrollment/:branch/:level" element={<Enrollment />} />
           </Routes>
         </div>
       </Router>

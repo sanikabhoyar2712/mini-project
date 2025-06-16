@@ -1,0 +1,380 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: url('../assets/mp2.jpeg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.gratitude-garden {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.garden-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.garden-header h1 {
+  font-size: 3rem;
+  color: #E91E63; /* Vibrant pink */
+  margin-bottom: 1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.garden-header p {
+  font-size: 1.2rem;
+  color: #E91E63; /* Vibrant pink */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.garden-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.plant-new-flower {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.plant-new-flower h2 {
+  color: #FF69B4; /* Pink color */
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.plant-new-flower form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.plant-new-flower textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.plant-new-flower textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.color-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.color-picker label {
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.color-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  justify-content: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.flower-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid transparent;
+}
+
+.flower-option:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #FF69B4;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.color-option {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.color-option.selected {
+  border-color: #FF69B4;
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.flower-info {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  width: 100%;
+}
+
+.flower-name {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.flower-category {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+}
+
+.plant-button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.plant-button:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.garden-display {
+  background: linear-gradient(135deg, #e0ffe0 0%, #c0e0c0 100%); /* Softer, green gradient */
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.garden-display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(150, 200, 150, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(150, 200, 150, 0.4) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.garden-display h2 {
+  color: #8B4513;
+  font-size: 2.8rem;
+  margin-bottom: 2.5rem;
+  font-weight: 800;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.garden-display h2:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+  color: #654321;
+}
+
+.flowers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  padding: 3rem;
+  justify-content: center;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.flower-container {
+  width: 200px;
+  height: 250px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 15px;
+  overflow: visible;
+  transition: transform 0.3s ease-out;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+.flower-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.flower-emoji {
+  font-size: 5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.flower-content {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 0 0.5rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.flower-text {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.flower-date {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.delete-flower {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  z-index: 3;
+}
+
+.flower-container:hover .delete-flower {
+  opacity: 1;
+}
+
+.delete-flower:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.no-entries {
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  padding: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .flowers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .garden-content {
+    grid-template-columns: 1fr;
+  }
+
+  .garden-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .flowers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flower-emoji {
+    font-size: 4rem;
+  }
+
+  .flower-container {
+    max-width: 150px;
+    border-radius: 12px;
+  }
+
+  .delete-flower {
+    width: 24px;
+    height: 24px;
+    font-size: 1.1rem;
+  }
+} 

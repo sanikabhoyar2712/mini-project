@@ -38,7 +38,7 @@ const Navbar = () => {
                             <li><NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>About Us</NavLink></li>
                             <li><NavLink to="/selfcare" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Self Care</NavLink></li>
                             <li><NavLink to="/todo" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>To Do</NavLink></li>
-                            <li><NavLink to="/courses" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Courses</NavLink></li>
+                            <li><NavLink to="/gratitude" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Gratitude Garden</NavLink></li>
                             <li><NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Contact Us</NavLink></li>
                             <li><button onClick={logoutHandler} className="logout-btn">Logout</button></li>
                         </>
