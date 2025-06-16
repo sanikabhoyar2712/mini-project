@@ -5,9 +5,9 @@ function Notes() {
     const [notes, setNotes] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/notes")
+        axios.get("http://localhost:3002/api/notes")
             .then((res) => {
-                console.log(res.data); // dekh console mein data aa raha ya nahi
+                console.log(res.data);
                 setNotes(res.data);
             })
             .catch((err) => {
@@ -15,25 +15,23 @@ function Notes() {
             });
     }, []);
 
-    return ( <
-        div >
-        <
-        h2 > All Notes < /h2> {
-            notes.length === 0 ? ( <
-                p > No notes found < /p>
+    return (
+        <div>
+            <h2>All Notes</h2>
+            {notes.length === 0 ? (
+                <p>No notes found</p>
             ) : (
-                notes.map((note) => ( <
-                    div key = { note._id }
-                    style = {
-                        { border: "1px solid gray", margin: "10px", padding: "10px" } } >
-                    <
-                    h3 > { note.title } < /h3> <
-                    p > { note.content } < /p> <
-                    /div>
+                notes.map((note) => (
+                    <div 
+                        key={note._id}
+                        style={{ border: "1px solid gray", margin: "10px", padding: "10px" }}
+                    >
+                        <h3>{note.title}</h3>
+                        <p>{note.content}</p>
+                    </div>
                 ))
-            )
-        } <
-        /div>
+            )}
+        </div>
     );
 }
 

@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Auth() {
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(location.pathname === '/login');
-  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   });
+
   const [errors, setErrors] = useState({});
   const [successMsg, setSuccessMsg] = useState('');
   const navigate = useNavigate();
@@ -43,8 +44,6 @@ function Auth() {
           setSuccessMsg(res.data.message);
           localStorage.setItem('token', res.data.token);
 
-
-          // Clear success message after 3 seconds
           setTimeout(() => {
             setSuccessMsg('');
             navigate('/');
@@ -52,7 +51,24 @@ function Auth() {
         } catch (error) {
           setErrors({ email: 'Invalid email or password' });
         }
-      
+      } else {
+        try {
+          const res = await axios.post('http://localhost:5000/api/auth/register', {
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+          });
+
+          setSuccessMsg(res.data.message);
+          localStorage.setItem('token', res.data.token);
+
+          setTimeout(() => {
+            setSuccessMsg('');
+            navigate('/');
+          }, 1500);
+        } catch (error) {
+          setErrors({ email: error.response?.data?.message || 'Registration failed' });
+        }
       }
     }
   };
@@ -62,31 +78,7 @@ function Auth() {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        } else {
-  try {
-    const res = await axios.post('http://localhost:5000/api/auth/register', {
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-    });
-
-    setSuccessMsg(res.data.message);
-
-    // ✅ ADD this line to store token
-    localStorage.setItem('token', res.data.token);
-
-    // ✅ Redirect to home page after signup
-    setTimeout(() => {
-      setSuccessMsg('');
-      navigate('/');
-    }, 1500);
-
-  } catch (error) {
-    setErrors({ email: error.response?.data?.message || 'Registration failed' });
-  }
-}
-
-          {isLogin ? 'Login' : 'Sign Up'}
+            {isLogin ? 'Login' : 'Sign Up'}
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -144,21 +136,20 @@ function Auth() {
           </div>
 
           <div className="text-sm text-center">
-          <button
-  type="button"
-  onClick={() => {
-    const newPath = isLogin ? '/signup' : '/login';
-    navigate(newPath); // Update the URL
-    setIsLogin(!isLogin); // Toggle form
-    setFormData({ name: '', email: '', password: '' }); // Clear form
-    setErrors({});
-    setSuccessMsg('');
-  }}
-  className="font-medium text-indigo-600 hover:text-indigo-500"
->
-  {isLogin ? "Don't have an account? Sign up" : "Already have an account? Login"}
-</button>
-
+            <button
+              type="button"
+              onClick={() => {
+                const newPath = isLogin ? '/signup' : '/login';
+                navigate(newPath);
+                setIsLogin(!isLogin);
+                setFormData({ name: '', email: '', password: '' });
+                setErrors({});
+                setSuccessMsg('');
+              }}
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              {isLogin ? "Don't have an account? Sign up" : "Already have an account? Login"}
+            </button>
           </div>
         </form>
       </div>
@@ -166,4 +157,4 @@ function Auth() {
   );
 }
 
-export default Auth; 
+export default Auth;

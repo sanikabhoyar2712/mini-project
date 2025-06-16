@@ -13,12 +13,13 @@ const createTodo = async (req, res) => {
             return res.status(400).json({ error: 'Task and category are required' });
         }
 
-        // Optionally validate dueDate if provided
+        // Validate dueDate if provided
         if (dueDate && isNaN(Date.parse(dueDate))) {
             return res.status(400).json({ error: 'Invalid dueDate format' });
         }
 
-        // Create new todo
+        console.log('req.user in createTodo:', req.user);
+
         const todo = await Todo.create({
             userId: req.user._id,
             task,
@@ -28,7 +29,7 @@ const createTodo = async (req, res) => {
         });
 
         console.log('Todo created:', { id: todo._id, task: todo.task });
-        // Exclude __v from response
+
         const todoObj = todo.toObject();
         delete todoObj.__v;
 
@@ -49,7 +50,7 @@ const getTodos = async (req, res) => {
     try {
         const todos = await Todo.find({ userId: req.user._id })
             .sort({ createdAt: -1 })
-            .select('-__v'); // Exclude version key
+            .select('-__v');
 
         console.log(`Fetched ${todos.length} todos for user:`, req.user._id);
         res.status(200).json(todos);
@@ -70,12 +71,10 @@ const updateTodo = async (req, res) => {
         const { id } = req.params;
         const updates = req.body;
 
-        // Validate ObjectId
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ error: 'Invalid todo ID format' });
         }
 
-        // Optionally validate dueDate if it's part of the update
         if (updates.dueDate && isNaN(Date.parse(updates.dueDate))) {
             return res.status(400).json({ error: 'Invalid dueDate format' });
         }

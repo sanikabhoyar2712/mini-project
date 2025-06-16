@@ -66,7 +66,7 @@ const Auth = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const res = await axios.post('http://localhost:5000/api/auth/login', {
+        const res = await axios.post('http://localhost:3002/api/auth/login', {
           email: formData.email,
           password: formData.password,
         });
@@ -84,7 +84,7 @@ const Auth = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const res = await axios.post('http://localhost:5000/api/auth/signup', {
+        const res = await axios.post('http://localhost:3002/api/auth/register', {
           name: formData.name,
           email: formData.email,
           password: formData.password,
@@ -92,7 +92,7 @@ const Auth = () => {
         setSuccessMsg(res.data.message);
 
         // Auto-login after signup
-        const loginRes = await axios.post('http://localhost:5000/api/auth/login', {
+        const loginRes = await axios.post('http://localhost:3002/api/auth/login', {
           email: formData.email,
           password: formData.password
         });

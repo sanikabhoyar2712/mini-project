@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Set base URL for all requests
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api/todos',
+  baseURL: 'http://localhost:3002/api/todos',
   headers: {
     'Content-Type': 'application/json'
   }
