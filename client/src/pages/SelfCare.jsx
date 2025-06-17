@@ -5,7 +5,7 @@ import './SelfCare.css';
 import SelfCareBgImage from '../assets/selfcarebackground.jpg';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/selfcare';
+const API_URL = 'http://localhost:3002/api/selfcare';
 
 const getMoodIcon = (mood) => {
   switch (mood) {
@@ -46,6 +46,7 @@ const SelfCare = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [formStatus, setFormStatus] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
 
   // Add new state variables for personal space
   const [importantDates, setImportantDates] = useState([]);
@@ -509,8 +510,11 @@ const SelfCare = () => {
   const handleAddDate = async () => {
     if (newDate.title.trim() && newDate.date.trim()) {
       try {
+        setIsLoading(true);
+        setError(null);
+        setFormStatus('');
         const response = await axios.post(`${API_URL}/important-date`, {
-          userId: 'user123',
+          // userId: 'user123', // This will be handled by the token/middleware
           title: newDate.title,
           date: new Date(newDate.date).toLocaleDateString(),
           description: newDate.description
@@ -520,28 +524,41 @@ const SelfCare = () => {
           setImportantDates(response.data.importantDates);
           setNewDate({ title: '', date: '', description: '' });
           setFormStatus('Date added successfully!');
+        } else {
+          setError(response.data.message || 'Failed to add date.');
         }
       } catch (error) {
-        console.error('Error saving date:', error);
-        setError('Failed to save date. Please try again.');
+        console.error('Error saving date:', error.response?.data || error.message);
+        setError(error.response?.data?.message || 'Failed to save date. Please try again.');
+      } finally {
+        setIsLoading(false);
       }
+    } else {
+      setError('Please enter a title and date before adding.');
     }
   };
 
   const handleDeleteDate = async (dateId) => {
     try {
+      setIsLoading(true);
+      setError(null);
+      setFormStatus('');
       const response = await axios.post(`${API_URL}/important-date/delete`, {
-        userId: 'user123',
+        // userId: 'user123', // Handled by token/middleware
         dateId: dateId
       });
 
       if (response.data.success) {
         setImportantDates(response.data.importantDates);
         setFormStatus('Date deleted successfully!');
+      } else {
+        setError(response.data.message || 'Failed to delete date.');
       }
     } catch (error) {
-      console.error('Error deleting date:', error);
-      setError('Failed to delete date. Please try again.');
+      console.error('Error deleting date:', error.response?.data || error.message);
+      setError(error.response?.data?.message || 'Failed to delete date. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -557,8 +574,11 @@ const SelfCare = () => {
 
   const handleSaveEditedDate = async (dateId) => {
     try {
+      setIsLoading(true);
+      setError(null);
+      setFormStatus('');
       const response = await axios.post(`${API_URL}/important-date/update`, {
-        userId: 'user123',
+        // userId: 'user123', // Handled by token/middleware
         dateId: dateId,
         title: editedDate.title,
         date: new Date(editedDate.date).toLocaleDateString(),
@@ -570,10 +590,14 @@ const SelfCare = () => {
         setEditingDateId(null);
         setEditedDate({ title: '', date: '', description: '' });
         setFormStatus('Date updated successfully!');
+      } else {
+        setError(response.data.message || 'Failed to update date.');
       }
     } catch (error) {
-      console.error('Error updating date:', error);
-      setError('Failed to update date. Please try again.');
+      console.error('Error updating date:', error.response?.data || error.message);
+      setError(error.response?.data?.message || 'Failed to update date. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -581,8 +605,11 @@ const SelfCare = () => {
   const handleAddThought = async () => {
     if (newThought.content.trim()) {
       try {
+        setIsLoading(true);
+        setError(null);
+        setFormStatus('');
         const response = await axios.post(`${API_URL}/learning-thought`, {
-          userId: 'user123',
+          // userId: 'user123', // Handled by token/middleware
           content: newThought.content,
           category: newThought.category
         });
@@ -591,25 +618,29 @@ const SelfCare = () => {
           setLearningThoughts(response.data.thoughts);
           setNewThought({ content: '', category: 'general' });
           setFormStatus('Thought added successfully!');
+        } else {
+          setError(response.data.message || 'Failed to add thought.');
         }
       } catch (error) {
-        console.error('Error saving thought:', error);
-        setError('Failed to save thought. Please try again.');
+        console.error('Error saving thought:', error.response?.data || error.message);
+        setError(error.response?.data?.message || 'Failed to save thought. Please try again.');
+      } finally {
+        setIsLoading(false);
       }
+    } else {
+      setError('Please enter content for your thought.');
     }
   };
 
   const handleDeleteThought = async (thoughtId) => {
     try {
+      setIsLoading(true);
+      setError(null);
+      setFormStatus('');
       console.log('Attempting to delete thought:', thoughtId);
       
-      // First update local state for immediate feedback
-      const updatedThoughts = learningThoughts.filter(thought => thought._id !== thoughtId);
-      setLearningThoughts(updatedThoughts);
-
-      // Then save to backend
       const response = await axios.post(`${API_URL}/learning-thought/delete`, {
-        userId: 'user123',
+        // userId: 'user123', // Handled by token/middleware
         thoughtId: thoughtId
       });
 
@@ -619,15 +650,18 @@ const SelfCare = () => {
         setFormStatus('Thought deleted successfully!');
         if (response.data.thoughts) {
           setLearningThoughts(response.data.thoughts);
+        } else {
+          // If the response doesn't send updated thoughts, filter locally
+          setLearningThoughts(prevThoughts => prevThoughts.filter(t => t._id !== thoughtId));
         }
       } else {
-        setLearningThoughts(learningThoughts);
-        setError('Failed to delete thought. Please try again.');
+        setError(response.data.message || 'Failed to delete thought.');
       }
     } catch (error) {
-      console.error('Error deleting thought:', error);
-      setError('Failed to delete thought. Please try again.');
-      setLearningThoughts(learningThoughts);
+      console.error('Error deleting thought:', error.response?.data || error.message);
+      setError(error.response?.data?.message || 'Failed to delete thought. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -635,32 +669,41 @@ const SelfCare = () => {
   const handleAddGoal = async () => {
     if (skincareGoalInput.trim()) {
       try {
+        setIsLoading(true);
+        setError(null);
+        setFormStatus('');
         // Save to backend
         const response = await axios.post(`${API_URL}/skincare`, {
-          userId: 'user123', // This should come from your auth system
+          // userId: 'user123', // This should come from your auth system
           content: skincareGoalInput,
           completed: false
         });
 
         // If successful, update local state
-        if (response.data.skincareGoals) {
-          setSkincareGoalsState(response.data.skincareGoals);
+        if (response.data.success) {
+          if (response.data.skincareGoals) {
+            setSkincareGoalsState(response.data.skincareGoals);
+          } else {
+            // If the response doesn't include the updated goals, add the new goal to existing ones
+            setSkincareGoalsState(prevGoals => [
+              {
+                id: response.data.goalId || Date.now(), // Use ID from backend if provided
+                content: skincareGoalInput,
+                completed: false
+              },
+              ...prevGoals
+            ]);
+          }
+          setSkincareGoalInput(''); // Clear the input field
+          setFormStatus('Goal added successfully!'); // Show success message
         } else {
-          // If the response doesn't include the updated goals, add the new goal to existing ones
-          setSkincareGoalsState(prevGoals => [
-            {
-              id: Date.now(),
-              content: skincareGoalInput,
-              completed: false
-            },
-            ...prevGoals
-          ]);
+          setError(response.data.message || 'Failed to add goal.');
         }
-        setSkincareGoalInput(''); // Clear the input field
-        setFormStatus('Goal added successfully!'); // Show success message
       } catch (error) {
-        console.error('Error saving skincare goal:', error);
-        setError('Failed to save skincare goal. Please try again.');
+        console.error('Error saving skincare goal:', error.response?.data || error.message);
+        setError(error.response?.data?.message || 'Failed to save skincare goal. Please try again.');
+      } finally {
+        setIsLoading(false);
       }
     } else {
       setError('Please enter a goal before adding.');
@@ -669,20 +712,26 @@ const SelfCare = () => {
 
   const handleDeleteGoal = async (goalId) => {
     try {
-      // First update local state for immediate feedback
-      const updatedGoals = skincareGoalsState.filter(goal => goal.id !== goalId);
-      setSkincareGoalsState(updatedGoals);
-
+      setIsLoading(true);
+      setError(null);
+      setFormStatus('');
       // Then save to backend
-      await axios.post(`${API_URL}/skincare/delete`, {
-        userId: 'user123',
+      const response = await axios.post(`${API_URL}/skincare/delete`, {
+        // userId: 'user123',
         goalId: goalId
       });
+
+      if (response.data.success) {
+        setSkincareGoalsState(prevGoals => prevGoals.filter(goal => goal.id !== goalId));
+        setFormStatus('Goal deleted successfully!');
+      } else {
+        setError(response.data.message || 'Failed to delete goal.');
+      }
     } catch (error) {
-      console.error('Error deleting skincare goal:', error);
-      setError('Failed to delete skincare goal. Please try again.');
-      // Revert to previous state if there's an error
-      setSkincareGoalsState(skincareGoalsState);
+      console.error('Error deleting skincare goal:', error.response?.data || error.message);
+      setError(error.response?.data?.message || 'Failed to delete skincare goal. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -690,10 +739,13 @@ const SelfCare = () => {
   const handleAddPersonalGoal = async () => {
     if (newGoal.content.trim()) {
       try {
+        setIsLoading(true);
+        setError(null);
+        setFormStatus('');
         console.log('Adding new personal goal:', newGoal);
         
         const goalData = {
-          userId: 'user123',
+          // userId: 'user123',
           content: newGoal.content,
           deadline: newGoal.deadline,
           priority: newGoal.priority,
@@ -706,67 +758,55 @@ const SelfCare = () => {
         console.log('Goal save response:', response.data);
 
         if (response.data.success) {
-          // Update local state with the response from backend
-          if (response.data.goals) {
-            setGeneralPersonalGoals(response.data.goals);
-          } else {
-            // If the response doesn't include the updated goals, add the new goal to existing ones
-            setGeneralPersonalGoals(prevGoals => [...prevGoals, {
-              _id: Date.now().toString(),
-              ...goalData
-            }]);
-          }
+          setGeneralPersonalGoals(response.data.personalGoals);
           setNewGoal({ content: '', deadline: '', priority: 'medium' });
-          setFormStatus('Goal added successfully!');
+          setFormStatus('Personal Goal added successfully!');
         } else {
-          setError('Failed to save goal. Please try again.');
+          setError(response.data.message || 'Failed to add personal goal.');
         }
       } catch (error) {
-        console.error('Error saving personal goal:', error);
-        setError('Failed to save personal goal. Please try again.');
+        console.error('Error saving personal goal:', error.response?.data || error.message);
+        setError(error.response?.data?.message || 'Failed to save personal goal. Please try again.');
+      } finally {
+        setIsLoading(false);
       }
+    } else {
+      setError('Please enter content for your personal goal.');
     }
   };
 
-  // Update the handleDeletePersonalGoal function
   const handleDeletePersonalGoal = async (goalId) => {
     try {
-      console.log('Attempting to delete personal goal:', goalId);
-      
-      // First update local state for immediate feedback
-      const updatedGoals = generalPersonalGoals.filter(goal => goal._id !== goalId);
-      setGeneralPersonalGoals(updatedGoals);
-
-      // Then save to backend
+      setIsLoading(true);
+      setError(null);
+      setFormStatus('');
       const response = await axios.post(`${API_URL}/personal-goal/delete`, {
-        userId: 'user123',
+        // userId: 'user123',
         goalId: goalId
       });
 
-      console.log('Delete response:', response.data);
-
       if (response.data.success) {
-        setFormStatus('Goal deleted successfully!');
-        if (response.data.goals) {
-          setGeneralPersonalGoals(response.data.goals);
-        }
+        setGeneralPersonalGoals(response.data.personalGoals);
+        setFormStatus('Personal Goal deleted successfully!');
       } else {
-        setGeneralPersonalGoals(generalPersonalGoals);
-        setError('Failed to delete goal. Please try again.');
+        setError(response.data.message || 'Failed to delete personal goal.');
       }
     } catch (error) {
-      console.error('Error deleting personal goal:', error);
-      setError('Failed to delete personal goal. Please try again.');
-      setGeneralPersonalGoals(generalPersonalGoals);
+      console.error('Error deleting personal goal:', error.response?.data || error.message);
+      setError(error.response?.data?.message || 'Failed to delete personal goal. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Update achievement handler
   const handleAddAchievement = async () => {
     if (newAchievement.content.trim()) {
       try {
+        setIsLoading(true);
+        setError(null);
+        setFormStatus('');
         const response = await axios.post(`${API_URL}/achievement`, {
-          userId: 'user123',
+          // userId: 'user123',
           content: newAchievement.content,
           category: newAchievement.category
         });
@@ -775,43 +815,41 @@ const SelfCare = () => {
           setAchievements(response.data.achievements);
           setNewAchievement({ content: '', category: 'general' });
           setFormStatus('Achievement added successfully!');
+        } else {
+          setError(response.data.message || 'Failed to add achievement.');
         }
       } catch (error) {
-        console.error('Error saving achievement:', error);
-        setError('Failed to save achievement. Please try again.');
+        console.error('Error saving achievement:', error.response?.data || error.message);
+        setError(error.response?.data?.message || 'Failed to save achievement. Please try again.');
+      } finally {
+        setIsLoading(false);
       }
+    } else {
+      setError('Please enter content for your achievement.');
     }
   };
 
   const handleDeleteAchievement = async (achievementId) => {
     try {
-      console.log('Attempting to delete achievement:', achievementId);
-      
-      // First update local state for immediate feedback
-      const updatedAchievements = achievements.filter(achievement => achievement._id !== achievementId);
-      setAchievements(updatedAchievements);
-
-      // Then save to backend
+      setIsLoading(true);
+      setError(null);
+      setFormStatus('');
       const response = await axios.post(`${API_URL}/achievement/delete`, {
-        userId: 'user123',
+        // userId: 'user123',
         achievementId: achievementId
       });
 
-      console.log('Delete response:', response.data);
-
       if (response.data.success) {
+        setAchievements(response.data.achievements);
         setFormStatus('Achievement deleted successfully!');
-        if (response.data.achievements) {
-          setAchievements(response.data.achievements);
-        }
       } else {
-        setAchievements(achievements);
-        setError('Failed to delete achievement. Please try again.');
+        setError(response.data.message || 'Failed to delete achievement.');
       }
     } catch (error) {
-      console.error('Error deleting achievement:', error);
-      setError('Failed to delete achievement. Please try again.');
-      setAchievements(achievements);
+      console.error('Error deleting achievement:', error.response?.data || error.message);
+      setError(error.response?.data?.message || 'Failed to delete achievement. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -963,6 +1001,14 @@ const SelfCare = () => {
       setPastMeditations(pastMeditations);
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+    }
+  }, [token]);
 
   return (
     <div className="selfcare-container" style={{ backgroundImage: `url(${SelfCareBgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', minHeight: '100vh' }}>
